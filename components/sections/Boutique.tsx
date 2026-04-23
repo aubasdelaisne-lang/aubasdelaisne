@@ -96,25 +96,61 @@ export default function BoutiqueSection() {
         </div>
 
         {/* Chips objets — sous le bloc */}
-        <div className="mt-16 text-center">
-          <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold mb-6">
-            Ce que vous trouverez
-          </div>
-          <div className="flex flex-wrap justify-center gap-2">
+        <div className="mt-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-3 mb-8"
+          >
+            <span aria-hidden className="h-px w-10 bg-terracotta/60" />
+            <span className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
+              Ce que vous trouverez
+            </span>
+            <span aria-hidden className="h-px w-10 bg-terracotta/60" />
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto">
             {ITEMS.map((item, i) => (
               <motion.span
                 key={item}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.04 }}
-                whileHover={{ y: -3, scale: 1.06, backgroundColor: "#191465", color: "#fafaff" }}
-                className="px-4 py-1.5 text-[13px] bg-cream-soft border border-ink/15 rounded-full cursor-default transition-colors"
+                initial={{ opacity: 0, y: 14, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 18,
+                  delay: i * 0.05,
+                }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.08,
+                  rotate: [0, -1.5, 1.5, 0],
+                  transition: { rotate: { duration: 0.4 }, default: { type: "spring", stiffness: 400, damping: 15 } },
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative inline-flex items-center gap-2 px-5 py-2 text-[13px] bg-paper border-2 border-ink/10 hover:border-terracotta hover:bg-terracotta hover:text-paper hover:shadow-[0_8px_20px_-8px_rgba(239,95,23,0.5)] rounded-full cursor-default transition-[background-color,border-color,color,box-shadow] duration-300"
               >
-                {item}
+                <span
+                  aria-hidden
+                  className="w-1.5 h-1.5 rounded-full bg-sage group-hover:bg-paper transition-colors duration-300"
+                />
+                <span className="font-medium">{item}</span>
               </motion.span>
             ))}
           </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-8 text-[13px] text-ink-soft italic"
+          >
+            … et bien d'autres trouvailles renouvelées chaque semaine.
+          </motion.p>
         </div>
       </div>
     </section>
