@@ -136,7 +136,7 @@ export default function ContactPage() {
 
             {/* Horaires */}
             <div className="spotlight p-6 bg-sage paper-texture border-2 border-ink/10 relative rounded-tl-[40px] rounded-br-[40px] overflow-hidden">
-              <ShineSweep onView delay={0.3} />
+              <ShineSweep delay={0.8} />
               <div className="relative z-10">
                 <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-4">
                   <Clock size={13} strokeWidth={1.8} />
