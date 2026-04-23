@@ -135,6 +135,92 @@ export default function BoutiquePage() {
         </div>
       </section>
 
+      {/* Galerie photos */}
+      <section className="py-24 md:py-28 px-4 md:px-8 bg-cream-soft">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
+              En images
+            </div>
+            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
+              La boutique en vrai.
+            </h2>
+          </div>
+
+          {/* Grid asymétrique : 1 grande à gauche + 2 empilées à droite */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            {/* Grande image gauche */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative aspect-[4/5] md:aspect-auto md:row-span-2 grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+            >
+              <Image
+                src="/images/boutique-capture.png"
+                alt="Devanture de la boutique Au Bas de l'Aisne"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                className="absolute bottom-5 left-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              >
+                <p className="font-display text-paper text-lg font-semibold">Notre boutique</p>
+                <p className="text-paper/80 text-[13px]">8 avenue de Château-Thierry, Brasles</p>
+              </motion.div>
+            </motion.div>
+
+            {/* Image haut droite */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+            >
+              <Image
+                src="/images/hero.jpeg"
+                alt="L'équipe de la recyclerie Au Bas de l'Aisne"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="font-display text-paper text-base font-semibold">Notre équipe</p>
+                <p className="text-paper/80 text-[12px]">Bénévoles & salariés en insertion</p>
+              </motion.div>
+            </motion.div>
+
+            {/* Image bas droite */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+            >
+              <Image
+                src="/images/vaisselle.jpg"
+                alt="Objets en vente — vaisselle et déco"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="font-display text-paper text-base font-semibold">Nos rayons</p>
+                <p className="text-paper/80 text-[12px]">Vaisselle, déco & bibelots</p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Horaires + adresse */}
       <section className="py-16 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
