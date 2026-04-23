@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
 import { ITEMS, HOURS_BOUTIQUE } from "@/lib/constants"
 import MagneticButton from "@/components/ui/MagneticButton"
+import ShineSweep from "@/components/ui/ShineSweep"
 
 export default function BoutiqueSection() {
   return (
@@ -12,6 +13,7 @@ export default function BoutiqueSection() {
       <div className="max-w-[1300px] mx-auto">
         {/* Bloc sauge avec image + contenu */}
         <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">
+          <ShineSweep onView delay={0.3} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center relative z-10">
             {/* Texte */}
             <div>

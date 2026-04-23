@@ -14,6 +14,7 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { DON_STEPS, HOURS_DEPOT, ITEMS, SITE } from "@/lib/constants"
+import ShineSweep from "@/components/ui/ShineSweep"
 
 const stepIcons = [Phone, Truck, Sparkles, Tags]
 
@@ -25,7 +26,8 @@ export default function DonnerPage() {
       {/* Hero */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
+          <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px] overflow-hidden">
+            <ShineSweep delay={0.6} />
             <div className="relative z-10">
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Faire un don
