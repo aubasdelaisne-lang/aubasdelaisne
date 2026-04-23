@@ -37,18 +37,27 @@ export default function Hero() {
   const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.08])
 
   return (
-    <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper">
+    <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
       <div className="relative max-w-[1300px] mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-visible">
-          {/* Starbursts décoratifs — parallax au scroll */}
+          {/* Starbursts décoratifs — parallax au scroll (masqués sur très petit mobile pour laisser respirer) */}
           <motion.div
             style={{ y: yStar1 }}
             initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -top-10 -left-8 md:-top-14 md:-left-14 text-cream z-20"
+            className="hidden sm:block absolute -top-8 -left-6 md:-top-14 md:-left-14 text-cream z-20"
           >
-            <Starburst size={130} points={22} duration={80} />
+            <Starburst size={90} points={22} duration={80} />
+          </motion.div>
+          {/* Version mobile — plus petit et haut-droite pour ne pas couvrir le titre */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="sm:hidden absolute -top-6 right-4 text-cream z-20"
+          >
+            <Starburst size={60} points={18} duration={70} />
           </motion.div>
 
           <motion.div
@@ -56,9 +65,18 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.5, rotate: 30 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -bottom-10 -right-8 md:-bottom-14 md:-right-14 text-cream z-20"
+            className="hidden sm:block absolute -bottom-8 -right-6 md:-bottom-14 md:-right-14 text-cream z-20"
           >
-            <Starburst size={150} points={24} duration={90} />
+            <Starburst size={110} points={24} duration={90} />
+          </motion.div>
+          {/* Version mobile bottom */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="sm:hidden absolute -bottom-6 left-4 text-cream z-20"
+          >
+            <Starburst size={70} points={22} duration={80} />
           </motion.div>
 
           <motion.div
@@ -72,7 +90,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Gauche — Contenu texte */}
-          <div className="relative bg-sage paper-texture flex flex-col justify-center px-8 md:px-14 py-16 md:py-20 z-10 overflow-hidden">
+          <div className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden">
             {/* Subtle shine sweep */}
             <motion.div
               aria-hidden
@@ -90,7 +108,7 @@ export default function Hero() {
               variants={wordParent}
               initial="hidden"
               animate="show"
-              className="relative z-10 font-display font-medium text-paper text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight"
+              className="relative z-10 font-display font-medium text-paper text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight"
             >
               {headline.map((word, i) => (
                 <span
@@ -124,7 +142,7 @@ export default function Hero() {
             >
               <MagneticButton
                 href="/donner"
-                className="bg-paper text-sage-deep px-7 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors"
+                className="bg-paper text-sage-deep px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors"
               >
                 Nous rejoindre
                 <ArrowRight size={14} strokeWidth={2.2} />
@@ -133,7 +151,7 @@ export default function Hero() {
               <MagneticButton
                 href="/boutique"
                 strength={0.25}
-                className="border-2 border-paper/70 text-paper px-7 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden hover:border-paper"
+                className="border-2 border-paper/70 text-paper px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:border-paper"
               >
                 La boutique
               </MagneticButton>

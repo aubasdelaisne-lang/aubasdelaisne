@@ -23,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -31,6 +32,14 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Désactive les effets de tilt 3D sur écrans tactiles pour éviter les accrocs */
+@media (hover: none) and (pointer: coarse) {
+  [data-tilt] {
+    transform: none !important;
+  }
 }
 
 /* Serif display — upright, lisible, chaleureux */

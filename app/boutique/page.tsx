@@ -30,14 +30,14 @@ export default function BoutiquePage() {
   return (
     <>
       {/* Hero de page */}
-      <section className="pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper">
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-10 md:p-16 text-center">
+          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="absolute -top-8 left-6 text-cream"
+              className="absolute -top-6 sm:-top-8 left-4 sm:left-6 text-cream scale-75 sm:scale-100 origin-top-left"
             >
               <Starburst size={80} points={18} duration={70} />
             </motion.div>
@@ -45,7 +45,7 @@ export default function BoutiquePage() {
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute -bottom-10 right-6 text-cream"
+              className="absolute -bottom-8 sm:-bottom-10 right-4 sm:right-6 text-cream scale-75 sm:scale-100 origin-bottom-right"
             >
               <Starburst size={100} points={20} duration={80} />
             </motion.div>

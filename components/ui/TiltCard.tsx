@@ -39,6 +39,7 @@ export default function TiltCard({ children, className = "", max = 6, glare = tr
   return (
     <motion.div
       ref={ref}
+      data-tilt
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 1000 }}
