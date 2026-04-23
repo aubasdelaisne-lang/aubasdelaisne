@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import { ChevronDown, ArrowRight } from "lucide-react"
 import { SITE } from "@/lib/constants"
-import Starburst from "@/components/ui/Starburst"
 import MagneticButton from "@/components/ui/MagneticButton"
 
 const headline = ["Au", "Bas", "de", "l'Aisne"]
@@ -30,65 +29,13 @@ export default function Hero() {
     offset: ["start start", "end start"],
   })
   // Parallax values — subtle, editorial
-  const yStar1 = useTransform(scrollYProgress, [0, 1], [0, -80])
-  const yStar2 = useTransform(scrollYProgress, [0, 1], [0, 120])
-  const yStar3 = useTransform(scrollYProgress, [0, 1], [0, -60])
   const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
   const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.08])
 
   return (
     <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
       <div className="relative max-w-[1300px] mx-auto">
-        <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-visible rounded-tl-[80px] md:rounded-tl-[140px] rounded-br-[80px] md:rounded-br-[140px]">
-          {/* Starbursts décoratifs — parallax au scroll (masqués sur très petit mobile pour laisser respirer) */}
-          <motion.div
-            style={{ y: yStar1 }}
-            initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden sm:block absolute -top-8 -left-6 md:-top-14 md:-left-14 text-cream z-20"
-          >
-            <Starburst size={90} points={22} duration={80} />
-          </motion.div>
-          {/* Version mobile — plus petit et haut-droite pour ne pas couvrir le titre */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="sm:hidden absolute -top-6 right-4 text-cream z-20"
-          >
-            <Starburst size={60} points={18} duration={70} />
-          </motion.div>
-
-          <motion.div
-            style={{ y: yStar2 }}
-            initial={{ opacity: 0, scale: 0.5, rotate: 30 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden sm:block absolute -bottom-8 -right-6 md:-bottom-14 md:-right-14 text-cream z-20"
-          >
-            <Starburst size={110} points={24} duration={90} />
-          </motion.div>
-          {/* Version mobile bottom */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="sm:hidden absolute -bottom-6 left-4 text-cream z-20"
-          >
-            <Starburst size={70} points={22} duration={80} />
-          </motion.div>
-
-          <motion.div
-            style={{ y: yStar3 }}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="hidden md:block absolute top-1/2 -right-10 -translate-y-1/2 text-cream z-20"
-          >
-            <Starburst size={90} points={16} duration={60} />
-          </motion.div>
-
+        <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px] rounded-br-[80px] md:rounded-br-[140px]">
           {/* Gauche — Contenu texte */}
           <div className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px]">
             {/* Subtle shine sweep */}

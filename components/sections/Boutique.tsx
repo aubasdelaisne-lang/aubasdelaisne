@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
 import { ITEMS, HOURS_BOUTIQUE } from "@/lib/constants"
-import Starburst from "@/components/ui/Starburst"
 import MagneticButton from "@/components/ui/MagneticButton"
 
 export default function BoutiqueSection() {
@@ -12,27 +11,7 @@ export default function BoutiqueSection() {
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
       <div className="max-w-[1300px] mx-auto">
         {/* Bloc sauge avec image + contenu */}
-        <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14">
-          {/* Starbursts */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="absolute -top-10 right-6 md:-top-14 md:right-16 text-cream z-20"
-          >
-            <Starburst size={110} points={20} duration={70} />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute -bottom-10 -left-8 md:-bottom-14 md:-left-14 text-cream z-20"
-          >
-            <Starburst size={130} points={22} duration={90} />
-          </motion.div>
-
+        <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center relative z-10">
             {/* Texte */}
             <div>

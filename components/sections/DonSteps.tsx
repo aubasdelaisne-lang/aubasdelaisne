@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Phone, Truck, Sparkles, Tags } from "lucide-react"
 import { DON_STEPS, SITE } from "@/lib/constants"
-import Starburst from "@/components/ui/Starburst"
 import SectionHeader from "@/components/ui/SectionHeader"
 import MagneticButton from "@/components/ui/MagneticButton"
 
@@ -12,16 +11,6 @@ const stepIcons = [Phone, Truck, Sparkles, Tags]
 export default function DonSteps() {
   return (
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.6 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="hidden md:block absolute top-20 right-10 text-sage/40 pointer-events-none"
-      >
-        <Starburst size={100} points={18} duration={80} />
-      </motion.div>
-
       <div className="max-w-[1100px] mx-auto">
         <SectionHeader
           eyebrow="Faire un don"

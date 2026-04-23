@@ -90,3 +90,29 @@ body {
   background: var(--color-terracotta);
   color: var(--color-paper);
 }
+
+/* ────────────────────────────────────────────────
+   Marquee — ticker horizontal infini (CSS pur)
+   ──────────────────────────────────────────────── */
+@keyframes marquee-left {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* Plus rapide sur mobile */
+@media (max-width: 640px) {
+  .marquee-track {
+    animation-duration: 14s !important;
+  }
+}
+
+/* Respecte les préférences de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}

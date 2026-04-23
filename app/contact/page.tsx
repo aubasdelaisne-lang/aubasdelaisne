@@ -4,7 +4,6 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { MapPin, Phone, Clock, Check } from "lucide-react"
 import { SITE, HOURS_BOUTIQUE } from "@/lib/constants"
-import Starburst from "@/components/ui/Starburst"
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -23,23 +22,6 @@ export default function ContactPage() {
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
           <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="absolute -top-6 sm:-top-8 left-4 sm:left-6 text-cream scale-75 sm:scale-100 origin-top-left"
-            >
-              <Starburst size={90} points={18} duration={80} />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute -bottom-8 sm:-bottom-10 right-4 sm:right-6 text-cream scale-75 sm:scale-100 origin-bottom-right"
-            >
-              <Starburst size={110} points={20} duration={90} />
-            </motion.div>
-
             <div className="relative z-10">
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Contact
