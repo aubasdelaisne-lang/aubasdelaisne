@@ -29,16 +29,19 @@ export default function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   })
-  // Parallax values — subtle, editorial
-  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
-  const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.08])
+  // Parallax values — plus marqués pour être perceptibles au mobile
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "22%"])
+  const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.12])
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"])
 
   return (
     <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
       <div className="relative max-w-[1300px] mx-auto">
         <div className="spotlight relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px] rounded-br-[80px] md:rounded-br-[140px]">
           {/* Gauche — Contenu texte */}
-          <div className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px]">
+          <motion.div
+            style={{ y: yText }}
+            className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px]">
             {/* Subtle shine sweep */}
             <ShineSweep delay={1.4} />
 
@@ -108,7 +111,7 @@ export default function Hero() {
               <ChevronDown size={16} strokeWidth={1.5} />
               Découvrir
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Droite — Image avec Ken Burns + parallax */}
           <motion.div

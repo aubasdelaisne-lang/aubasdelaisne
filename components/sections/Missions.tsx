@@ -1,11 +1,12 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Leaf, HeartHandshake, Briefcase } from "lucide-react"
 import { MISSIONS } from "@/lib/constants"
 import TiltCard from "@/components/ui/TiltCard"
 import SectionHeader from "@/components/ui/SectionHeader"
+import { useIsTouch } from "@/hooks/useIsTouch"
 
 const icons = { Leaf, HeartHandshake, Briefcase } as const
 
@@ -14,9 +15,11 @@ const ease = [0.22, 1, 0.36, 1] as const
 function MissionCard({
   mission,
   index,
+  isActive,
 }: {
   mission: (typeof MISSIONS)[number]
   index: number
+  isActive: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: "-15%" })
@@ -29,9 +32,14 @@ function MissionCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay, ease }}
+      whileTap={{ scale: 0.98 }}
     >
       <TiltCard max={4} className="h-full">
-        <article className="relative bg-cream-soft border-2 border-ink/10 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px]">
+        <article className={`relative border-2 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px] transition-[background-color,border-color,box-shadow] duration-500 ${
+          isActive
+            ? "bg-paper border-terracotta shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)]"
+            : "bg-cream-soft border-ink/10"
+        }`}>
           {/* Shimmer hover */}
           <span
             aria-hidden
@@ -113,10 +121,14 @@ function MissionCard({
             {mission.description}
           </motion.p>
 
-          {/* Chevron bas droite au hover */}
+          {/* Chevron bas droite au hover / auto-actif */}
           <motion.span
             aria-hidden
-            className="pointer-events-none absolute bottom-4 right-4 h-6 w-6 rounded-full border-2 border-sage-deep/30 flex items-center justify-center text-sage-deep/60 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2 transition-all duration-500"
+            className={`pointer-events-none absolute bottom-4 right-4 h-6 w-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+              isActive
+                ? "border-terracotta text-terracotta opacity-100 translate-x-0"
+                : "border-sage-deep/30 text-sage-deep/60 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:border-terracotta group-hover:text-terracotta"
+            }`}
           >
             <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
               <path
@@ -134,6 +146,18 @@ function MissionCard({
 }
 
 export default function Missions() {
+  const isTouch = useIsTouch()
+  const [active, setActive] = useState(-1)
+
+  // Sur mobile : met en valeur une mission à tour de rôle
+  useEffect(() => {
+    if (!isTouch) return
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % MISSIONS.length)
+    }, 2800)
+    return () => clearInterval(id)
+  }, [isTouch])
+
   return (
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
       <div className="max-w-[1100px] mx-auto">
@@ -151,7 +175,7 @@ export default function Missions() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {MISSIONS.map((m, i) => (
-            <MissionCard key={m.title} mission={m} index={i} />
+            <MissionCard key={m.title} mission={m} index={i} isActive={active === i} />
           ))}
         </div>
       </div>

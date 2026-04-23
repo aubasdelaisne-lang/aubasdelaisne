@@ -6,6 +6,7 @@ import Footer from "@/components/ui/Footer"
 import PageTransition from "@/components/ui/PageTransition"
 import CookieBanner from "@/components/ui/CookieBanner"
 import SpotlightInit from "@/components/ui/SpotlightInit"
+import ScrollProgress from "@/components/ui/ScrollProgress"
 import { SITE } from "@/lib/constants"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
@@ -58,6 +59,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="min-h-screen flex flex-col antialiased bg-paper text-ink">
+        <ScrollProgress />
         <Navbar />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>

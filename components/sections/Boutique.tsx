@@ -1,13 +1,26 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
 import { ITEMS, HOURS_BOUTIQUE } from "@/lib/constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
+import { useIsTouch } from "@/hooks/useIsTouch"
 
 export default function BoutiqueSection() {
+  const isTouch = useIsTouch()
+  const [activeChip, setActiveChip] = useState(-1)
+
+  // Sur mobile : un chip prend la couleur orange à tour de rôle
+  useEffect(() => {
+    if (!isTouch) return
+    const id = setInterval(() => {
+      setActiveChip((prev) => (prev + 1) % ITEMS.length)
+    }, 1500)
+    return () => clearInterval(id)
+  }, [isTouch])
   return (
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
       <div className="max-w-[1300px] mx-auto">
@@ -133,11 +146,17 @@ export default function BoutiqueSection() {
                   transition: { rotate: { duration: 0.4 }, default: { type: "spring", stiffness: 400, damping: 15 } },
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-2 px-5 py-2 text-[13px] bg-paper border-2 border-ink/10 hover:border-terracotta hover:bg-terracotta hover:text-paper hover:shadow-[0_8px_20px_-8px_rgba(239,95,23,0.5)] rounded-full cursor-default transition-[background-color,border-color,color,box-shadow] duration-300"
+                className={`group relative inline-flex items-center gap-2 px-5 py-2 text-[13px] border-2 rounded-full cursor-default transition-[background-color,border-color,color,box-shadow,transform] duration-500 ${
+                  activeChip === i
+                    ? "bg-terracotta text-paper border-terracotta shadow-[0_8px_20px_-8px_rgba(239,95,23,0.5)] -translate-y-1 scale-[1.06]"
+                    : "bg-paper border-ink/10 hover:border-terracotta hover:bg-terracotta hover:text-paper hover:shadow-[0_8px_20px_-8px_rgba(239,95,23,0.5)]"
+                }`}
               >
                 <span
                   aria-hidden
-                  className="w-1.5 h-1.5 rounded-full bg-sage group-hover:bg-paper transition-colors duration-300"
+                  className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
+                    activeChip === i ? "bg-paper" : "bg-sage group-hover:bg-paper"
+                  }`}
                 />
                 <span className="font-medium">{item}</span>
               </motion.span>
