@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useState } from "react"
 
 /**
  * Ticker horizontal infini — style vintage.
@@ -20,13 +20,22 @@ export default function Marquee({
   className = "",
   direction = "left",
 }: Props) {
+  const [speed, setSpeed] = useState(duration)
+
+  useEffect(() => {
+    const update = () => setSpeed(window.innerWidth < 640 ? duration * 0.5 : duration)
+    update()
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [duration])
+
   const sequence = [...items, ...items]
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <motion.div
         className="flex gap-12 whitespace-nowrap"
         animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{ duration, ease: "linear", repeat: Infinity }}
+        transition={{ duration: speed, ease: "linear", repeat: Infinity }}
       >
         {sequence.map((item, i) => (
           <span key={i} className="inline-flex items-center gap-3 shrink-0">
