@@ -23,7 +23,7 @@ export default function ContactPage() {
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
           <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px] overflow-hidden">
-            <ShineSweep delay={0.6} />
+            <ShineSweep />
             <div className="relative z-10">
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Contact
@@ -136,7 +136,7 @@ export default function ContactPage() {
 
             {/* Horaires */}
             <div className="spotlight p-6 bg-sage paper-texture border-2 border-ink/10 relative rounded-tl-[40px] rounded-br-[40px] overflow-hidden">
-              <ShineSweep delay={0.8} />
+              <ShineSweep delay={0.5} />
               <div className="relative z-10">
                 <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-4">
                   <Clock size={13} strokeWidth={1.8} />
