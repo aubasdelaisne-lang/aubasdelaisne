@@ -119,7 +119,7 @@ export default function BoutiquePage() {
                 className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-6 md:p-8 text-center cursor-default overflow-hidden transition-colors"
               >
                 <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(220px_circle_at_center,rgba(127,165,168,0.18),transparent_65%)]" />
+                <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(220px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
                 <motion.div
                   whileHover={{ rotate: 15, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -231,7 +231,7 @@ export default function BoutiquePage() {
             whileHover={{ y: -4 }}
             className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
           >
-            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(127,165,168,0.15),transparent_65%)]" />
+            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-5">
               <Clock size={13} strokeWidth={1.8} />
               Horaires

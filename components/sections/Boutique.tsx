@@ -129,7 +129,7 @@ export default function BoutiqueSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                whileHover={{ y: -3, scale: 1.06, backgroundColor: "#7fa5a8", color: "#ede0c5" }}
+                whileHover={{ y: -3, scale: 1.06, backgroundColor: "#191465", color: "#fafaff" }}
                 className="px-4 py-1.5 text-[13px] bg-cream-soft border border-ink/15 rounded-full cursor-default transition-colors"
               >
                 {item}

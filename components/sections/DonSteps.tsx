@@ -55,7 +55,7 @@ export default function DonSteps() {
                 {/* Spotlight curseur */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(200px_circle_at_center,rgba(127,165,168,0.18),transparent_65%)]"
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(200px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]"
                 />
                 {/* Trait haut terracotta */}
                 <motion.span

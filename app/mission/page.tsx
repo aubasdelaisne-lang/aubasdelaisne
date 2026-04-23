@@ -102,7 +102,7 @@ export default function MissionPage() {
                   className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
                 >
                   <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(127,165,168,0.18),transparent_65%)]" />
+                  <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
                   <div className="relative flex items-start justify-between mb-6">
                     <span className="font-display font-bold text-5xl text-sage-deep leading-none">
                       {m.num}
@@ -149,7 +149,7 @@ export default function MissionPage() {
                 className="group relative py-5 pl-8 cursor-default"
               >
                 <motion.div
-                  whileHover={{ scale: 1.3, backgroundColor: "#b8543a" }}
+                  whileHover={{ scale: 1.3, backgroundColor: "#ef5f17" }}
                   transition={{ type: "spring", stiffness: 260, damping: 16 }}
                   className="absolute -left-[9px] md:-left-[2px] top-6 w-6 h-6 rounded-full bg-sage border-4 border-cream-soft"
                 />
@@ -186,7 +186,7 @@ export default function MissionPage() {
                 className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
               >
                 <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(127,165,168,0.18),transparent_65%)]" />
+                <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
                 <motion.div
                   whileHover={{ rotate: -10, scale: 1.15 }}
                   transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -218,7 +218,7 @@ export default function MissionPage() {
           whileHover={{ y: -4 }}
           className="group relative max-w-[900px] mx-auto flex flex-col md:flex-row items-center gap-8 bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
         >
-          <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(300px_circle_at_center,rgba(127,165,168,0.12),transparent_65%)]" />
+          <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(300px_circle_at_center,rgba(25,20,101,0.12),transparent_65%)]" />
           <motion.div
             whileHover={{ rotate: 6, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}

@@ -1,21 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  /* Vintage natural palette — sauge teal + terracotta + crème papier */
-  --color-ink: #2a2d26;
-  --color-ink-soft: #55564d;
-  --color-olive: #3d4a36;
-  --color-sage: #7fa5a8;       /* bleu-sauge vintage (dominant) */
-  --color-sage-deep: #5f8589;
-  --color-sage-soft: #a3c0c2;
-  --color-terracotta: #b8543a;
-  --color-terracotta-soft: #d88a6f;
-  --color-clay: #c9a37a;
-  --color-paper: #ede0c5;      /* crème chaud, un peu kraft */
-  --color-cream: #f1e7d2;      /* crème plus clair */
-  --color-cream-soft: #f7efdc;
-  --color-stone: #dccfb0;
-  --color-rule: #c8b895;
+  /* ────────────────────────────────────────────────
+     Palette moderne — Bleu profond + Lilas + Orange
+     ──────────────────────────────────────────────── */
+
+  /* Textes — bleu très foncé pour contraste sur fonds clairs */
+  --color-ink: #0a0838;          /* bleu quasi-noir, texte principal */
+  --color-ink-soft: #484377;     /* bleu moyen, texte secondaire */
+  --color-olive: #0f0a45;        /* variante foncée */
+
+  /* DOMINANT : bleu profond */
+  --color-sage: #191465;         /* couleur dominante (navy indigo) */
+  --color-sage-deep: #0f0a45;    /* variante plus foncée (hover, titres) */
+  --color-sage-soft: #5a54a3;    /* variante douce */
+
+  /* ACCENT : orange vif */
+  --color-terracotta: #ef5f17;
+  --color-terracotta-soft: #f58e5c;
+  --color-clay: #f5a884;
+
+  /* BACKGROUNDS : blanc + lilas */
+  --color-paper: #fafaff;        /* blanc légèrement teinté lilas, fond principal */
+  --color-cream: #f0efff;        /* lilas très pâle */
+  --color-cream-soft: #e1e0ff;   /* LILAS SECONDAIRE */
+  --color-stone: #c9c7f5;        /* lilas moyen (rules) */
+  --color-rule: #a8a5d8;         /* lilas plus dense (bordures visibles) */
 
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -50,7 +60,7 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Texture papier — subtle paper grain sur backgrounds colorés */
+/* Texture — grain subtil sur fonds colorés (hero, footer) */
 .paper-texture {
   position: relative;
 }
@@ -58,20 +68,20 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
-  mix-blend-mode: multiply;
-  opacity: 0.4;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.5;
   pointer-events: none;
 }
 
-/* Grain léger pour photos vintage */
+/* Grain léger pour photos */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
   z-index: 1;
 }

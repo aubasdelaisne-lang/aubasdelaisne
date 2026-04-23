@@ -77,7 +77,7 @@ export default function ContactPage() {
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(127,165,168,0.15),transparent_65%)]" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
               <motion.div
                 whileHover={{ rotate: 15, scale: 1.12 }}
                 transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -103,7 +103,7 @@ export default function ContactPage() {
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(184,84,58,0.15),transparent_65%)]" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(239,95,23,0.15),transparent_65%)]" />
               <motion.div
                 whileHover={{ rotate: 15, scale: 1.12 }}
                 transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -131,7 +131,7 @@ export default function ContactPage() {
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(95,133,137,0.15),transparent_65%)]" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(15,10,69,0.15),transparent_65%)]" />
               <motion.div
                 whileHover={{ rotate: 15, scale: 1.12 }}
                 transition={{ type: "spring", stiffness: 260, damping: 16 }}
