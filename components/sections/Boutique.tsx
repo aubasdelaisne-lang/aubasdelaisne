@@ -11,7 +11,7 @@ export default function BoutiqueSection() {
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
       <div className="max-w-[1300px] mx-auto">
         {/* Bloc sauge avec image + contenu */}
-        <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">
+        <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center relative z-10">
             {/* Texte */}
             <div>

@@ -116,3 +116,45 @@ body {
     animation: none !important;
   }
 }
+
+/* ────────────────────────────────────────────────
+   Spotlight — halo lumineux qui suit le curseur
+   sur les grands blocs marqués `.spotlight`
+   ──────────────────────────────────────────────── */
+.spotlight {
+  position: relative;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(225, 224, 255, 0.22),
+    transparent 60%
+  );
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+  z-index: 1;
+}
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* Désactive le spotlight sur écrans tactiles */
+@media (hover: none) and (pointer: coarse) {
+  .spotlight::after {
+    display: none;
+  }
+}
+
+/* Feedback tactile : léger scale down au tap sur les grands blocs */
+@media (hover: none) and (pointer: coarse) {
+  .tap-scale:active {
+    transform: scale(0.985);
+    transition: transform 0.15s ease;
+  }
+}

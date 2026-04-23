@@ -106,7 +106,7 @@ export default function DonSteps() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative mt-16 bg-sage paper-texture border-2 border-ink/10 p-8 md:p-12 text-center"
+          className="spotlight relative mt-16 bg-sage paper-texture border-2 border-ink/10 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
         >
           <h3 className="relative z-10 font-display font-medium text-3xl md:text-4xl text-paper leading-tight">
             Prêt à nous confier vos objets ?

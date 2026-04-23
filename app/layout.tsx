@@ -5,6 +5,7 @@ import Navbar from "@/components/ui/Navbar"
 import Footer from "@/components/ui/Footer"
 import PageTransition from "@/components/ui/PageTransition"
 import CookieBanner from "@/components/ui/CookieBanner"
+import SpotlightInit from "@/components/ui/SpotlightInit"
 import { SITE } from "@/lib/constants"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
@@ -63,6 +64,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieBanner />
+        <SpotlightInit />
       </body>
     </html>
   )

@@ -21,7 +21,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
+          <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
             <div className="relative z-10">
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Contact
@@ -56,6 +56,7 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -4, x: 2 }}
+              whileTap={{ scale: 0.98 }}
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -82,6 +83,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               whileHover={{ y: -4, x: 2 }}
+              whileTap={{ scale: 0.98 }}
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -110,6 +112,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               whileHover={{ y: -4, x: 2 }}
+              whileTap={{ scale: 0.98 }}
               className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -130,7 +133,7 @@ export default function ContactPage() {
             </motion.a>
 
             {/* Horaires */}
-            <div className="p-6 bg-sage paper-texture border-2 border-ink/10 relative">
+            <div className="spotlight p-6 bg-sage paper-texture border-2 border-ink/10 relative rounded-tl-[40px] rounded-br-[40px] overflow-hidden">
               <div className="relative z-10">
                 <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-4">
                   <Clock size={13} strokeWidth={1.8} />

@@ -34,7 +34,7 @@ export default function MissionPage() {
       {/* Hero */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
+          <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
             <div className="relative z-10">
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Notre mission
@@ -81,6 +81,7 @@ export default function MissionPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.12 }}
                   whileHover={{ y: -6 }}
+                  whileTap={{ scale: 0.98 }}
                   className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors rounded-tl-[40px] rounded-br-[40px]"
                 >
                   <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -198,7 +199,8 @@ export default function MissionPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
-          className="group relative max-w-[900px] mx-auto flex flex-col md:flex-row items-center gap-8 bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
+          whileTap={{ scale: 0.985 }}
+          className="spotlight group relative max-w-[900px] mx-auto flex flex-col md:flex-row items-center gap-8 bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors rounded-tl-[40px] rounded-br-[40px]"
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(300px_circle_at_center,rgba(25,20,101,0.12),transparent_65%)]" />
           <motion.div
