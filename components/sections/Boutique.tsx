@@ -83,7 +83,7 @@ export default function BoutiqueSection() {
               <div className="mt-8">
                 <MagneticButton
                   href="/boutique"
-                  className="bg-paper text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden"
+                  className="bg-paper text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full"
                 >
                   Visiter la boutique
                   <ArrowRight size={14} strokeWidth={2.2} />

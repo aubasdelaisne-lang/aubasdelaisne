@@ -32,7 +32,7 @@ export default function BoutiquePage() {
       {/* Hero de page */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center">
+          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -116,7 +116,7 @@ export default function BoutiquePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-6 md:p-8 text-center cursor-default overflow-hidden transition-colors"
+                className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-6 md:p-8 text-center cursor-default overflow-hidden transition-colors rounded-t-[40px]"
               >
                 <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
                 <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(220px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
@@ -155,7 +155,7 @@ export default function BoutiquePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative aspect-[4/5] md:aspect-auto md:row-span-2 grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+              className="group relative aspect-[4/5] md:aspect-auto md:row-span-2 grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-t-[80px] md:rounded-t-[120px]"
             >
               <Image
                 src="/images/boutique-capture.png"
@@ -274,7 +274,7 @@ export default function BoutiquePage() {
               </p>
               <a
                 href={SITE.phoneHref}
-                className="inline-flex items-center gap-2 bg-paper text-sage-deep px-6 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold hover:bg-cream transition-colors"
+                className="inline-flex items-center gap-2 bg-paper text-sage-deep px-6 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
               >
                 <Phone size={13} strokeWidth={2} />
                 {SITE.phone}
@@ -292,13 +292,13 @@ export default function BoutiquePage() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/contact"
-            className="bg-sage text-paper px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold hover:bg-sage-deep transition-colors"
+            className="bg-sage text-paper px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-sage-deep transition-colors"
           >
             Voir l'accès
           </Link>
           <Link
             href="/donner"
-            className="bg-paper text-sage-deep border-2 border-sage px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold hover:bg-cream transition-colors"
+            className="bg-paper text-sage-deep border-2 border-sage px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
           >
             Faire un don
           </Link>

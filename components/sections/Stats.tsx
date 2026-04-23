@@ -48,7 +48,7 @@ export default function Stats() {
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="group bg-sage paper-texture text-paper text-center px-4 py-8 md:py-10 border-2 border-ink/10 hover:border-terracotta/50 relative overflow-hidden transition-colors cursor-default"
+              className="group bg-sage paper-texture text-paper text-center px-4 py-8 md:py-10 border-2 border-ink/10 hover:border-terracotta/50 relative overflow-hidden transition-colors cursor-default rounded-t-[60px]"
             >
               {/* Spotlight hover */}
               <span

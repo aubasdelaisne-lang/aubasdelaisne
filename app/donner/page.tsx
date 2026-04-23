@@ -26,7 +26,7 @@ export default function DonnerPage() {
       {/* Hero */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
         <div className="max-w-[1300px] mx-auto">
-          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center">
+          <div className="relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px]">
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -180,7 +180,7 @@ export default function DonnerPage() {
               ))}
               <a
                 href={SITE.phoneHref}
-                className="mt-6 inline-flex items-center gap-2 bg-paper text-sage-deep px-5 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold hover:bg-cream transition-colors"
+                className="mt-6 inline-flex items-center gap-2 bg-paper text-sage-deep px-5 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
               >
                 <Phone size={12} strokeWidth={2} />
                 {SITE.phone}
@@ -299,7 +299,7 @@ export default function DonnerPage() {
               <motion.button
                 type="submit"
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-sage text-paper px-6 py-4 text-[13px] tracking-[0.25em] uppercase font-bold hover:bg-sage-deep transition-colors"
+                className="w-full bg-sage text-paper px-6 py-4 text-[13px] tracking-[0.25em] uppercase font-bold rounded-full hover:bg-sage-deep transition-colors"
               >
                 Envoyer ma demande
               </motion.button>

@@ -90,7 +90,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href={SITE.phoneHref}
-          className="hidden md:inline-flex items-center gap-2 bg-sage text-paper px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-bold hover:bg-sage-deep transition-colors"
+          className="hidden md:inline-flex items-center gap-2 bg-sage text-paper px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-bold hover:bg-sage-deep transition-colors rounded-full"
         >
           <Phone size={12} strokeWidth={2} />
           {SITE.phone}
@@ -130,7 +130,7 @@ export default function Navbar() {
               ))}
               <a
                 href={SITE.phoneHref}
-                className="mt-4 flex items-center justify-center gap-2 bg-sage text-paper px-4 py-3 text-[13px] tracking-[0.2em] uppercase font-bold"
+                className="mt-4 flex items-center justify-center gap-2 bg-sage text-paper px-4 py-3 text-[13px] tracking-[0.2em] uppercase font-bold rounded-full"
               >
                 <Phone size={13} strokeWidth={2} />
                 {SITE.phone}

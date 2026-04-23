@@ -31,7 +31,7 @@ function MissionCard({
       transition={{ duration: 0.8, delay, ease }}
     >
       <TiltCard max={4} className="h-full">
-        <article className="relative bg-cream-soft border-2 border-ink/10 p-8 md:p-10 flex flex-col h-full group overflow-hidden">
+        <article className="relative bg-cream-soft border-2 border-ink/10 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px]">
           {/* Shimmer hover */}
           <span
             aria-hidden

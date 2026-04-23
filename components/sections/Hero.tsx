@@ -39,7 +39,7 @@ export default function Hero() {
   return (
     <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
       <div className="relative max-w-[1300px] mx-auto">
-        <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-visible">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-[560px] md:min-h-[640px] border-2 border-ink/10 overflow-visible rounded-tl-[80px] md:rounded-tl-[140px] rounded-br-[80px] md:rounded-br-[140px]">
           {/* Starbursts décoratifs — parallax au scroll (masqués sur très petit mobile pour laisser respirer) */}
           <motion.div
             style={{ y: yStar1 }}
@@ -90,7 +90,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Gauche — Contenu texte */}
-          <div className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden">
+          <div className="relative bg-sage paper-texture flex flex-col justify-center px-6 sm:px-8 md:px-14 py-12 sm:py-16 md:py-20 z-10 overflow-hidden rounded-tl-[80px] md:rounded-tl-[140px]">
             {/* Subtle shine sweep */}
             <motion.div
               aria-hidden
@@ -142,7 +142,7 @@ export default function Hero() {
             >
               <MagneticButton
                 href="/donner"
-                className="bg-paper text-sage-deep px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors"
+                className="bg-paper text-sage-deep px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors rounded-full"
               >
                 Nous rejoindre
                 <ArrowRight size={14} strokeWidth={2.2} />
@@ -151,7 +151,7 @@ export default function Hero() {
               <MagneticButton
                 href="/boutique"
                 strength={0.25}
-                className="border-2 border-paper/70 text-paper px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:border-paper"
+                className="border-2 border-paper/70 text-paper px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:border-paper rounded-full"
               >
                 La boutique
               </MagneticButton>
@@ -173,7 +173,7 @@ export default function Hero() {
             initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
             animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
             transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
-            className="relative grain overflow-hidden min-h-[320px]"
+            className="relative grain overflow-hidden min-h-[320px] md:rounded-br-[140px] rounded-br-[80px]"
           >
             <motion.div
               style={{ y: yImage, scale: scaleImage }}
