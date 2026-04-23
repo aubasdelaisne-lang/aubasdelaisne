@@ -23,7 +23,7 @@ export default function Marquee({
   const [speed, setSpeed] = useState(duration)
 
   useEffect(() => {
-    const update = () => setSpeed(window.innerWidth < 640 ? duration * 0.2 : duration)
+    const update = () => setSpeed(window.innerWidth < 640 ? duration * 0.1 : duration)
     update()
     window.addEventListener("resize", update)
     return () => window.removeEventListener("resize", update)
