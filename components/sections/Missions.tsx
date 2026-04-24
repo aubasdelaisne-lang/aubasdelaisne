@@ -35,18 +35,30 @@ function MissionCard({
       whileTap={{ scale: 0.98 }}
     >
       <TiltCard max={4} className="h-full">
-        <article className={`relative border-2 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px] transition-[background-color,border-color,box-shadow] duration-500 ${
+        <article className={`relative border-2 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px] transition-[border-color,box-shadow] duration-500 bg-sage paper-texture ${
           isActive
-            ? "bg-paper border-terracotta shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)]"
-            : "bg-cream-soft border-ink/10"
+            ? "border-terracotta shadow-[0_20px_40px_-15px_rgba(239,95,23,0.45)]"
+            : "border-ink/10 hover:border-terracotta hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)]"
         }`}>
-          {/* Shimmer hover */}
+          {/* Overlay orange au hover / auto-actif */}
           <span
             aria-hidden
-            className="pointer-events-none absolute -inset-px bg-gradient-to-br from-paper/0 via-paper/50 to-paper/0 opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-700 ease-out"
+            className={`pointer-events-none absolute inset-0 bg-gradient-to-br transition-all duration-700 ${
+              isActive
+                ? "from-terracotta/20 to-terracotta/5"
+                : "from-terracotta/0 to-terracotta/0 group-hover:from-terracotta/20 group-hover:to-terracotta/5"
+            }`}
           />
 
-          {/* Ligne diagonale décor vintage en haut */}
+          {/* Shimmer diagonal */}
+          <span
+            aria-hidden
+            className={`pointer-events-none absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-paper/15 to-transparent skew-x-[-18deg] transition-[left] duration-[1200ms] ease-out ${
+              isActive ? "left-[150%]" : "-left-full group-hover:left-[150%]"
+            }`}
+          />
+
+          {/* Ligne terracotta en haut */}
           <motion.span
             aria-hidden
             initial={{ scaleX: 0 }}
@@ -62,11 +74,12 @@ function MissionCard({
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.9, delay: delay + 0.1, ease }}
-                className="inline-block font-display font-bold text-6xl md:text-7xl text-sage-deep leading-none"
+                className={`inline-block font-display font-bold text-6xl md:text-7xl leading-none transition-colors duration-500 ${
+                  isActive ? "text-terracotta-soft" : "text-paper group-hover:text-terracotta-soft"
+                }`}
               >
                 {mission.num}
               </motion.span>
-              {/* Petit trait sous le numéro */}
               <motion.span
                 aria-hidden
                 initial={{ scaleX: 0 }}
@@ -76,26 +89,24 @@ function MissionCard({
               />
             </div>
 
-            {/* Icône avec pulse + rotation spring au hover */}
+            {/* Icône */}
             <motion.div
               initial={{ scale: 0, rotate: -90 }}
               animate={inView ? { scale: 1, rotate: 0 } : {}}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                damping: 14,
-                delay: delay + 0.4,
-              }}
+              transition={{ type: "spring", stiffness: 200, damping: 14, delay: delay + 0.4 }}
               whileHover={{ rotate: 15, scale: 1.12 }}
-              className="relative w-14 h-14 rounded-full bg-sage flex items-center justify-center shadow-sm"
+              className={`relative w-14 h-14 rounded-full flex items-center justify-center shadow-sm transition-all duration-500 ${
+                isActive
+                  ? "bg-terracotta rotate-12 scale-110"
+                  : "bg-paper/10 group-hover:bg-terracotta group-hover:rotate-12 group-hover:scale-110"
+              }`}
             >
-              {/* Pulse ring au premier reveal */}
               <motion.span
                 aria-hidden
-                initial={{ scale: 1, opacity: 0.6 }}
+                initial={{ scale: 1, opacity: 0.4 }}
                 animate={inView ? { scale: 1.6, opacity: 0 } : {}}
                 transition={{ duration: 1.4, delay: delay + 0.5, ease: "easeOut" }}
-                className="absolute inset-0 rounded-full bg-sage"
+                className="absolute inset-0 rounded-full bg-paper/20"
               />
               <Icon size={22} strokeWidth={1.6} className="relative text-paper" />
             </motion.div>
@@ -106,7 +117,7 @@ function MissionCard({
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: delay + 0.3, ease }}
-            className="relative font-display font-semibold text-2xl text-ink leading-tight mb-4"
+            className="relative font-display font-semibold text-2xl text-paper leading-tight mb-4"
           >
             {mission.title}
           </motion.h3>
@@ -116,18 +127,18 @@ function MissionCard({
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: delay + 0.5 }}
-            className="relative text-[14px] text-ink-soft leading-relaxed"
+            className="relative text-[14px] text-paper/75 leading-relaxed"
           >
             {mission.description}
           </motion.p>
 
-          {/* Chevron bas droite au hover / auto-actif */}
+          {/* Chevron bas droite */}
           <motion.span
             aria-hidden
             className={`pointer-events-none absolute bottom-4 right-4 h-6 w-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
               isActive
                 ? "border-terracotta text-terracotta opacity-100 translate-x-0"
-                : "border-sage-deep/30 text-sage-deep/60 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:border-terracotta group-hover:text-terracotta"
+                : "border-paper/30 text-paper/60 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:border-terracotta group-hover:text-terracotta"
             }`}
           >
             <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
