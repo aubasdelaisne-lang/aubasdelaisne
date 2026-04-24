@@ -175,7 +175,7 @@ export default function DonnerPage() {
       </section>
 
       {/* Formulaire */}
-      <section className="py-24 px-4 md:px-8 bg-paper">
+      <section id="formulaire" className="py-24 px-4 md:px-8 bg-paper">
         <div className="max-w-[800px] mx-auto">
           <div className="text-center mb-10">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">

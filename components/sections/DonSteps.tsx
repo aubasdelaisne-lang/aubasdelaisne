@@ -124,7 +124,7 @@ export default function DonSteps() {
           </p>
           <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-3">
             <MagneticButton
-              href="/donner"
+              href="/donner#formulaire"
               className="bg-paper text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full"
             >
               Prendre rendez-vous
