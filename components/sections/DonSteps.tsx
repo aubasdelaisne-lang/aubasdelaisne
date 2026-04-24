@@ -40,7 +40,7 @@ export default function DonSteps() {
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -6 }}
-                className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-6 md:p-7 text-center overflow-hidden transition-colors cursor-default"
+                className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[36px] rounded-br-[36px] p-6 md:p-7 text-center overflow-hidden transition-colors cursor-default"
               >
                 {/* Spotlight curseur */}
                 <span

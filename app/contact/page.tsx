@@ -59,7 +59,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               whileHover={{ y: -4, x: 2 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
+              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
@@ -86,7 +86,7 @@ export default function ContactPage() {
               transition={{ delay: 0.1 }}
               whileHover={{ y: -4, x: 2 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
+              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(239,95,23,0.15),transparent_65%)]" />
@@ -115,7 +115,7 @@ export default function ContactPage() {
               transition={{ delay: 0.2 }}
               whileHover={{ y: -4, x: 2 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 transition-colors overflow-hidden"
+              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
             >
               <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(15,10,69,0.15),transparent_65%)]" />
@@ -163,7 +163,7 @@ export default function ContactPage() {
             </div>
 
             {/* Carte */}
-            <div className="overflow-hidden border-2 border-ink/10">
+            <div className="overflow-hidden border-2 border-ink/10 rounded-tl-[32px] rounded-br-[32px]">
               <iframe
                 title="Localisation"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=3.4149%2C49.0490%2C3.4249%2C49.0540&layer=mapnik&marker=49.0515%2C3.4199"
@@ -186,7 +186,7 @@ export default function ContactPage() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-cream-soft border-2 border-ink/10 p-10 text-center"
+                className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-10 text-center"
               >
                 <div className="w-14 h-14 rounded-full bg-sage mx-auto flex items-center justify-center mb-5">
                   <Check size={22} strokeWidth={2} className="text-paper" />
@@ -205,7 +205,7 @@ export default function ContactPage() {
                   if ((form.elements.namedItem("website") as HTMLInputElement)?.value) return
                   setSubmitted(true)
                 }}
-                className="space-y-5 bg-cream-soft border-2 border-ink/10 p-6 md:p-8"
+                className="space-y-5 bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-6 md:p-8"
               >
                 {/* Honeypot anti-bot : caché aux humains, rempli par les bots */}
                 <input
@@ -224,7 +224,7 @@ export default function ContactPage() {
                     <input
                       required
                       type="text"
-                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                     />
                   </div>
                   <div>
@@ -234,7 +234,7 @@ export default function ContactPage() {
                     <input
                       required
                       type="email"
-                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                     />
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     placeholder="Ex: Question sur les dons"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                   />
                 </div>
                 <div>
@@ -255,7 +255,7 @@ export default function ContactPage() {
                   <textarea
                     required
                     rows={6}
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none resize-none transition-colors"
+                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none resize-none transition-colors"
                   />
                 </div>
                 <motion.button

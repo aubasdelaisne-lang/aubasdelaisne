@@ -208,7 +208,7 @@ export default function MissionPage() {
           <motion.div
             whileHover={{ rotate: 6, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
-            className="relative w-32 h-32 shrink-0 grain overflow-hidden bg-cream"
+            className="relative w-32 h-32 shrink-0 grain overflow-hidden bg-cream rounded-2xl"
           >
             <Image src="/images/tremplin.webp" alt="Label Tremplin" fill sizes="128px" className="object-contain p-3" />
           </motion.div>

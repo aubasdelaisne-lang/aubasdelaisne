@@ -75,7 +75,7 @@ export default function DonnerPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   whileHover={{ y: -6 }}
-                  className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-6 text-center cursor-default overflow-hidden transition-colors"
+                  className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[36px] rounded-br-[36px] p-6 text-center cursor-default overflow-hidden transition-colors"
                 >
                   <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                   <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(200px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
@@ -190,7 +190,7 @@ export default function DonnerPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-cream-soft border-2 border-ink/10 p-10 text-center"
+              className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-10 text-center"
             >
               <div className="w-14 h-14 rounded-full bg-sage mx-auto flex items-center justify-center mb-5">
                 <Check size={22} strokeWidth={2} className="text-paper" />
@@ -215,7 +215,7 @@ export default function DonnerPage() {
                 if ((form.elements.namedItem("website") as HTMLInputElement)?.value) return
                 setSubmitted(true)
               }}
-              className="bg-cream-soft border-2 border-ink/10 p-8 md:p-10 space-y-6"
+              className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 space-y-6"
             >
               {/* Honeypot anti-bot : caché aux humains, rempli par les bots */}
               <input
@@ -235,7 +235,7 @@ export default function DonnerPage() {
                     required
                     type="text"
                     placeholder="Marie Dupont"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                   />
                 </div>
                 <div>
@@ -246,7 +246,7 @@ export default function DonnerPage() {
                     required
                     type="tel"
                     placeholder="06 12 34 56 78"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function DonnerPage() {
                   <select
                     required
                     defaultValue=""
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none appearance-none cursor-pointer"
+                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none appearance-none cursor-pointer"
                   >
                     <option value="" disabled>Sélectionner…</option>
                     {ITEMS.map((item) => (
@@ -288,7 +288,7 @@ export default function DonnerPage() {
                 <textarea
                   rows={3}
                   placeholder="État, quantité…"
-                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none resize-none transition-colors"
+                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none resize-none transition-colors"
                 />
               </div>
 

@@ -387,7 +387,7 @@ export default function BoutiquePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-tr-[60px]"
             >
               <Image
                 src="/images/hero.jpeg"
@@ -409,7 +409,7 @@ export default function BoutiquePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer"
+              className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-br-[60px]"
             >
               <Image
                 src="/images/vaisselle.jpg"
@@ -436,7 +436,7 @@ export default function BoutiquePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -4 }}
-            className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
+            className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-5">
@@ -468,7 +468,7 @@ export default function BoutiquePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
             whileHover={{ y: -4 }}
-            className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta-soft/60 p-8 cursor-default overflow-hidden transition-colors"
+            className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta-soft/60 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(255,255,255,0.18),transparent_65%)]" />
             <div className="relative z-10">
@@ -492,23 +492,42 @@ export default function BoutiquePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-4 md:px-8 bg-paper text-center">
-        <h2 className="font-display font-medium text-4xl md:text-5xl text-sage-deep">
-          Venez chiner.
-        </h2>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link
-            href="/contact"
-            className="bg-sage text-paper px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-sage-deep transition-colors"
+      <section className="py-24 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-10 md:p-16 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
           >
-            Voir l'accès
-          </Link>
-          <Link
-            href="/donner"
-            className="bg-paper text-sage-deep border-2 border-sage px-7 py-3 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
-          >
-            Faire un don
-          </Link>
+            <ShineSweep delay={0.3} />
+            <div className="relative z-10">
+              <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
+                Nous rendre visite
+              </div>
+              <h2 className="font-display font-medium text-4xl md:text-5xl text-paper leading-[1.05]">
+                Venez chiner.
+              </h2>
+              <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
+                La boutique ouvre ses portes du mercredi au samedi. Chaque visite réserve une nouvelle trouvaille.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-paper text-sage-deep px-7 py-3.5 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
+                >
+                  Voir l'accès
+                </Link>
+                <Link
+                  href="/donner"
+                  className="inline-flex items-center gap-2 border-2 border-paper/70 text-paper px-7 py-3.5 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:border-paper transition-colors"
+                >
+                  Faire un don
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

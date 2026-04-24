@@ -50,7 +50,7 @@ export default function BoutiqueSection() {
               </p>
 
               {/* Horaires */}
-              <div className="mt-8 bg-paper/95 p-5 max-w-md">
+              <div className="mt-8 bg-paper/95 border border-paper/30 rounded-2xl p-5 max-w-md">
                 <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-3">
                   <Clock size={13} strokeWidth={1.8} />
                   Horaires
