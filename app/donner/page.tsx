@@ -210,10 +210,22 @@ export default function DonnerPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault()
+                // Honeypot : si le champ caché est rempli, c'est un bot
+                const form = e.currentTarget as HTMLFormElement
+                if ((form.elements.namedItem("website") as HTMLInputElement)?.value) return
                 setSubmitted(true)
               }}
               className="bg-cream-soft border-2 border-ink/10 p-8 md:p-10 space-y-6"
             >
+              {/* Honeypot anti-bot : caché aux humains, rempli par les bots */}
+              <input
+                type="text"
+                name="website"
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden"
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
