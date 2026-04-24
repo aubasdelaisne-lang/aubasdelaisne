@@ -34,7 +34,7 @@ export default function ContactPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="mt-4 font-display font-medium text-4xl md:text-6xl text-paper leading-[1.05]"
               >
-                Parlons-nous.
+                À votre écoute.
               </motion.h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Une question, un projet de don, ou simplement envie de passer ?
