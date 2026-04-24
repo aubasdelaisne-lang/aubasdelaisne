@@ -22,6 +22,11 @@ export default function Navbar() {
   const pathname = usePathname()
   const { scrollY } = useScroll()
 
+  // Ferme le menu mobile à chaque changement de route
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
   useEffect(() => {
     const unsub = scrollY.on("change", (y) => setScrolled(y > 24))
     return unsub
@@ -98,7 +103,9 @@ export default function Navbar() {
 
         {/* Mobile burger */}
         <button
-          aria-label="Menu"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
           className="md:hidden p-2 text-ink"
           onClick={() => setOpen(!open)}
         >
@@ -110,6 +117,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
