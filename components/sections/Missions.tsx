@@ -176,12 +176,12 @@ export default function Missions() {
           eyebrow="Notre Mission"
           title={
             <>
-              Donner une seconde vie,
+              Des mains qui retrouvent confiance.
               <br />
-              un objet à la fois.
+              Des objets qui retrouvent leur utilité.
             </>
           }
-          lede="Nous croyons qu'un territoire durable se construit en préservant les objets, en créant du lien et en donnant du travail à chacun."
+          lede=""
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

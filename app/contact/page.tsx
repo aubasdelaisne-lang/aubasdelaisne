@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Phone, Clock, Check } from "lucide-react"
+import { MapPin, Phone, Clock, Check, Instagram } from "lucide-react"
 import { SITE, HOURS_BOUTIQUE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 
@@ -50,6 +50,7 @@ export default function ContactPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Infos + carte */}
           <div className="space-y-5">
+            {/* Adresse principale — Château-Thierry */}
             <motion.a
               href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}`}
               target="_blank"
@@ -72,9 +73,38 @@ export default function ContactPage() {
               </motion.div>
               <div className="relative">
                 <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Adresse
+                  Boutique — Château-Thierry
                 </div>
                 <div className="font-display text-lg mt-1">{SITE.address}</div>
+              </div>
+            </motion.a>
+
+            {/* Adresse secondaire — Brasles */}
+            <motion.a
+              href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.addressSecondary)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -4, x: 2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
+            >
+              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
+              <motion.div
+                whileHover={{ rotate: 15, scale: 1.12 }}
+                transition={{ type: "spring", stiffness: 260, damping: 16 }}
+                className="relative w-12 h-12 rounded-full bg-sage/60 flex items-center justify-center shrink-0 shadow-sm"
+              >
+                <MapPin size={18} strokeWidth={1.6} className="text-paper" />
+              </motion.div>
+              <div className="relative">
+                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
+                  Dépôt — Brasles
+                </div>
+                <div className="font-display text-lg mt-1">{SITE.addressSecondary}</div>
               </div>
             </motion.a>
 
@@ -134,6 +164,35 @@ export default function ContactPage() {
               </div>
             </motion.a>
 
+            <motion.a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ y: -4, x: 2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
+            >
+              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(239,95,23,0.12),transparent_65%)]" />
+              <motion.div
+                whileHover={{ rotate: 15, scale: 1.12 }}
+                transition={{ type: "spring", stiffness: 260, damping: 16 }}
+                className="relative w-12 h-12 rounded-full bg-sage-deep flex items-center justify-center shrink-0 text-paper shadow-sm"
+              >
+                <Instagram size={18} strokeWidth={1.6} />
+              </motion.div>
+              <div className="relative">
+                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
+                  Instagram
+                </div>
+                <div className="font-display text-lg mt-1">@ressourcerie_aubasdelaisne</div>
+              </div>
+            </motion.a>
+
             {/* Horaires */}
             <div className="spotlight p-6 bg-sage paper-texture border-2 border-ink/10 relative rounded-tl-[40px] rounded-br-[40px] overflow-hidden">
               <ShineSweep delay={0.5} />
@@ -142,22 +201,27 @@ export default function ContactPage() {
                   <Clock size={13} strokeWidth={1.8} />
                   Horaires boutique
                 </div>
-                <div className="space-y-2">
-                  {HOURS_BOUTIQUE.map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-baseline text-[14px] pb-2 border-b border-paper/20 last:border-0"
-                    >
-                      <span className="text-paper/75">{h.days}</span>
-                      <span
-                        className={`tabular-nums ${
-                          h.hours === "Fermé" ? "text-terracotta-soft italic" : "text-paper font-semibold"
-                        }`}
-                      >
-                        {h.hours}
-                      </span>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-0">
+                  {HOURS_BOUTIQUE.map((h, i) => {
+                    const isClosed = h.hours === "Fermé"
+                    const isTodo = h.hours === "TODO"
+                    return (
+                      <div key={i} className="contents">
+                        <span className={`py-2 text-[14px] border-b border-paper/15 last:border-0 ${isClosed ? "text-paper/45" : "text-paper/80"}`}>
+                          {h.days}
+                        </span>
+                        <span className={`py-2 text-[14px] border-b border-paper/15 last:border-0 text-right tabular-nums ${
+                          isClosed
+                            ? "text-terracotta-soft italic"
+                            : isTodo
+                              ? "text-paper/40 italic text-[12px]"
+                              : "text-paper font-semibold"
+                        }`}>
+                          {isTodo ? "à venir" : h.hours}
+                        </span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>

@@ -1,20 +1,27 @@
 export const SITE = {
   name: "Au Bas de l'Aisne",
   fullName: "Recyclerie-Ressourcerie Au Bas de l'Aisne",
-  slogan: "Réduire les déchets, créer du lien, réinsérer",
-  address: "8 avenue de Château-Thierry, 02410 BRASLES",
+  slogan: "Réinsérer, relier, réduire…",
+  address: "22 avenue de l'Europe, 02410 Château-Thierry",
+  addressSecondary: "8 avenue de Château-Thierry, 02410 Brasles",
   phone: "03 64 13 48 64",
   phoneHref: "tel:+33364134864",
   facebook: "https://www.facebook.com/aubasdelaisne",
+  // TODO: remplacer "#" par l'URL Instagram définitive dès confirmation client
+  instagram: "https://www.instagram.com/ressourcerie_aubasdelaisne/",
   siret: "800 130 494 000 27",
   founded: "16 janvier 2014",
   registration: "Sous-préfecture de Château-Thierry (N° W021001352)",
 }
 
 export const HOURS_BOUTIQUE = [
-  { days: "Mardi – Vendredi", hours: "9h30–12h / 13h–18h" },
-  { days: "Samedi", hours: "9h30–12h" },
-  { days: "Dimanche – Lundi", hours: "Fermé" },
+  { days: "Lundi", hours: "Fermé" },
+  { days: "Mardi", hours: "TODO" }, // TODO: compléter les horaires
+  { days: "Mercredi", hours: "TODO" }, // TODO: compléter les horaires
+  { days: "Jeudi", hours: "TODO" }, // TODO: compléter les horaires
+  { days: "Vendredi", hours: "TODO" }, // TODO: compléter les horaires
+  { days: "Samedi", hours: "TODO" }, // TODO: compléter les horaires
+  { days: "Dimanche", hours: "Fermé" },
 ]
 
 export const HOURS_DEPOT = [
@@ -98,6 +105,12 @@ export const TIMELINE = [
     year: "2024",
     title: "10 ans d'engagement",
     desc: "L'association célèbre une décennie au service de l'économie circulaire et de l'insertion locale.",
+  },
+  {
+    year: "2026",
+    title: "Ouverture d'une nouvelle boutique",
+    // TODO: le client doit fournir le texte de description
+    desc: "TODO — description à compléter par le client.",
   },
 ]
 

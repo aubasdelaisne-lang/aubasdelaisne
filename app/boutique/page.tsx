@@ -19,10 +19,8 @@ import ShineSweep from "@/components/ui/ShineSweep"
 
 type Category = {
   Icon: typeof Armchair
-  num: string
   label: string
   desc: string
-  stock: string
   tone: "sage" | "paper" | "cream" | "terracotta"
   size: "xl" | "lg" | "md"
 }
@@ -30,92 +28,72 @@ type Category = {
 const categories: Category[] = [
   {
     Icon: Armchair,
-    num: "01",
     label: "Meubles",
     desc: "Tables, chaises, armoires, commodes, bureaux, étagères. Du mobilier solide et plein de caractère.",
-    stock: "~80 pièces",
     tone: "sage",
     size: "xl",
   },
   {
     Icon: BookOpen,
-    num: "02",
     label: "Livres & Médias",
     desc: "Romans, BD, livres jeunesse, CD, DVD, vinyles.",
-    stock: "~500 titres",
     tone: "cream",
     size: "lg",
   },
   {
     Icon: Utensils,
-    num: "03",
     label: "Vaisselle",
     desc: "Assiettes, verres, couverts, plats, théières.",
-    stock: "~200 pièces",
     tone: "paper",
     size: "md",
   },
   {
     Icon: ToyBrick,
-    num: "04",
     label: "Jouets",
     desc: "Jeux de société, peluches, Lego, poupées.",
-    stock: "~150 jouets",
     tone: "paper",
     size: "md",
   },
   {
     Icon: Bike,
-    num: "05",
     label: "Vélos",
     desc: "Vélos adultes et enfants, selon les dons.",
-    stock: "Arrivages réguliers",
     tone: "terracotta",
     size: "lg",
   },
   {
     Icon: Frame,
-    num: "06",
     label: "Déco",
     desc: "Cadres, bibelots, luminaires, linge de maison.",
-    stock: "Renouvelé chaque semaine",
     tone: "cream",
     size: "lg",
   },
 ]
 
-const toneStyles: Record<Category["tone"], { bg: string; text: string; num: string; iconBg: string; iconColor: string; accent: string }> = {
+const toneStyles: Record<Category["tone"], { bg: string; text: string; iconBg: string; iconColor: string }> = {
   sage: {
     bg: "bg-sage paper-texture",
     text: "text-paper",
-    num: "text-paper/15",
     iconBg: "bg-terracotta",
     iconColor: "text-paper",
-    accent: "text-terracotta-soft",
   },
   paper: {
     bg: "bg-paper",
     text: "text-ink",
-    num: "text-sage/10",
     iconBg: "bg-sage",
     iconColor: "text-paper",
-    accent: "text-terracotta",
   },
   cream: {
     bg: "bg-cream-soft",
     text: "text-ink",
-    num: "text-sage/15",
     iconBg: "bg-sage",
     iconColor: "text-paper",
-    accent: "text-terracotta",
   },
   terracotta: {
     bg: "bg-terracotta paper-texture",
     text: "text-paper",
-    num: "text-paper/15",
     iconBg: "bg-paper",
     iconColor: "text-terracotta",
-    accent: "text-paper",
   },
 }
 
@@ -180,11 +158,6 @@ export default function BoutiquePage() {
 
       {/* Catégories — bento grid asymétrique */}
       <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
-        {/* Décor fond : gros numéro "06" ombré */}
-        <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 font-display font-bold text-[14rem] md:text-[22rem] text-sage/[0.03] leading-none select-none">
-          06
-        </div>
-
         <div className="relative max-w-[1200px] mx-auto">
           {/* Header asymétrique */}
           <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -208,9 +181,7 @@ export default function BoutiquePage() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="font-display font-medium text-4xl md:text-6xl text-sage-deep leading-[1]"
               >
-                Six familles,
-                <br />
-                <span className="italic text-terracotta">mille trouvailles.</span>
+                Ce qu'on propose.
               </motion.h2>
             </div>
             <motion.p
@@ -240,18 +211,6 @@ export default function BoutiquePage() {
                   whileTap={{ scale: 0.98 }}
                   className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-6 md:p-8 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.3)] ${sizeClasses[cat.size]} ${t.bg} ${t.text}`}
                 >
-                  {/* Numéro géant en fond */}
-                  <span
-                    aria-hidden
-                    className={`pointer-events-none absolute font-display font-bold leading-none select-none transition-all duration-700 group-hover:scale-110 ${t.num} ${
-                      isXL
-                        ? "text-[14rem] md:text-[20rem] -bottom-12 -right-8"
-                        : "text-[10rem] -bottom-8 -right-4"
-                    }`}
-                  >
-                    {cat.num}
-                  </span>
-
                   {/* Shimmer diagonal au hover */}
                   <span
                     aria-hidden
@@ -260,13 +219,8 @@ export default function BoutiquePage() {
 
                   {/* Contenu */}
                   <div className="relative z-10 flex flex-col h-full">
-                    {/* En-tête : label rayon + icône */}
-                    <div className="flex items-start justify-between mb-5">
-                      <span
-                        className={`text-[10px] tracking-[0.3em] uppercase font-bold ${t.accent}`}
-                      >
-                        Rayon · {cat.num}
-                      </span>
+                    {/* Icône */}
+                    <div className="flex justify-end mb-5">
                       <motion.div
                         whileHover={{ rotate: 15, scale: 1.12 }}
                         transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -287,42 +241,12 @@ export default function BoutiquePage() {
 
                     {/* Description */}
                     <p
-                      className={`leading-relaxed mb-6 ${
+                      className={`leading-relaxed ${
                         isXL ? "text-[15px] max-w-md" : "text-[13px]"
                       } ${cat.tone === "sage" || cat.tone === "terracotta" ? "text-paper/85" : "text-ink-soft"}`}
                     >
                       {cat.desc}
                     </p>
-
-                    {/* Footer : stock + flèche */}
-                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-current/15">
-                      <span
-                        className={`text-[11px] tracking-[0.15em] uppercase font-semibold ${
-                          cat.tone === "sage" || cat.tone === "terracotta"
-                            ? "text-paper/70"
-                            : "text-ink-soft"
-                        }`}
-                      >
-                        {cat.stock}
-                      </span>
-                      <motion.span
-                        aria-hidden
-                        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 ${
-                          cat.tone === "sage" || cat.tone === "terracotta"
-                            ? "bg-paper/10 group-hover:bg-paper text-paper group-hover:text-ink"
-                            : "bg-sage/10 group-hover:bg-terracotta text-sage group-hover:text-paper"
-                        }`}
-                      >
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path
-                            d="M2 6h8m0 0L6 2m4 4L6 10"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </motion.span>
-                    </div>
                   </div>
                 </motion.article>
               )
@@ -476,9 +400,14 @@ export default function BoutiquePage() {
                 <MapPin size={13} strokeWidth={1.8} />
                 Nous trouver
               </div>
-              <p className="font-display text-2xl text-paper leading-snug mb-6">
-                {SITE.address}
-              </p>
+              <div className="mb-6">
+                <p className="font-display text-2xl text-paper leading-snug">
+                  {SITE.address}
+                </p>
+                <p className="font-display text-lg text-paper/65 leading-snug mt-2">
+                  {SITE.addressSecondary}
+                </p>
+              </div>
               <a
                 href={SITE.phoneHref}
                 className="inline-flex items-center gap-2 bg-paper text-sage-deep px-6 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
@@ -510,7 +439,7 @@ export default function BoutiquePage() {
                 Venez chiner.
               </h2>
               <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
-                La boutique ouvre ses portes du mercredi au samedi. Chaque visite réserve une nouvelle trouvaille.
+                La boutique ouvre ses portes du mardi au samedi. Chaque visite réserve une nouvelle trouvaille.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link

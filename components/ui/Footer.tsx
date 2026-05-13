@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { MapPin, Phone } from "lucide-react"
+import { MapPin, Phone, Instagram } from "lucide-react"
 import { SITE, HOURS_BOUTIQUE } from "@/lib/constants"
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -69,19 +69,32 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-[14px] leading-relaxed text-paper/80 max-w-xs">
-              {SITE.slogan}.
+              Réinsérer, relier, réduire…
             </p>
-            <motion.a
-              href={SITE.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ x: 4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="mt-5 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] font-semibold text-paper/90 hover:text-paper border-b border-paper/30 pb-1 transition-colors"
-            >
-              <FacebookIcon size={13} />
-              Facebook
-            </motion.a>
+            <div className="mt-5 flex flex-col gap-3">
+              <motion.a
+                href={SITE.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] font-semibold text-paper/90 hover:text-paper border-b border-paper/30 pb-1 transition-colors w-fit"
+              >
+                <FacebookIcon size={13} />
+                Facebook
+              </motion.a>
+              <motion.a
+                href={SITE.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] font-semibold text-paper/90 hover:text-paper border-b border-paper/30 pb-1 transition-colors w-fit"
+              >
+                <Instagram size={13} strokeWidth={1.8} />
+                Instagram
+              </motion.a>
+            </div>
           </motion.div>
 
           {/* Navigation */}
@@ -158,6 +171,10 @@ export default function Footer() {
             <div className="flex items-start gap-2 text-[13px] text-paper/85 mb-3">
               <MapPin size={14} strokeWidth={1.5} className="mt-0.5 shrink-0 text-terracotta-soft" />
               <span>{SITE.address}</span>
+            </div>
+            <div className="flex items-start gap-2 text-[13px] text-paper/85 mb-3">
+              <MapPin size={14} strokeWidth={1.5} className="mt-0.5 shrink-0 text-terracotta-soft" />
+              <span>{SITE.addressSecondary}</span>
             </div>
             <motion.a
               href={SITE.phoneHref}

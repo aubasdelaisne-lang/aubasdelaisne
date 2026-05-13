@@ -13,7 +13,7 @@ import {
   Tags,
   ChevronDown,
 } from "lucide-react"
-import { DON_STEPS, HOURS_DEPOT, ITEMS, SITE } from "@/lib/constants"
+import { DON_STEPS, ITEMS, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 
 const stepIcons = [Phone, Truck, Sparkles, Tags]
@@ -145,23 +145,20 @@ export default function DonnerPage() {
             <div className="relative z-10">
               <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-5">
                 <Calendar size={13} strokeWidth={1.8} />
-                Horaires de dépôt
+                Dépôt de dons
               </div>
-              {HOURS_DEPOT.map((h, i) => (
-                <div key={i}>
-                  {"days" in h && (
-                    <div className="flex justify-between items-baseline text-[15px] pb-2 border-b border-paper/20">
-                      <span className="text-paper/80">{h.days}</span>
-                      <span className="text-paper font-semibold tabular-nums">{h.hours}</span>
-                    </div>
-                  )}
-                  {"note" in h && (
-                    <p className="mt-4 text-[12px] uppercase tracking-[0.2em] text-terracotta-soft font-semibold italic">
-                      {h.note}
-                    </p>
-                  )}
-                </div>
-              ))}
+              <p className="text-[15px] text-paper/90 leading-relaxed mb-4">
+                Le dépôt de dons se fait <strong className="text-paper font-semibold">sans rendez-vous</strong>, directement à la ressourcerie de Château-Thierry.
+              </p>
+              <p className="text-[13px] text-paper/70 leading-relaxed mb-2">
+                22 avenue de l'Europe, 02410 Château-Thierry
+              </p>
+              <div className="mt-4 flex items-start gap-2 text-[13px] text-terracotta-soft">
+                <AlertCircle size={14} strokeWidth={1.8} className="shrink-0 mt-0.5" />
+                <span>
+                  <strong className="font-semibold">Exception :</strong> les meubles sont acceptés uniquement sur rendez-vous.
+                </span>
+              </div>
               <a
                 href={SITE.phoneHref}
                 className="mt-6 inline-flex items-center gap-2 bg-paper text-sage-deep px-5 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"

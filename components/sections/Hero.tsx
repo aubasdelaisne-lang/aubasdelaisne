@@ -4,7 +4,6 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import { ChevronDown, ArrowRight } from "lucide-react"
-import { SITE } from "@/lib/constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
 
@@ -74,9 +73,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="relative z-10 mt-7 max-w-md text-paper/85 text-[15px] leading-relaxed"
             >
-              {SITE.slogan}. Une recyclerie-ressourcerie associative à Brasles
-              depuis 2014. Donner, chiner, s'engager — trois gestes simples pour
-              un territoire plus juste.
+              Réinsertion professionnelle, créer du lien, réduire les déchets…
             </motion.p>
 
             <motion.div
