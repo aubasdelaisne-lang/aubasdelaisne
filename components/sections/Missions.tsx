@@ -176,9 +176,11 @@ export default function Missions() {
           eyebrow="Notre Mission"
           title={
             <>
-              Des mains qui retrouvent confiance.
+              Des mains qui retrouvent{" "}
+              <span className="italic text-terracotta">confiance.</span>
               <br />
-              Des objets qui retrouvent leur utilité.
+              Des objets qui retrouvent leur{" "}
+              <span className="italic text-terracotta">utilité.</span>
             </>
           }
           lede=""
