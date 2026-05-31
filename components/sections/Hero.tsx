@@ -52,12 +52,22 @@ export default function Hero() {
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={rotatingTitles[titleIndex]}
-                  initial={{ y: 28, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  initial={{ y: 28, opacity: 0, backgroundPosition: "0% 0%" }}
+                  animate={{ y: 0, opacity: 1, backgroundPosition: "100% 0%" }}
                   exit={{ y: -28, opacity: 0 }}
-                  transition={{ duration: 0.6, ease }}
-                  className={`block ${titleIndex === 0 ? "text-terracotta-soft" : "text-paper"}`}
-                  style={{ paddingBottom: "0.08em" }}
+                  transition={{
+                    duration: 0.6,
+                    ease,
+                    backgroundPosition: { duration: 1.2, ease: "easeInOut", delay: 0.15 },
+                  }}
+                  className="block bg-clip-text text-transparent"
+                  style={{
+                    paddingBottom: "0.08em",
+                    backgroundImage:
+                      "linear-gradient(110deg, rgba(250,250,255,0.78) 0%, rgba(250,250,255,0.78) 38%, #ffffff 47%, #ffffff 53%, rgba(250,250,255,0.78) 62%, rgba(250,250,255,0.78) 100%)",
+                    backgroundSize: "250% 100%",
+                    filter: "drop-shadow(0 0 14px rgba(255,255,255,0.22))",
+                  }}
                 >
                   {rotatingTitles[titleIndex]}
                 </motion.span>
