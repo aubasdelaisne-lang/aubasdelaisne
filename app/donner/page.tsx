@@ -1,19 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import {
-  Phone,
-  Calendar,
-  Check,
-  AlertCircle,
-  Truck,
-  Sparkles,
-  Tags,
-} from "lucide-react"
-import { DON_STEPS, ITEMS, SITE } from "@/lib/constants"
+import { Phone, Calendar, Check, AlertCircle } from "lucide-react"
+import { ITEMS, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
-
-const stepIcons = [Phone, Truck, Sparkles, Tags]
+import StepsTimeline from "@/components/ui/StepsTimeline"
 
 export default function DonnerPage() {
 
@@ -60,37 +51,7 @@ export default function DonnerPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-            {DON_STEPS.map((step, i) => {
-              const Icon = stepIcons[i]
-              return (
-                <motion.div
-                  key={step.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ y: -6 }}
-                  className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[36px] rounded-br-[36px] p-6 text-center cursor-default overflow-hidden transition-colors"
-                >
-                  <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(200px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
-                  <motion.div
-                    whileHover={{ rotate: 15, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                    className="relative w-14 h-14 rounded-full bg-sage mx-auto flex items-center justify-center mb-4 shadow-sm"
-                  >
-                    <Icon size={22} strokeWidth={1.5} className="text-paper" />
-                  </motion.div>
-                  <div className="relative font-display font-bold text-sage-deep text-xl mb-2">
-                    {step.step}
-                  </div>
-                  <h3 className="relative font-display font-semibold text-lg mb-3">{step.title}</h3>
-                  <p className="relative text-[13px] text-ink-soft leading-relaxed">{step.desc}</p>
-                </motion.div>
-              )
-            })}
-          </div>
+          <StepsTimeline />
         </div>
       </section>
 
