@@ -1,26 +1,16 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import { ChevronDown, ArrowRight } from "lucide-react"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
 
-const headline = ["Au", "Bas", "de", "l'Aisne"]
+const ease = [0.22, 1, 0.36, 1] as const
 
-const wordParent = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
-}
-const wordChild = {
-  hidden: { y: "110%", opacity: 0 },
-  show: {
-    y: "0%",
-    opacity: 1,
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
+// Le grand titre alterne entre ces deux textes toutes les 3 s
+const rotatingTitles = ["Ressourcerie", "Au Bas de l'Aisne"]
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -32,6 +22,15 @@ export default function Hero() {
   const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "22%"])
   const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.12])
   const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"])
+
+  // Alternance du grand titre toutes les 3 secondes
+  const [titleIndex, setTitleIndex] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTitleIndex((i) => (i + 1) % rotatingTitles.length)
+    }, 3000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <section ref={ref} className="relative pt-24 md:pt-28 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
@@ -45,27 +44,25 @@ export default function Hero() {
             <ShineSweep delay={1.4} />
 
             <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
-              Recyclerie · Brasles · Depuis 2014
+              Ressourcerie · Brasles · Depuis 2014
             </div>
 
-            <motion.h1
-              variants={wordParent}
-              initial="hidden"
-              animate="show"
-              className="relative z-10 font-display font-medium text-paper text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight"
-            >
-              {headline.map((word, i) => (
-                <span
-                  key={i}
-                  className="inline-block overflow-hidden align-baseline mr-3 last:mr-0"
+            {/* Grand titre qui alterne Ressourcerie ↔ Au Bas de l'Aisne */}
+            <h1 className="relative z-10 font-display font-medium text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight min-h-[2.2em] flex items-start">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={rotatingTitles[titleIndex]}
+                  initial={{ y: 28, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -28, opacity: 0 }}
+                  transition={{ duration: 0.6, ease }}
+                  className={`block ${titleIndex === 0 ? "text-terracotta-soft" : "text-paper"}`}
                   style={{ paddingBottom: "0.08em" }}
                 >
-                  <motion.span variants={wordChild} className="inline-block">
-                    {word}
-                  </motion.span>
-                </span>
-              ))}
-            </motion.h1>
+                  {rotatingTitles[titleIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
