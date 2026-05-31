@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 import Image from "next/image"
 import { Leaf, HeartHandshake, Briefcase, Quote } from "lucide-react"
 import { MISSIONS, TIMELINE, SITE } from "@/lib/constants"
@@ -61,7 +62,7 @@ export default function MissionPage() {
       </section>
 
       {/* 3 engagements */}
-      <section className="py-24 md:py-28 px-4 md:px-8 bg-paper">
+      <section className="py-24 md:py-32 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
@@ -84,24 +85,24 @@ export default function MissionPage() {
                   transition={{ duration: 0.6, delay: i * 0.12 }}
                   whileHover={{ y: -6 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors rounded-tl-[40px] rounded-br-[40px]"
+                  className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)] p-8 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 rounded-tl-[40px] rounded-br-[40px]"
                 >
                   <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.18),transparent_65%)]" />
+                  <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-terracotta/0 to-terracotta/0 group-hover:from-terracotta/20 group-hover:to-terracotta/5 transition-all duration-700" />
                   <div className="relative flex items-start justify-between mb-6">
-                    <span className="font-display font-bold text-5xl text-sage-deep leading-none">
+                    <span className="font-display font-bold text-5xl text-paper group-hover:text-terracotta-soft leading-none transition-colors duration-500">
                       {m.num}
                     </span>
                     <motion.div
                       whileHover={{ rotate: 15, scale: 1.12 }}
                       transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                      className="w-12 h-12 rounded-full bg-sage flex items-center justify-center shadow-sm"
+                      className="w-12 h-12 rounded-full bg-paper/10 group-hover:bg-terracotta flex items-center justify-center shadow-sm transition-colors duration-500"
                     >
                       <Icon size={20} strokeWidth={1.6} className="text-paper" />
                     </motion.div>
                   </div>
-                  <h3 className="relative font-display font-semibold text-2xl mb-3">{m.title}</h3>
-                  <p className="relative text-[14px] text-ink-soft leading-relaxed">{m.description}</p>
+                  <h3 className="relative font-display font-semibold text-2xl text-paper mb-3">{m.title}</h3>
+                  <p className="relative text-[14px] text-paper/75 leading-relaxed">{m.description}</p>
                 </motion.article>
               )
             })}
@@ -110,7 +111,7 @@ export default function MissionPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-24 md:py-28 px-4 md:px-8 bg-cream-soft">
+      <section className="py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[900px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
@@ -148,7 +149,7 @@ export default function MissionPage() {
       </section>
 
       {/* Témoignages */}
-      <section className="py-24 md:py-28 px-4 md:px-8 bg-paper">
+      <section className="py-24 md:py-32 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
@@ -225,6 +226,47 @@ export default function MissionPage() {
             </p>
           </div>
         </motion.div>
+      </section>
+
+      {/* CTA final */}
+      <section className="py-24 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-10 md:p-16 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
+          >
+            <ShineSweep delay={0.3} />
+            <div className="relative z-10">
+              <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
+                Agir avec nous
+              </div>
+              <h2 className="font-display font-medium text-4xl md:text-5xl text-paper leading-[1.05]">
+                Rejoignez le mouvement.
+              </h2>
+              <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
+                Donner un objet, chiner une trouvaille ou simplement passer nous
+                voir — chaque geste fait vivre le territoire.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/donner"
+                  className="inline-flex items-center gap-2 bg-paper text-sage-deep px-7 py-3.5 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
+                >
+                  Faire un don
+                </Link>
+                <Link
+                  href="/boutique"
+                  className="inline-flex items-center gap-2 border-2 border-paper/70 text-paper px-7 py-3.5 text-[13px] tracking-[0.22em] uppercase font-bold rounded-full hover:border-paper transition-colors"
+                >
+                  Visiter la boutique
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Colophon */}

@@ -4,7 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { MapPin, Phone } from "lucide-react"
-import { SITE, HOURS_BOUTIQUE } from "@/lib/constants"
+import { SITE } from "@/lib/constants"
+import HorairesPlaque from "@/components/ui/HorairesPlaque"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -45,7 +46,8 @@ export default function Footer() {
       />
 
       <div className="relative z-10 max-w-[1300px] mx-auto px-4 md:px-8 pt-16 md:pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
           {/* Brand */}
           <motion.div
@@ -133,39 +135,6 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Horaires */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2, ease }}
-          >
-            <div className="text-[11px] uppercase tracking-[0.25em] text-paper/70 font-semibold mb-4">
-              Horaires boutique
-            </div>
-            <div className="space-y-2">
-              {HOURS_BOUTIQUE.map((h, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.25 + i * 0.08, ease }}
-                  className="flex justify-between text-[13px] pb-2 border-b border-paper/15 last:border-0"
-                >
-                  <span className="text-paper/75">{h.days}</span>
-                  <span
-                    className={`tabular-nums ${
-                      h.hours === "Fermé" ? "text-terracotta-soft italic" : "text-paper font-medium"
-                    }`}
-                  >
-                    {h.hours}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Contact */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -194,6 +163,12 @@ export default function Footer() {
               {SITE.phone}
             </motion.a>
           </motion.div>
+          </div>
+
+          {/* Horaires — plaque émail */}
+          <div className="flex justify-center lg:justify-end">
+            <HorairesPlaque />
+          </div>
         </div>
 
         {/* Bottom bar */}

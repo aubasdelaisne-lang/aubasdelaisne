@@ -14,14 +14,15 @@ export const SITE = {
   registration: "Sous-préfecture de Château-Thierry (N° W021001352)",
 }
 
+// creneaux vide = jour fermé. Plusieurs créneaux = plusieurs lignes (matin / après-midi).
 export const HOURS_BOUTIQUE = [
-  { days: "Lundi", hours: "Fermé" },
-  { days: "Mardi", hours: "TODO" }, // TODO: compléter les horaires
-  { days: "Mercredi", hours: "TODO" }, // TODO: compléter les horaires
-  { days: "Jeudi", hours: "TODO" }, // TODO: compléter les horaires
-  { days: "Vendredi", hours: "TODO" }, // TODO: compléter les horaires
-  { days: "Samedi", hours: "TODO" }, // TODO: compléter les horaires
-  { days: "Dimanche", hours: "Fermé" },
+  { days: "Lundi", creneaux: [] as string[] },
+  { days: "Mardi", creneaux: ["09h30 – 12h00", "13h00 – 18h00"] },
+  { days: "Mercredi", creneaux: ["09h30 – 12h00", "13h00 – 18h00"] },
+  { days: "Jeudi", creneaux: ["09h30 – 12h00", "13h00 – 18h00"] },
+  { days: "Vendredi", creneaux: ["09h30 – 12h00", "13h00 – 18h00"] },
+  { days: "Samedi", creneaux: ["09h30 – 12h00"] },
+  { days: "Dimanche", creneaux: [] as string[] },
 ]
 
 export const HOURS_DEPOT = [

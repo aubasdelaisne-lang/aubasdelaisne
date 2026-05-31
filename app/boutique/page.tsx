@@ -10,12 +10,12 @@ import {
   ToyBrick,
   Bike,
   Frame,
-  Clock,
   MapPin,
   Phone,
 } from "lucide-react"
-import { HOURS_BOUTIQUE, SITE } from "@/lib/constants"
+import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
+import HorairesPlaque from "@/components/ui/HorairesPlaque"
 
 type Category = {
   Icon: typeof Armchair
@@ -142,7 +142,7 @@ export default function BoutiquePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="relative aspect-[16/8] grain overflow-hidden border-2 border-ink/10"
+            className="relative aspect-[16/8] grain overflow-hidden border-2 border-ink/10 rounded-tl-[60px] md:rounded-tl-[100px] rounded-br-[60px] md:rounded-br-[100px]"
           >
             <Image
               src="/images/boutique-capture.png"
@@ -267,7 +267,7 @@ export default function BoutiquePage() {
       </section>
 
       {/* Galerie photos */}
-      <section className="py-24 md:py-28 px-4 md:px-8 bg-cream-soft">
+      <section className="py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-12">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
@@ -354,37 +354,11 @@ export default function BoutiquePage() {
 
       {/* Horaires + adresse */}
       <section className="py-16 px-4 md:px-8 bg-cream-soft">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
-          >
-            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
-            <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-5">
-              <Clock size={13} strokeWidth={1.8} />
-              Horaires
-            </div>
-            <div className="space-y-3">
-              {HOURS_BOUTIQUE.map((h, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-baseline text-[15px] pb-2 border-b border-rule/40 last:border-0"
-                >
-                  <span className="text-ink-soft">{h.days}</span>
-                  <span
-                    className={`tabular-nums ${
-                      h.hours === "Fermé" ? "text-terracotta italic" : "text-ink font-semibold"
-                    }`}
-                  >
-                    {h.hours}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          {/* Horaires — plaque émail */}
+          <div className="flex justify-center">
+            <HorairesPlaque />
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

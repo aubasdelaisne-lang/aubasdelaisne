@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Clock, ArrowRight } from "lucide-react"
-import { ITEMS, HOURS_BOUTIQUE } from "@/lib/constants"
+import { ArrowRight } from "lucide-react"
+import { ITEMS } from "@/lib/constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
+import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import { useIsTouch } from "@/hooks/useIsTouch"
 
 export default function BoutiqueSection() {
@@ -49,30 +50,8 @@ export default function BoutiqueSection() {
                 avec soin, renouvelée chaque semaine.
               </p>
 
-              {/* Horaires */}
-              <div className="mt-8 bg-paper/95 border border-paper/30 rounded-2xl p-5 max-w-md">
-                <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-3">
-                  <Clock size={13} strokeWidth={1.8} />
-                  Horaires
-                </div>
-                {HOURS_BOUTIQUE.map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between items-baseline text-[14px] py-1.5 border-b border-rule/40 last:border-0"
-                  >
-                    <span className="text-ink-soft">{h.days}</span>
-                    <span
-                      className={`tabular-nums ${
-                        h.hours === "Fermé"
-                          ? "text-terracotta italic"
-                          : "text-ink font-semibold"
-                      }`}
-                    >
-                      {h.hours}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              {/* Horaires — plaque émail */}
+              <HorairesPlaque className="mt-8" />
 
               <div className="mt-8">
                 <MagneticButton

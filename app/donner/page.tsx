@@ -106,7 +106,7 @@ export default function DonnerPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -4 }}
-            className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 p-8 cursor-default overflow-hidden transition-colors"
+            className="group relative bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
             <div className="relative text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-5">
@@ -139,7 +139,7 @@ export default function DonnerPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             whileHover={{ y: -4 }}
-            className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta-soft/60 p-8 cursor-default overflow-hidden transition-colors"
+            className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta-soft/60 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(255,255,255,0.18),transparent_65%)]" />
             <div className="relative z-10">
@@ -274,7 +274,7 @@ export default function DonnerPage() {
                 </label>
                 <input
                   type="date"
-                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage px-4 py-3 text-[15px] outline-none transition-colors"
+                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
                 />
               </div>
 

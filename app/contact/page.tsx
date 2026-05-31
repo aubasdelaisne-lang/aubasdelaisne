@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Phone, Clock, Check } from "lucide-react"
-import { SITE, HOURS_BOUTIQUE } from "@/lib/constants"
+import { MapPin, Phone, Check } from "lucide-react"
+import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
+import HorairesPlaque from "@/components/ui/HorairesPlaque"
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -201,37 +202,9 @@ export default function ContactPage() {
               </div>
             </motion.a>
 
-            {/* Horaires */}
-            <div className="spotlight p-6 bg-sage paper-texture border-2 border-ink/10 relative rounded-tl-[40px] rounded-br-[40px] overflow-hidden">
-              <ShineSweep delay={0.5} />
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-4">
-                  <Clock size={13} strokeWidth={1.8} />
-                  Horaires boutique
-                </div>
-                <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-0">
-                  {HOURS_BOUTIQUE.map((h, i) => {
-                    const isClosed = h.hours === "Fermé"
-                    const isTodo = h.hours === "TODO"
-                    return (
-                      <div key={i} className="contents">
-                        <span className={`py-2 text-[14px] border-b border-paper/15 last:border-0 ${isClosed ? "text-paper/45" : "text-paper/80"}`}>
-                          {h.days}
-                        </span>
-                        <span className={`py-2 text-[14px] border-b border-paper/15 last:border-0 text-right tabular-nums ${
-                          isClosed
-                            ? "text-terracotta-soft italic"
-                            : isTodo
-                              ? "text-paper/40 italic text-[12px]"
-                              : "text-paper font-semibold"
-                        }`}>
-                          {isTodo ? "à venir" : h.hours}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
+            {/* Horaires — plaque émail */}
+            <div className="flex justify-center">
+              <HorairesPlaque />
             </div>
 
             {/* Carte */}

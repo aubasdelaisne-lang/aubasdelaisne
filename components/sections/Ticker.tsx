@@ -24,7 +24,7 @@ export default function Ticker() {
           >
             <Icon size={18} strokeWidth={1.6} className="text-terracotta" />
             {label}
-            <span className="mx-6 text-rule">✦</span>
+            <span className="mx-6 text-terracotta/50">✦</span>
           </span>
         ))}
       />
