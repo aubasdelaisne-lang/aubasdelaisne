@@ -33,12 +33,12 @@ export const HOURS_DEPOT = [
 export const MISSIONS = [
   {
     num: "01",
-    iconKey: "Leaf",
-    title: "Réduire les déchets",
-    lede: "Seconde vie",
+    iconKey: "Briefcase",
+    title: "Réinsérer",
+    lede: "Emploi & formation",
     description:
-      "Chaque objet récupéré est une victoire pour la planète. Nous détournons des tonnes de déchets chaque année.",
-    tone: "sage",
+      "Nous embauchons des personnes en difficulté sociale, avec accompagnement et formation sur mesure.",
+    tone: "ink",
   },
   {
     num: "02",
@@ -51,12 +51,12 @@ export const MISSIONS = [
   },
   {
     num: "03",
-    iconKey: "Briefcase",
-    title: "Réinsérer",
-    lede: "Emploi & formation",
+    iconKey: "Leaf",
+    title: "Réduire les déchets",
+    lede: "Seconde vie",
     description:
-      "Nous embauchons des personnes en difficulté sociale, avec accompagnement et formation sur mesure.",
-    tone: "ink",
+      "Chaque objet récupéré est une victoire pour la planète. Nous détournons des tonnes de déchets chaque année.",
+    tone: "sage",
   },
 ]
 
