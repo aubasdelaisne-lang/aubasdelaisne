@@ -98,9 +98,9 @@ const toneStyles: Record<Category["tone"], { bg: string; text: string; iconBg: s
 }
 
 const sizeClasses: Record<Category["size"], string> = {
-  xl: "md:col-span-2 md:row-span-2 rounded-tl-[80px] rounded-br-[80px] min-h-[380px]",
-  lg: "md:col-span-2 rounded-tl-[60px] rounded-br-[60px] min-h-[220px]",
-  md: "md:col-span-1 rounded-tl-[40px] rounded-br-[40px] min-h-[220px]",
+  xl: "md:col-span-2 md:row-span-2 rounded-tl-[60px] rounded-br-[60px] min-h-[260px]",
+  lg: "md:col-span-2 rounded-tl-[44px] rounded-br-[44px] min-h-[150px]",
+  md: "md:col-span-1 rounded-tl-[32px] rounded-br-[32px] min-h-[150px]",
 }
 
 export default function BoutiquePage() {
@@ -209,7 +209,7 @@ export default function BoutiquePage() {
                   transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ y: -8 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-6 md:p-8 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.3)] ${sizeClasses[cat.size]} ${t.bg} ${t.text}`}
+                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-5 md:p-6 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.3)] ${sizeClasses[cat.size]} ${t.bg} ${t.text}`}
                 >
                   {/* Shimmer diagonal au hover */}
                   <span
@@ -220,7 +220,7 @@ export default function BoutiquePage() {
                   {/* Contenu */}
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Icône */}
-                    <div className="flex justify-end mb-5">
+                    <div className="flex justify-end mb-3">
                       <motion.div
                         whileHover={{ rotate: 15, scale: 1.12 }}
                         transition={{ type: "spring", stiffness: 260, damping: 16 }}
