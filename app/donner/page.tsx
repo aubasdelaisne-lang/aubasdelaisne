@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
-import Link from "next/link"
 import {
   Phone,
   Calendar,
@@ -11,7 +9,6 @@ import {
   Truck,
   Sparkles,
   Tags,
-  ChevronDown,
 } from "lucide-react"
 import { DON_STEPS, ITEMS, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
@@ -19,7 +16,6 @@ import ShineSweep from "@/components/ui/ShineSweep"
 const stepIcons = [Phone, Truck, Sparkles, Tags]
 
 export default function DonnerPage() {
-  const [submitted, setSubmitted] = useState(false)
 
   return (
     <>
@@ -171,133 +167,37 @@ export default function DonnerPage() {
         </div>
       </section>
 
-      {/* Formulaire */}
+      {/* Contact pour un don */}
       <section id="formulaire" className="py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[800px] mx-auto">
-          <div className="text-center mb-10">
-            <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
-              Prise de rendez-vous
-            </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Planifier un don.
-            </h2>
-          </div>
-
-          {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-10 text-center"
-            >
-              <div className="w-14 h-14 rounded-full bg-sage mx-auto flex items-center justify-center mb-5">
-                <Check size={22} strokeWidth={2} className="text-paper" />
+        <div className="max-w-[900px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-10 md:p-16 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
+          >
+            <ShineSweep delay={0.3} />
+            <div className="relative z-10">
+              <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
+                Faire un don
               </div>
-              <h3 className="font-display font-semibold text-2xl mb-2">Demande envoyée.</h3>
-              <p className="text-ink-soft text-[14px]">
-                Nous vous recontacterons dans les plus brefs délais.
+              <h2 className="font-display font-medium text-4xl md:text-5xl text-paper leading-[1.05]">
+                Un appel, c'est parti.
+              </h2>
+              <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
+                Dépôt sans rendez-vous aux horaires d'ouverture. Pour les meubles,
+                appelez-nous pour convenir d'un créneau de collecte ou de dépôt.
               </p>
-              <Link
-                href="/"
-                className="mt-6 inline-block text-[12px] uppercase tracking-[0.22em] font-semibold text-sage-deep border-b-2 border-sage hover:border-sage-deep pb-0.5"
+              <a
+                href={SITE.phoneHref}
+                className="mt-8 inline-flex items-center justify-center gap-3 bg-paper text-sage-deep px-7 py-4 rounded-full font-display font-bold text-2xl tracking-[0.08em] tabular-nums hover:bg-cream transition-colors"
               >
-                Retour à l'accueil
-              </Link>
-            </motion.div>
-          ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                // Honeypot : si le champ caché est rempli, c'est un bot
-                const form = e.currentTarget as HTMLFormElement
-                if ((form.elements.namedItem("website") as HTMLInputElement)?.value) return
-                setSubmitted(true)
-              }}
-              className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 space-y-6"
-            >
-              {/* Honeypot anti-bot : caché aux humains, rempli par les bots */}
-              <input
-                type="text"
-                name="website"
-                autoComplete="off"
-                tabIndex={-1}
-                aria-hidden="true"
-                className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden"
-              />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                    Nom et prénom
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Marie Dupont"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                    Téléphone
-                  </label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder="06 12 34 56 78"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                  Type d'objets
-                </label>
-                <div className="relative">
-                  <select
-                    required
-                    defaultValue=""
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>Sélectionner…</option>
-                    {ITEMS.map((item) => (
-                      <option key={item}>{item}</option>
-                    ))}
-                    <option>Autre</option>
-                  </select>
-                  <ChevronDown size={14} className="absolute right-4 top-4 text-ink-soft pointer-events-none" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                  Date souhaitée
-                </label>
-                <input
-                  type="date"
-                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                  Description (optionnel)
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="État, quantité…"
-                  className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none resize-none transition-colors"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-sage text-paper px-6 py-4 text-[13px] tracking-[0.25em] uppercase font-bold rounded-full hover:bg-sage-deep transition-colors"
-              >
-                Envoyer ma demande
-              </motion.button>
-            </form>
-          )}
+                <Phone size={20} strokeWidth={2} className="text-terracotta" />
+                {SITE.phone}
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

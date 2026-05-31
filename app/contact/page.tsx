@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Phone, Check } from "lucide-react"
+import { MapPin, Phone } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
@@ -24,8 +23,6 @@ function InstagramIcon({ size = 14 }: { size?: number }) {
 }
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false)
-
   return (
     <>
       {/* Hero */}
@@ -221,97 +218,53 @@ export default function ContactPage() {
           {/* Formulaire */}
           <div>
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold mb-4">
-              Envoyer un message
+              Nous contacter
             </div>
             <h2 className="font-display font-medium text-3xl md:text-4xl text-sage-deep leading-tight mb-8">
-              On vous répond vite.
+              Parlons directement.
             </h2>
 
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-10 text-center"
-              >
-                <div className="w-14 h-14 rounded-full bg-sage mx-auto flex items-center justify-center mb-5">
-                  <Check size={22} strokeWidth={2} className="text-paper" />
-                </div>
-                <h3 className="font-display font-semibold text-2xl mb-2">Message envoyé.</h3>
-                <p className="text-ink-soft text-[14px]">
-                  Nous vous répondrons dans les meilleurs délais.
+            <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 overflow-hidden">
+              <ShineSweep delay={0.3} />
+              <div className="relative z-10">
+                <p className="text-paper/85 text-[15px] leading-relaxed">
+                  Le plus simple, c'est de nous appeler ou de passer nous voir
+                  pendant les horaires d'ouverture. Pour un don de meubles, un
+                  coup de fil suffit pour convenir d'un rendez-vous.
                 </p>
-              </motion.div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  // Honeypot : si le champ caché est rempli, c'est un bot
-                  const form = e.currentTarget as HTMLFormElement
-                  if ((form.elements.namedItem("website") as HTMLInputElement)?.value) return
-                  setSubmitted(true)
-                }}
-                className="space-y-5 bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-6 md:p-8"
-              >
-                {/* Honeypot anti-bot : caché aux humains, rempli par les bots */}
-                <input
-                  type="text"
-                  name="website"
-                  autoComplete="off"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden"
-                />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                      Nom et prénom
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                      Email
-                    </label>
-                    <input
-                      required
-                      type="email"
-                      className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                    Sujet
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Ex: Question sur les dons"
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    required
-                    rows={6}
-                    className="w-full bg-paper border-2 border-ink/15 focus:border-sage rounded-xl px-4 py-3 text-[15px] outline-none resize-none transition-colors"
-                  />
-                </div>
-                <motion.button
-                  type="submit"
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-sage text-paper px-6 py-4 text-[13px] tracking-[0.25em] uppercase font-bold rounded-full hover:bg-sage-deep transition-colors"
+
+                {/* Téléphone */}
+                <a
+                  href={SITE.phoneHref}
+                  className="mt-8 flex items-center justify-center gap-3 bg-paper text-sage-deep px-6 py-4 rounded-full font-display font-bold text-2xl tracking-[0.08em] tabular-nums hover:bg-cream transition-colors"
                 >
-                  Envoyer le message
-                </motion.button>
-              </form>
-            )}
+                  <Phone size={20} strokeWidth={2} className="text-terracotta" />
+                  {SITE.phone}
+                </a>
+
+                {/* Réseaux sociaux */}
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <a
+                    href={SITE.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 border-2 border-paper/40 text-paper px-4 py-3 rounded-full text-[12px] uppercase tracking-[0.2em] font-bold hover:border-paper transition-colors"
+                  >
+                    <FacebookIcon size={15} />
+                    Facebook
+                  </a>
+                  <a
+                    href={SITE.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 border-2 border-paper/40 text-paper px-4 py-3 rounded-full text-[12px] uppercase tracking-[0.2em] font-bold hover:border-paper transition-colors"
+                  >
+                    <InstagramIcon size={15} />
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
