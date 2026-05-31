@@ -5,7 +5,6 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { MapPin, Phone } from "lucide-react"
 import { SITE } from "@/lib/constants"
-import HorairesPlaque from "@/components/ui/HorairesPlaque"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -46,8 +45,7 @@ export default function Footer() {
       />
 
       <div className="relative z-10 max-w-[1300px] mx-auto px-4 md:px-8 pt-16 md:pt-20 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
           {/* Brand */}
           <motion.div
@@ -163,12 +161,6 @@ export default function Footer() {
               {SITE.phone}
             </motion.a>
           </motion.div>
-          </div>
-
-          {/* Horaires — plaque émail */}
-          <div className="flex justify-center lg:justify-end">
-            <HorairesPlaque />
-          </div>
         </div>
 
         {/* Bottom bar */}
