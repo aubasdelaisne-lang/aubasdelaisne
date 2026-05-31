@@ -43,8 +43,14 @@ export default function Hero() {
             {/* Subtle shine sweep */}
             <ShineSweep delay={1.4} />
 
+            {/* Halo orange très subtil en fond */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(239,95,23,0.18),transparent_70%)] blur-2xl"
+            />
+
             <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
-              Ressourcerie · Brasles · Depuis 2014
+              Ressourcerie <span className="text-terracotta-soft">·</span> Brasles <span className="text-terracotta-soft">·</span> Depuis 2014
             </div>
 
             {/* Grand titre qui alterne Ressourcerie ↔ Au Bas de l'Aisne */}
@@ -94,7 +100,7 @@ export default function Hero() {
                 className="bg-paper text-sage-deep px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors rounded-full"
               >
                 Nous rejoindre
-                <ArrowRight size={14} strokeWidth={2.2} />
+                <ArrowRight size={14} strokeWidth={2.2} className="text-terracotta" />
               </MagneticButton>
 
               <MagneticButton
@@ -112,7 +118,7 @@ export default function Hero() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="relative z-10 mt-12 md:mt-16 text-paper/70 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] font-semibold"
             >
-              <ChevronDown size={16} strokeWidth={1.5} />
+              <ChevronDown size={16} strokeWidth={1.8} className="text-terracotta-soft" />
               Découvrir
             </motion.div>
           </motion.div>
