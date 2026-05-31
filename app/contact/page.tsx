@@ -51,195 +51,77 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Grid contact */}
+      {/* Coordonnées */}
       <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Infos + carte */}
-          <div className="space-y-5">
-            {/* Adresse principale — Château-Thierry */}
-            <motion.a
-              href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+            {/* Panneau contact direct */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -4, x: 2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
+              transition={{ duration: 0.7 }}
+              className="spotlight relative bg-sage paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 overflow-hidden flex flex-col"
             >
-              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.12 }}
-                transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                className="relative w-12 h-12 rounded-full bg-sage flex items-center justify-center shrink-0 shadow-sm"
-              >
-                <MapPin size={18} strokeWidth={1.6} className="text-paper" />
-              </motion.div>
-              <div className="relative">
-                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Boutique — Château-Thierry
-                </div>
-                <div className="font-display text-lg mt-1">{SITE.address}</div>
-              </div>
-            </motion.a>
-
-            {/* Adresse secondaire — Brasles */}
-            <motion.a
-              href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.addressSecondary)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -4, x: 2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
-            >
-              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(25,20,101,0.15),transparent_65%)]" />
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.12 }}
-                transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                className="relative w-12 h-12 rounded-full bg-sage/60 flex items-center justify-center shrink-0 shadow-sm"
-              >
-                <MapPin size={18} strokeWidth={1.6} className="text-paper" />
-              </motion.div>
-              <div className="relative">
-                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Dépôt — Brasles
-                </div>
-                <div className="font-display text-lg mt-1">{SITE.addressSecondary}</div>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href={SITE.phoneHref}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              whileHover={{ y: -4, x: 2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
-            >
-              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(239,95,23,0.15),transparent_65%)]" />
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.12 }}
-                transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                className="relative w-12 h-12 rounded-full bg-terracotta flex items-center justify-center shrink-0 shadow-sm"
-              >
-                <Phone size={18} strokeWidth={1.6} className="text-paper" />
-              </motion.div>
-              <div className="relative">
-                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Téléphone
-                </div>
-                <div className="font-display text-lg mt-1">{SITE.phone}</div>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href={SITE.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              whileHover={{ y: -4, x: 2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
-            >
-              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(15,10,69,0.15),transparent_65%)]" />
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.12 }}
-                transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                className="relative w-12 h-12 rounded-full bg-sage-deep flex items-center justify-center shrink-0 text-paper shadow-sm"
-              >
-                <FacebookIcon size={18} />
-              </motion.div>
-              <div className="relative">
-                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Facebook
-                </div>
-                <div className="font-display text-lg mt-1">facebook.com/aubasdelaisne</div>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href={SITE.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ y: -4, x: 2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative flex gap-5 p-6 bg-cream-soft hover:bg-paper border-2 border-ink/10 hover:border-terracotta/40 rounded-tl-[32px] rounded-br-[32px] transition-colors overflow-hidden"
-            >
-              <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(240px_circle_at_center,rgba(239,95,23,0.12),transparent_65%)]" />
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.12 }}
-                transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                className="relative w-12 h-12 rounded-full bg-sage-deep flex items-center justify-center shrink-0 text-paper shadow-sm"
-              >
-                <InstagramIcon size={18} />
-              </motion.div>
-              <div className="relative">
-                <div className="text-[11px] uppercase tracking-[0.25em] text-sage-deep font-semibold">
-                  Instagram
-                </div>
-                <div className="font-display text-lg mt-1">@ressourcerie_aubasdelaisne</div>
-              </div>
-            </motion.a>
-
-            {/* Horaires — plaque émail */}
-            <div className="flex justify-center">
-              <HorairesPlaque />
-            </div>
-
-            {/* Carte */}
-            <div className="overflow-hidden border-2 border-ink/10 rounded-tl-[32px] rounded-br-[32px]">
-              <iframe
-                title="Localisation"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=3.4149%2C49.0490%2C3.4249%2C49.0540&layer=mapnik&marker=49.0515%2C3.4199"
-                className="w-full h-64"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          {/* Formulaire */}
-          <div>
-            <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold mb-4">
-              Nous contacter
-            </div>
-            <h2 className="font-display font-medium text-3xl md:text-4xl text-sage-deep leading-tight mb-8">
-              Parlons directement.
-            </h2>
-
-            <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 overflow-hidden">
               <ShineSweep delay={0.3} />
-              <div className="relative z-10">
-                <p className="text-paper/85 text-[15px] leading-relaxed">
-                  Le plus simple, c'est de nous appeler ou de passer nous voir
-                  pendant les horaires d'ouverture. Pour un don de meubles, un
-                  coup de fil suffit pour convenir d'un rendez-vous.
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold">
+                  Nous contacter
+                </div>
+                <h2 className="mt-3 font-display font-medium text-3xl md:text-4xl text-paper leading-tight">
+                  Parlons directement.
+                </h2>
+                <p className="mt-4 text-paper/85 text-[15px] leading-relaxed">
+                  Appelez-nous ou passez nous voir aux horaires d'ouverture.
+                  Pour un don de meubles, un coup de fil suffit.
                 </p>
+
+                {/* Adresses */}
+                <div className="mt-6 space-y-4">
+                  <a
+                    href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex gap-3 items-start"
+                  >
+                    <MapPin size={18} strokeWidth={1.6} className="mt-0.5 shrink-0 text-terracotta-soft" />
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
+                        Boutique — Château-Thierry
+                      </div>
+                      <div className="text-paper/90 text-[14px] group-hover:text-paper transition-colors">
+                        {SITE.address}
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.addressSecondary)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex gap-3 items-start"
+                  >
+                    <MapPin size={18} strokeWidth={1.6} className="mt-0.5 shrink-0 text-terracotta-soft" />
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
+                        Dépôt — Brasles
+                      </div>
+                      <div className="text-paper/90 text-[14px] group-hover:text-paper transition-colors">
+                        {SITE.addressSecondary}
+                      </div>
+                    </div>
+                  </a>
+                </div>
 
                 {/* Téléphone */}
                 <a
                   href={SITE.phoneHref}
-                  className="mt-8 flex items-center justify-center gap-3 bg-paper text-sage-deep px-6 py-4 rounded-full font-display font-bold text-2xl tracking-[0.08em] tabular-nums hover:bg-cream transition-colors"
+                  className="mt-auto pt-7 group"
                 >
-                  <Phone size={20} strokeWidth={2} className="text-terracotta" />
-                  {SITE.phone}
+                  <span className="flex items-center justify-center gap-3 bg-paper text-sage-deep px-6 py-4 rounded-full font-display font-bold text-2xl tracking-[0.08em] tabular-nums group-hover:bg-cream transition-colors">
+                    <Phone size={20} strokeWidth={2} className="text-terracotta" />
+                    {SITE.phone}
+                  </span>
                 </a>
 
                 {/* Réseaux sociaux */}
@@ -264,8 +146,35 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Plaque horaires, centrée */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex items-center justify-center bg-cream-soft border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10"
+            >
+              <HorairesPlaque />
+            </motion.div>
           </div>
+
+          {/* Carte pleine largeur */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="mt-8 overflow-hidden border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px]"
+          >
+            <iframe
+              title="Localisation"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=3.4149%2C49.0490%2C3.4249%2C49.0540&layer=mapnik&marker=49.0515%2C3.4199"
+              className="w-full h-72 md:h-80"
+              loading="lazy"
+            />
+          </motion.div>
         </div>
       </section>
     </>

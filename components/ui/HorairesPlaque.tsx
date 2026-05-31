@@ -12,7 +12,7 @@ import { HOURS_BOUTIQUE } from "@/lib/constants"
 export default function HorairesPlaque({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative bg-[#f6f1e4] text-[#2c2a33] rounded-[24px] shadow-[0_18px_40px_-18px_rgba(0,0,0,0.45)] px-6 py-6 sm:px-8 sm:py-7 max-w-xs w-full ${className}`}
+      className={`relative bg-[#f6f1e4] text-[#2c2a33] rounded-[24px] shadow-[0_18px_40px_-18px_rgba(0,0,0,0.45)] px-6 py-6 sm:px-8 sm:py-7 max-w-[360px] w-full ${className}`}
     >
       {/* Cadre intérieur ornemental */}
       <span
@@ -53,7 +53,7 @@ export default function HorairesPlaque({ className = "" }: { className?: string 
             const ferme = h.creneaux.length === 0
             return (
               <div key={h.days} className="flex items-baseline justify-between gap-3">
-                <dt className="font-display text-[15px] sm:text-base text-[#2c2a33]/90">
+                <dt className="font-display text-[15px] sm:text-base text-[#2c2a33]/90 shrink-0">
                   {h.days}
                 </dt>
                 <dd className="text-right">
@@ -62,7 +62,7 @@ export default function HorairesPlaque({ className = "" }: { className?: string 
                       Fermé
                     </span>
                   ) : (
-                    <span className="font-display italic text-[12.5px] sm:text-[13px] tabular-nums text-[#2c2a33]/75 leading-tight">
+                    <span className="font-display italic text-[13px] tabular-nums text-[#2c2a33]/75 whitespace-nowrap">
                       {h.creneaux.join(" · ")}
                     </span>
                   )}
