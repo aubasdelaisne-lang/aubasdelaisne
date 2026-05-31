@@ -352,43 +352,78 @@ export default function BoutiquePage() {
         </div>
       </section>
 
-      {/* Horaires + adresse */}
-      <section className="py-16 px-4 md:px-8 bg-cream-soft">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      {/* Infos pratiques : horaires + adresse */}
+      <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Horaires — plaque émail */}
-          <div className="flex justify-center">
-            <HorairesPlaque />
-          </div>
-
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            whileHover={{ y: -4 }}
-            className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta-soft/60 rounded-tl-[40px] rounded-br-[40px] p-8 cursor-default overflow-hidden transition-colors"
+            transition={{ duration: 0.7 }}
+            className="flex items-center justify-center"
           >
-            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(260px_circle_at_center,rgba(255,255,255,0.18),transparent_65%)]" />
+            <HorairesPlaque />
+          </motion.div>
+
+          {/* Nous trouver */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="spotlight relative bg-sage paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 overflow-hidden flex flex-col justify-center"
+          >
+            <ShineSweep delay={0.3} />
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-5">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-paper/80 font-semibold mb-7">
                 <MapPin size={13} strokeWidth={1.8} />
                 Nous trouver
               </div>
-              <div className="mb-6">
-                <p className="font-display text-2xl text-paper leading-snug">
-                  {SITE.address}
-                </p>
-                <p className="font-display text-lg text-paper/65 leading-snug mt-2">
-                  {SITE.addressSecondary}
-                </p>
+
+              <div className="space-y-6">
+                <div className="flex gap-3 items-start">
+                  <MapPin size={18} strokeWidth={1.6} className="mt-1 shrink-0 text-terracotta-soft" />
+                  <div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
+                      Boutique — Château-Thierry
+                    </div>
+                    <p className="font-display text-xl text-paper leading-snug mt-1">
+                      {SITE.address}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-start">
+                  <MapPin size={18} strokeWidth={1.6} className="mt-1 shrink-0 text-terracotta-soft" />
+                  <div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
+                      Dépôt — Brasles
+                    </div>
+                    <p className="font-display text-lg text-paper/85 leading-snug mt-1">
+                      {SITE.addressSecondary}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <a
-                href={SITE.phoneHref}
-                className="inline-flex items-center gap-2 bg-paper text-sage-deep px-6 py-2.5 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
-              >
-                <Phone size={13} strokeWidth={2} />
-                {SITE.phone}
-              </a>
+
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a
+                  href={SITE.phoneHref}
+                  className="inline-flex items-center gap-2 bg-paper text-sage-deep px-6 py-3 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:bg-cream transition-colors"
+                >
+                  <Phone size={13} strokeWidth={2} className="text-terracotta" />
+                  {SITE.phone}
+                </a>
+                <a
+                  href={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border-2 border-paper/40 text-paper px-6 py-3 text-[12px] tracking-[0.22em] uppercase font-bold rounded-full hover:border-paper transition-colors"
+                >
+                  <MapPin size={13} strokeWidth={2} />
+                  Itinéraire
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
