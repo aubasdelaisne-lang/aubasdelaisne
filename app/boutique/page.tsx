@@ -16,6 +16,8 @@ import {
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
+import SectionHeader from "@/components/ui/SectionHeader"
+import WaveDivider from "@/components/ui/WaveDivider"
 
 type Category = {
   Icon: typeof Armchair
@@ -266,6 +268,9 @@ export default function BoutiquePage() {
         </div>
       </section>
 
+      {/* Vague : paper → cream-soft */}
+      <WaveDivider top="text-paper" bottom="bg-cream-soft" />
+
       {/* Galerie photos */}
       <section className="py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[1100px] mx-auto">
@@ -352,9 +357,18 @@ export default function BoutiquePage() {
         </div>
       </section>
 
+      {/* Vague inversée : cream-soft → paper */}
+      <WaveDivider top="text-cream-soft" bottom="bg-paper" flip />
+
       {/* Infos pratiques : horaires + adresse */}
       <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeader
+            eyebrow="Infos pratiques"
+            title="Venir nous voir."
+            lede="Nos horaires d'ouverture et nos adresses — la boutique et le point de dépôt des dons."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Horaires — plaque émail */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -426,6 +440,7 @@ export default function BoutiquePage() {
               </div>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
 
