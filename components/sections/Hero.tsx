@@ -70,20 +70,26 @@ export default function Hero() {
                 <motion.span
                   key={rotatingTitles[titleIndex].id}
                   initial={{ y: 28, opacity: 0, backgroundPosition: "0% 0%" }}
-                  animate={{ y: 0, opacity: 1, backgroundPosition: "100% 0%" }}
+                  animate={{ y: 0, opacity: 1, backgroundPosition: ["0% 0%", "100% 0%"] }}
                   exit={{ y: -28, opacity: 0 }}
                   transition={{
                     duration: 0.6,
                     ease,
-                    backgroundPosition: { duration: 1.2, ease: "easeInOut", delay: 0.15 },
+                    backgroundPosition: {
+                      duration: 3.2,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: 0.2,
+                    },
                   }}
                   className="block bg-clip-text text-transparent"
                   style={{
                     paddingBottom: "0.08em",
                     backgroundImage:
-                      "linear-gradient(110deg, rgba(250,250,255,0.78) 0%, rgba(250,250,255,0.78) 38%, #ffffff 47%, #ffffff 53%, rgba(250,250,255,0.78) 62%, rgba(250,250,255,0.78) 100%)",
+                      "linear-gradient(110deg, #ffffff 0%, #ffffff 40%, #f58e5c 46%, #ef5f17 50%, #f58e5c 54%, #ffffff 60%, #ffffff 100%)",
                     backgroundSize: "250% 100%",
-                    filter: "drop-shadow(0 0 14px rgba(255,255,255,0.22))",
+                    filter: "drop-shadow(0 0 16px rgba(239,95,23,0.22))",
                   }}
                 >
                   {rotatingTitles[titleIndex].content}
