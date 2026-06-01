@@ -72,7 +72,7 @@ export default function Footer() {
               <div className="leading-tight">
                 <div className="font-display font-semibold text-lg">Au Bas de l'Aisne</div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-paper/70 font-semibold">
-                  Recyclerie
+                  Ressourcerie
                 </div>
               </div>
             </div>

@@ -63,7 +63,7 @@ export default function Navbar() {
               Au Bas de l'Aisne
             </div>
             <div className="text-[10px] uppercase tracking-[0.22em] text-ink-soft font-semibold">
-              Recyclerie · Brasles
+              Ressourcerie · Brasles
             </div>
           </div>
         </Link>
