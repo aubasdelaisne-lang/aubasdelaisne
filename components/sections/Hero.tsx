@@ -9,8 +9,19 @@ import ShineSweep from "@/components/ui/ShineSweep"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-// Le grand titre alterne entre ces deux textes toutes les 3 s
-const rotatingTitles = ["Ressourcerie", "Au Bas de l'Aisne"]
+// Le grand titre alterne entre ces deux textes toutes les 3 s.
+// « l'Aisne » en italique = accent éditorial (italique réservé à l'accent).
+const rotatingTitles = [
+  { id: "ressourcerie", content: <>Ressourcerie</> },
+  {
+    id: "nom",
+    content: (
+      <>
+        Au Bas de <span className="italic">l&apos;Aisne</span>
+      </>
+    ),
+  },
+]
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -49,15 +60,15 @@ export default function Hero() {
               className="pointer-events-none absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(239,95,23,0.18),transparent_70%)] blur-2xl"
             />
 
-            <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
+            <div className="inline-flex items-center gap-2 self-start mb-7 rounded-full border border-paper/25 bg-paper/5 px-4 py-1.5 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-paper/80 font-semibold backdrop-blur-sm">
               Ressourcerie <span className="text-terracotta-soft">·</span> Brasles <span className="text-terracotta-soft">·</span> Depuis 2014
             </div>
 
             {/* Grand titre qui alterne Ressourcerie ↔ Au Bas de l'Aisne */}
-            <h1 className="relative z-10 font-display font-medium text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight min-h-[2.2em] flex items-start">
+            <h1 className="relative z-10 font-display font-medium text-[2.6rem] sm:text-6xl lg:text-[5rem] leading-[0.95] tracking-[-0.025em] min-h-[2.1em] flex items-start">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
-                  key={rotatingTitles[titleIndex]}
+                  key={rotatingTitles[titleIndex].id}
                   initial={{ y: 28, opacity: 0, backgroundPosition: "0% 0%" }}
                   animate={{ y: 0, opacity: 1, backgroundPosition: "100% 0%" }}
                   exit={{ y: -28, opacity: 0 }}
@@ -75,7 +86,7 @@ export default function Hero() {
                     filter: "drop-shadow(0 0 14px rgba(255,255,255,0.22))",
                   }}
                 >
-                  {rotatingTitles[titleIndex]}
+                  {rotatingTitles[titleIndex].content}
                 </motion.span>
               </AnimatePresence>
             </h1>
