@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Au Bas de l'Aisne",
-  fullName: "Recyclerie-Ressourcerie Au Bas de l'Aisne",
+  fullName: "Ressourcerie Au Bas de l'Aisne",
   slogan: "Réinsérer, relier, réduire…",
   address: "22 avenue de l'Europe, 02410 Château-Thierry",
   addressSecondary: "8 avenue de Château-Thierry, 02410 Brasles",

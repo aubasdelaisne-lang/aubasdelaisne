@@ -153,7 +153,7 @@ export default function Hero() {
             >
               <Image
                 src="/images/hero.jpeg"
-                alt="L'équipe de la recyclerie Au Bas de l'Aisne"
+                alt="L'équipe de la ressourcerie Au Bas de l'Aisne"
                 fill
                 priority
                 sizes="(min-width: 768px) 50vw, 100vw"

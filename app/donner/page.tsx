@@ -105,10 +105,10 @@ export default function DonnerPage() {
                 Dépôt de dons
               </div>
               <p className="text-[15px] text-paper/90 leading-relaxed mb-4">
-                Le dépôt de dons se fait <strong className="text-paper font-semibold">sans rendez-vous</strong>, directement à la ressourcerie de Château-Thierry.
+                Le dépôt de dons se fait <strong className="text-paper font-semibold">sans rendez-vous</strong>, directement à la ressourcerie de Brasles.
               </p>
               <p className="text-[13px] text-paper/70 leading-relaxed mb-2">
-                22 avenue de l'Europe, 02410 Château-Thierry
+                {SITE.addressSecondary}
               </p>
               <div className="mt-4 flex items-start gap-2 text-[13px] text-terracotta-soft">
                 <AlertCircle size={14} strokeWidth={1.8} className="shrink-0 mt-0.5" />

@@ -306,7 +306,7 @@ export default function BoutiquePage() {
                 className="absolute bottom-5 left-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               >
                 <p className="font-display text-paper text-lg font-semibold">Notre boutique</p>
-                <p className="text-paper/80 text-[13px]">8 avenue de Château-Thierry, Brasles</p>
+                <p className="text-paper/80 text-[13px]">22 avenue de l'Europe, Château-Thierry</p>
               </motion.div>
             </motion.div>
 
@@ -320,7 +320,7 @@ export default function BoutiquePage() {
             >
               <Image
                 src="/images/hero.jpeg"
-                alt="L'équipe de la recyclerie Au Bas de l'Aisne"
+                alt="L'équipe de la ressourcerie Au Bas de l'Aisne"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
