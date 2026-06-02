@@ -9,7 +9,7 @@ const items = [
   { Icon: HeartHandshake, label: "Insertion professionnelle" },
   { Icon: Users, label: "Ancrage local" },
   { Icon: Sparkles, label: "Objets chinés" },
-  { Icon: MapPin, label: "Brasles · 02410" },
+  { Icon: MapPin, label: "Château-Thierry · 02410" },
 ]
 
 export default function Ticker() {

@@ -118,7 +118,7 @@ export default function MissionPage() {
               Notre histoire
             </div>
             <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Dix ans à Brasles.
+              Dix ans dans l'Aisne.
             </h2>
           </div>
 

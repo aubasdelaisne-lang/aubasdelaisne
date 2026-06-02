@@ -26,16 +26,16 @@ export const metadata: Metadata = {
     default: `${SITE.fullName}`,
     template: `%s · Au Bas de l'Aisne`,
   },
-  description: `${SITE.slogan} — Ressourcerie associative à Brasles (02410), près de Château-Thierry. Boutique de seconde main, collecte de dons, insertion professionnelle depuis 2014.`,
+  description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry (02410), dans l'Aisne. Boutique de seconde main, collecte de dons, insertion professionnelle depuis 2014.`,
   keywords: [
-    "ressourcerie", "ressourcerie Brasles", "Brasles", "Aisne", "02410",
+    "ressourcerie", "ressourcerie Château-Thierry", "Aisne", "02410",
     "Château-Thierry", "seconde main", "don objets", "insertion professionnelle",
     "économie circulaire", "brocante solidaire", "meubles occasion",
     "déchetterie alternative", "association Aisne",
   ],
   openGraph: {
     title: SITE.fullName,
-    description: `${SITE.slogan} — Ressourcerie associative à Brasles depuis 2014.`,
+    description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry depuis 2014.`,
     url: "/",
     siteName: SITE.name,
     images: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: "/images/hero.jpeg",
         width: 1200,
         height: 630,
-        alt: "Au Bas de l'Aisne — Ressourcerie à Brasles",
+        alt: "Au Bas de l'Aisne — Ressourcerie à Château-Thierry",
       },
     ],
     locale: "fr_FR",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: SITE.fullName,
-    description: `${SITE.slogan} — Ressourcerie associative à Brasles depuis 2014.`,
+    description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry depuis 2014.`,
     images: ["/images/hero.jpeg"],
   },
 }

@@ -13,7 +13,7 @@ export default function JsonLd() {
     "@type": ["Store", "Organization"],
     name: SITE.name,
     alternateName: SITE.fullName,
-    description: `${SITE.slogan}. Ressourcerie associative à Brasles depuis 2014. Boutique de seconde main, dons d'objets et insertion professionnelle.`,
+    description: `${SITE.slogan}. Ressourcerie associative à Château-Thierry depuis 2014. Boutique de seconde main, dons d'objets et insertion professionnelle.`,
     url: BASE_URL,
     logo: `${BASE_URL}/images/papillon.jpg`,
     image: `${BASE_URL}/images/hero.jpeg`,
