@@ -61,7 +61,7 @@ export default function Hero() {
             />
 
             <div className="inline-flex items-center gap-2 self-start mb-7 rounded-full border border-paper/25 bg-paper/5 px-4 py-1.5 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-paper/80 font-semibold backdrop-blur-sm">
-              Ressourcerie <span className="text-terracotta-soft">·</span> Brasles <span className="text-terracotta-soft">·</span> Depuis 2014
+              Ressourcerie <span className="text-terracotta-soft">·</span> Château-Thierry <span className="text-terracotta-soft">·</span> Depuis 2014
             </div>
 
             {/* Grand titre qui alterne Ressourcerie ↔ Au Bas de l'Aisne */}
