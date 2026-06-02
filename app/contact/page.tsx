@@ -88,7 +88,7 @@ export default function ContactPage() {
                     <MapPin size={18} strokeWidth={1.6} className="mt-0.5 shrink-0 text-terracotta-soft" />
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
-                        Boutique — Château-Thierry
+                        Boutique &amp; dépôt — Château-Thierry
                       </div>
                       <div className="text-paper/90 text-[14px] group-hover:text-paper transition-colors">
                         {SITE.address}
@@ -104,7 +104,7 @@ export default function ContactPage() {
                     <MapPin size={18} strokeWidth={1.6} className="mt-0.5 shrink-0 text-terracotta-soft" />
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
-                        Dépôt — Brasles
+                        Boutique — Brasles
                       </div>
                       <div className="text-paper/90 text-[14px] group-hover:text-paper transition-colors">
                         {SITE.addressSecondary}

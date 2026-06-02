@@ -400,7 +400,7 @@ export default function BoutiquePage() {
                   <MapPin size={18} strokeWidth={1.6} className="mt-1 shrink-0 text-terracotta-soft" />
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
-                      Boutique — Château-Thierry
+                      Boutique &amp; dépôt — Château-Thierry
                     </div>
                     <p className="font-display text-xl text-paper leading-snug mt-1">
                       {SITE.address}
@@ -411,7 +411,7 @@ export default function BoutiquePage() {
                   <MapPin size={18} strokeWidth={1.6} className="mt-1 shrink-0 text-terracotta-soft" />
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.2em] text-paper/60 font-semibold">
-                      Dépôt — Brasles
+                      Boutique — Brasles
                     </div>
                     <p className="font-display text-lg text-paper/85 leading-snug mt-1">
                       {SITE.addressSecondary}
