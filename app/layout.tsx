@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Inter, Fraunces } from "next/font/google"
+import { Montserrat } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/ui/Navbar"
 import Footer from "@/components/ui/Footer"
@@ -10,12 +10,13 @@ import ScrollProgress from "@/components/ui/ScrollProgress"
 import JsonLd from "@/components/ui/JsonLd"
 import { SITE } from "@/lib/constants"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
-const fraunces = Fraunces({
+// Typo officielle de l'asso : Montserrat (titres + textes)
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-montserrat",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
 })
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="fr" className={montserrat.variable}>
       <body className="min-h-screen flex flex-col antialiased bg-paper text-ink">
         <JsonLd />
         <ScrollProgress />

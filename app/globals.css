@@ -27,8 +27,8 @@
   --color-stone: #c9c7f5;        /* lilas moyen (rules) */
   --color-rule: #a8a5d8;         /* lilas plus dense (bordures visibles) */
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -52,12 +52,10 @@ body {
   }
 }
 
-/* Serif display — upright, lisible, chaleureux */
+/* Titres Montserrat — version douce : tracking resserré pour du caractère */
 .font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 /* Texture — grain subtil sur fonds colorés (hero, footer) */
