@@ -152,8 +152,8 @@ export default function Hero() {
               className="absolute inset-0"
             >
               <Image
-                src="/images/hero.jpeg"
-                alt="L'équipe de la ressourcerie Au Bas de l'Aisne"
+                src="/images/devanture.webp"
+                alt="La devanture de la ressourcerie Au Bas de l'Aisne à Château-Thierry"
                 fill
                 priority
                 sizes="(min-width: 768px) 50vw, 100vw"

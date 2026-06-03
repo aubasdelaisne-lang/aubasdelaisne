@@ -78,8 +78,8 @@ export default function BoutiqueSection() {
                 className="absolute inset-0"
               >
                 <Image
-                  src="/images/boutique-capture.png"
-                  alt="Devanture de la boutique Au Bas de l'Aisne"
+                  src="/images/serviette.webp"
+                  alt="Table dressée — vaisselle et arts de la table chinés à la ressourcerie"
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover"

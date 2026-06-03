@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Notre Mission · Au Bas de l'Aisne",
     description:
       "Réduire les déchets, créer du lien social et réinsérer — l'histoire et les engagements de la ressourcerie depuis 2014.",
-    images: [{ url: "/images/hero.jpeg", width: 1200, height: 630 }],
+    images: [{ url: "/images/devanture.webp", width: 1200, height: 630 }],
   },
 }
 

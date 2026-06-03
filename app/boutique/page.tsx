@@ -147,8 +147,8 @@ export default function BoutiquePage() {
             className="relative aspect-[16/8] grain overflow-hidden border-2 border-ink/10 rounded-tl-[60px] md:rounded-tl-[100px] rounded-br-[60px] md:rounded-br-[100px]"
           >
             <Image
-              src="/images/boutique-capture.png"
-              alt="Devanture de la boutique"
+              src="/images/table-bois.webp"
+              alt="Arts de la table et vaisselle chinés à la ressourcerie"
               fill
               priority
               sizes="100vw"
@@ -294,8 +294,8 @@ export default function BoutiquePage() {
               className="group relative aspect-[4/5] md:aspect-auto md:row-span-2 grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-t-[80px] md:rounded-t-[120px]"
             >
               <Image
-                src="/images/boutique-capture.png"
-                alt="Devanture de la boutique Au Bas de l'Aisne"
+                src="/images/devanture.webp"
+                alt="Devanture de la ressourcerie Au Bas de l'Aisne à Château-Thierry"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -319,16 +319,16 @@ export default function BoutiquePage() {
               className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-tr-[60px]"
             >
               <Image
-                src="/images/hero.jpeg"
-                alt="L'équipe de la ressourcerie Au Bas de l'Aisne"
+                src="/images/camion.webp"
+                alt="Camion de collecte des dons à domicile"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <p className="font-display text-paper text-base font-semibold">Notre équipe</p>
-                <p className="text-paper/80 text-[12px]">Bénévoles & salariés en insertion</p>
+                <p className="font-display text-paper text-base font-semibold">Collecte à domicile</p>
+                <p className="text-paper/80 text-[12px]">On vient chercher vos dons</p>
               </motion.div>
             </motion.div>
 
@@ -341,8 +341,8 @@ export default function BoutiquePage() {
               className="group relative aspect-video grain overflow-hidden border-2 border-ink/10 cursor-pointer rounded-br-[60px]"
             >
               <Image
-                src="/images/vaisselle.jpg"
-                alt="Objets en vente — vaisselle et déco"
+                src="/images/livre.webp"
+                alt="Rayon livres de la ressourcerie — romans, BD et poches"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -350,7 +350,7 @@ export default function BoutiquePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <p className="font-display text-paper text-base font-semibold">Nos rayons</p>
-                <p className="text-paper/80 text-[12px]">Vaisselle, déco & bibelots</p>
+                <p className="text-paper/80 text-[12px]">Livres, romans, BD & plus</p>
               </motion.div>
             </motion.div>
           </div>

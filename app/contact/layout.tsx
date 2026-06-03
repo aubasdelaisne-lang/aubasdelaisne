@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Contact · Au Bas de l'Aisne",
     description:
       "Contactez la ressourcerie Au Bas de l'Aisne à Château-Thierry — téléphone, réseaux sociaux, horaires et accès.",
-    images: [{ url: "/images/boutique-capture.png", width: 1200, height: 630 }],
+    images: [{ url: "/images/devanture.webp", width: 1200, height: 630 }],
   },
 }
 

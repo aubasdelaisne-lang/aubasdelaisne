@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     images: [
       {
-        url: "/images/hero.jpeg",
+        url: "/images/devanture.webp",
         width: 1200,
         height: 630,
         alt: "Au Bas de l'Aisne — Ressourcerie à Château-Thierry",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.fullName,
     description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry depuis 2014.`,
-    images: ["/images/hero.jpeg"],
+    images: ["/images/devanture.webp"],
   },
 }
 
