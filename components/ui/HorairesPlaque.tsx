@@ -52,7 +52,7 @@ export default function HorairesPlaque({ className = "" }: { className?: string 
           {HOURS_BOUTIQUE.map((h) => {
             const ferme = h.creneaux.length === 0
             return (
-              <div key={h.days} className="flex items-baseline justify-between gap-3">
+              <div key={h.days} className="flex items-start justify-between gap-3">
                 <dt className="font-display text-[15px] sm:text-base text-[#2c2a33]/90 shrink-0">
                   {h.days}
                 </dt>
@@ -62,9 +62,14 @@ export default function HorairesPlaque({ className = "" }: { className?: string 
                       Fermé
                     </span>
                   ) : (
-                    <span className="font-display italic text-[13px] tabular-nums text-[#2c2a33]/75 whitespace-nowrap">
-                      {h.creneaux.join(" · ")}
-                    </span>
+                    h.creneaux.map((c) => (
+                      <span
+                        key={c}
+                        className="block font-display italic text-[12.5px] sm:text-[13px] tabular-nums text-[#2c2a33]/75 leading-snug whitespace-nowrap"
+                      >
+                        {c}
+                      </span>
+                    ))
                   )}
                 </dd>
               </div>
