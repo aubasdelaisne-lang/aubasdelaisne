@@ -169,11 +169,24 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 pt-6 border-t border-paper/15 flex flex-col md:flex-row justify-between gap-2 text-[11px] uppercase tracking-[0.18em] text-paper/60"
+          className="mt-12 pt-6 border-t border-paper/15 flex flex-col md:flex-row justify-between gap-3 text-[11px] uppercase tracking-[0.18em] text-paper/60"
         >
-          <div>© {new Date().getFullYear()} {SITE.fullName}</div>
-          <div>SIRET · {SITE.siret}</div>
-          <div>Fondée le {SITE.founded}</div>
+          <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+            <div>© {new Date().getFullYear()} {SITE.fullName}</div>
+            <div>SIRET · {SITE.siret}</div>
+            <div>Fondée le {SITE.founded}</div>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link href="/mentions-legales" className="hover:text-paper transition-colors">
+              Mentions légales
+            </Link>
+            <Link href="/confidentialite" className="hover:text-paper transition-colors">
+              Confidentialité
+            </Link>
+            <Link href="/cookies" className="hover:text-paper transition-colors">
+              Cookies
+            </Link>
+          </div>
         </motion.div>
       </div>
     </footer>

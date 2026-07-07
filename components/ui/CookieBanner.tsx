@@ -42,10 +42,10 @@ export default function CookieBanner() {
 
             {/* Texte */}
             <p className="flex-1 text-[13px] text-paper/85 leading-relaxed">
-              Ce site utilise des cookies essentiels au bon fonctionnement. Aucune donnée personnelle
+              Ce site n'utilise aucun cookie de suivi ni de publicité. Aucune donnée personnelle
               n'est vendue ni transmise à des tiers.{" "}
               <a
-                href="/mission"
+                href="/cookies"
                 className="text-terracotta-soft underline underline-offset-2 hover:text-paper transition-colors"
               >
                 En savoir plus
