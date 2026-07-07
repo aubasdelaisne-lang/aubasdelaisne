@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { MapPin, Phone } from "lucide-react"
 import { SITE } from "@/lib/constants"
+import { resetConsent } from "@/lib/consent"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -186,6 +187,9 @@ export default function Footer() {
             <Link href="/cookies" className="hover:text-paper transition-colors">
               Cookies
             </Link>
+            <button onClick={resetConsent} className="hover:text-paper transition-colors">
+              Gérer les cookies
+            </button>
           </div>
         </motion.div>
       </div>

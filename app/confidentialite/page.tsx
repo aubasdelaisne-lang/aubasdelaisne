@@ -55,17 +55,20 @@ export default function ConfidentialitePage() {
       <h2>Choix mémorisé du bandeau cookies</h2>
       <p>
         Lors de votre première visite, un bandeau vous informe de cette politique. Votre choix
-        (accepté / refusé) est mémorisé localement dans votre navigateur, uniquement pour éviter
-        de vous réafficher ce message à chaque visite. Voir notre{" "}
+        (accepté / refusé) est mémorisé localement dans votre navigateur pendant 6 mois, puis
+        vous sera de nouveau demandé. Vous pouvez à tout moment revenir sur ce choix via le lien
+        « Gérer les cookies » en bas de page. Voir notre{" "}
         <Link href="/cookies">politique de cookies</Link> pour plus de détails.
       </p>
 
       <h2>Services tiers intégrés au site</h2>
       <p>
-        La page Contact affiche une carte fournie par <strong>OpenStreetMap</strong>, un service
-        respectueux de la vie privée. Des liens renvoient également vers Facebook, Instagram et
-        Google Maps. Si vous cliquez sur ces liens, vous quittez notre site et les conditions de
-        confidentialité de ces plateformes s'appliquent — nous vous invitons à les consulter.
+        La page Contact propose une carte fournie par <strong>OpenStreetMap</strong>. Par
+        précaution, cette carte n'est chargée qu'après votre accord explicite (bandeau cookies ou
+        bouton dédié) afin d'éviter tout dépôt de cookie tiers sans consentement. Des liens
+        renvoient également vers Facebook, Instagram et Google Maps. Si vous cliquez sur ces
+        liens, vous quittez notre site et les conditions de confidentialité de ces plateformes
+        s'appliquent — nous vous invitons à les consulter.
       </p>
 
       <h2>Hébergement et transfert de données</h2>

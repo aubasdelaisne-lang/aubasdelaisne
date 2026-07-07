@@ -5,6 +5,7 @@ import { MapPin, Phone } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
+import MapEmbed from "@/components/ui/MapEmbed"
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -168,11 +169,10 @@ export default function ContactPage() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-8 overflow-hidden border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px]"
           >
-            <iframe
-              title="Localisation"
+            <MapEmbed
               src="https://www.openstreetmap.org/export/embed.html?bbox=3.4149%2C49.0490%2C3.4249%2C49.0540&layer=mapnik&marker=49.0515%2C3.4199"
+              mapsUrl={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}`}
               className="w-full h-72 md:h-80"
-              loading="lazy"
             />
           </motion.div>
         </div>

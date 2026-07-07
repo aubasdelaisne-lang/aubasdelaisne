@@ -3,26 +3,33 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Cookie, X } from "lucide-react"
+import { getConsent, setConsent } from "@/lib/consent"
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const consent = localStorage.getItem("rgpd-consent")
-    if (!consent) {
+    if (!getConsent()) {
       // Petit délai pour ne pas bloquer le rendu initial
       const t = setTimeout(() => setVisible(true), 1200)
       return () => clearTimeout(t)
     }
   }, [])
 
+  // Permet de rouvrir le bandeau depuis le footer ("Gérer les cookies")
+  useEffect(() => {
+    const reopen = () => setVisible(true)
+    window.addEventListener("open-cookie-banner", reopen)
+    return () => window.removeEventListener("open-cookie-banner", reopen)
+  }, [])
+
   function accept() {
-    localStorage.setItem("rgpd-consent", "accepted")
+    setConsent("accepted")
     setVisible(false)
   }
 
   function refuse() {
-    localStorage.setItem("rgpd-consent", "refused")
+    setConsent("refused")
     setVisible(false)
   }
 
@@ -42,8 +49,8 @@ export default function CookieBanner() {
 
             {/* Texte */}
             <p className="flex-1 text-[13px] text-paper/85 leading-relaxed">
-              Ce site n'utilise aucun cookie de suivi ni de publicité. Aucune donnée personnelle
-              n'est vendue ni transmise à des tiers.{" "}
+              Ce site n'utilise aucun cookie de suivi ni de publicité. La carte de la page Contact
+              n'est affichée qu'avec votre accord.{" "}
               <a
                 href="/cookies"
                 className="text-terracotta-soft underline underline-offset-2 hover:text-paper transition-colors"
