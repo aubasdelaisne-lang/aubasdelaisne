@@ -28,7 +28,7 @@ export default function WaveDivider({
         className={`block w-full h-[40px] md:h-[70px] ${top} ${flip ? "rotate-180" : ""}`}
       >
         <path
-          d="M0,0 L1440,0 L1440,44 C1200,76 960,20 720,44 C480,68 240,20 0,44 Z"
+          d="M0,0 L1440,0 L1440,30 Q720,80 0,30 Z"
           fill="currentColor"
         />
       </svg>
