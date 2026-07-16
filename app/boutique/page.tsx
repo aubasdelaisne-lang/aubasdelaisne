@@ -272,7 +272,7 @@ export default function BoutiquePage() {
       <WaveDivider top="text-paper" bottom="bg-cream-soft" />
 
       {/* Galerie photos */}
-      <section className="py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
+      <section className="pt-24 md:pt-32 pb-10 md:pb-14 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-12">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
