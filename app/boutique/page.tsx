@@ -358,7 +358,7 @@ export default function BoutiquePage() {
       </section>
 
       {/* Vague inversée : cream-soft → paper */}
-      <WaveDivider top="text-cream-soft" bottom="bg-paper" flip />
+      <WaveDivider top="text-cream-soft" bottom="bg-paper" />
 
       {/* Infos pratiques : horaires + adresse */}
       <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
