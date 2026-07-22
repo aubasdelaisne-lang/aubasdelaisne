@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     template: `%s · Au Bas de l'Aisne`,
   },
   alternates: { canonical: "/" },
+  verification: {
+    google: "yIZv6c4jWGx1PhuQ-iHeIDgjUe4CrR0gBPUyZesO4Ck",
+  },
   description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry (02410), dans l'Aisne. Boutique de seconde main, collecte de dons, insertion professionnelle depuis 2014.`,
   keywords: [
     "ressourcerie", "ressourcerie Château-Thierry", "Aisne", "02410",
