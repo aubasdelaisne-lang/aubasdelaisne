@@ -23,7 +23,7 @@ export default function JsonLd() {
       "@type": "PostalAddress",
       streetAddress: "22 avenue de l'Europe",
       addressLocality: "Château-Thierry",
-      postalCode: "02410",
+      postalCode: "02400",
       addressRegion: "Hauts-de-France",
       addressCountry: "FR",
     },

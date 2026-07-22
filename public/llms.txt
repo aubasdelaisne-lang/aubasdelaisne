@@ -19,7 +19,7 @@ Allow: /
 # Site : https://ressourcerie-aubasdelaisne.fr
 # Activité : Ressourcerie associative — boutique de seconde main, collecte de
 #            dons d'objets et insertion professionnelle, depuis 2014.
-# Adresse : 22 avenue de l'Europe, 02410 Château-Thierry, France
+# Adresse : 22 avenue de l'Europe, 02400 Château-Thierry, France
 # Téléphone : 03 64 13 48 64
 # Zone desservie : Château-Thierry et sud de l'Aisne (~30 km)
 

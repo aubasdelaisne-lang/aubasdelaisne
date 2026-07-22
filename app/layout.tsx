@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   verification: {
     google: "yIZv6c4jWGx1PhuQ-iHeIDgjUe4CrR0gBPUyZesO4Ck",
   },
-  description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry (02410), dans l'Aisne. Boutique de seconde main, collecte de dons, insertion professionnelle depuis 2014.`,
+  description: `${SITE.slogan} — Ressourcerie associative à Château-Thierry (02400), dans l'Aisne. Boutique de seconde main, collecte de dons, insertion professionnelle depuis 2014.`,
   keywords: [
-    "ressourcerie", "ressourcerie Château-Thierry", "Aisne", "02410",
+    "ressourcerie", "ressourcerie Château-Thierry", "Aisne", "02400",
     "Château-Thierry", "seconde main", "don objets", "insertion professionnelle",
     "économie circulaire", "brocante solidaire", "meubles occasion",
     "déchetterie alternative", "association Aisne",
