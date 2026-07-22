@@ -1,6 +1,6 @@
 import { SITE } from "@/lib/constants"
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://aubasdelaisne.vercel.app"
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://ressourcerie-aubasdelaisne.fr"
 
 /**
  * Données structurées Schema.org pour Google.

@@ -21,7 +21,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ?? "https://aubasdelaisne.vercel.app"
+    process.env.NEXT_PUBLIC_BASE_URL ?? "https://ressourcerie-aubasdelaisne.fr"
   ),
   title: {
     default: `${SITE.fullName}`,

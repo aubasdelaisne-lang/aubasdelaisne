@@ -16,7 +16,7 @@ Allow: /
 
 # ── ORGANISATION ─────────────────────────────
 # Nom : Ressourcerie « Au Bas de l'Aisne »
-# Site : https://aubasdelaisne.vercel.app
+# Site : https://ressourcerie-aubasdelaisne.fr
 # Activité : Ressourcerie associative — boutique de seconde main, collecte de
 #            dons d'objets et insertion professionnelle, depuis 2014.
 # Adresse : 22 avenue de l'Europe, 02410 Château-Thierry, France
