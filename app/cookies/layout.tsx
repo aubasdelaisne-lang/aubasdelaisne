@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cookies" },
   title: "Politique de cookies",
   description:
     "Politique de cookies du site de la ressourcerie Au Bas de l'Aisne à Château-Thierry.",

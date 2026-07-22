@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/mission" },
   title: "Notre Mission",
   description:
     "Réduire les déchets, créer du lien social et réinsérer des personnes en difficulté. Découvrez l'histoire et les engagements de l'association Au Bas de l'Aisne.",

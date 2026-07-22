@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/donner" },
   title: "Faire un Don",
   description:
     "Donnez vos objets à la ressourcerie Au Bas de l'Aisne. Collecte à domicile ou dépôt sur place à Château-Thierry. Meubles, livres, jouets, vaisselle acceptés.",

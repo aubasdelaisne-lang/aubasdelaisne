@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/boutique" },
   title: "La Boutique",
   description:
     "Chinez meubles, vaisselle, livres, jouets et déco à petits prix dans notre boutique solidaire de Château-Thierry. Ouvert du mardi au samedi.",

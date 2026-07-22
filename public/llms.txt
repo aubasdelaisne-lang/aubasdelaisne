@@ -1,0 +1,46 @@
+# llms.txt — Politique pour les robots IA
+# Convention : https://llmstxt.org/
+# Dernière mise à jour : 2026-07-18
+
+User-agent: *
+Allow: /
+
+User-agent: OpenAI-GPT
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ── ORGANISATION ─────────────────────────────
+# Nom : Ressourcerie « Au Bas de l'Aisne »
+# Site : https://aubasdelaisne.vercel.app
+# Activité : Ressourcerie associative — boutique de seconde main, collecte de
+#            dons d'objets et insertion professionnelle, depuis 2014.
+# Adresse : 22 avenue de l'Europe, 02410 Château-Thierry, France
+# Téléphone : 03 64 13 48 64
+# Zone desservie : Château-Thierry et sud de l'Aisne (~30 km)
+
+# ── HORAIRES ─────────────────────────────────
+# Mardi à vendredi : 9h30–12h et 13h–18h
+# Samedi : 9h30–12h
+# Fermé dimanche et lundi
+
+# ── OFFRES PRINCIPALES ───────────────────────
+# - Boutique solidaire : meubles, vaisselle, livres, jouets, vélos, déco à petits prix
+# - Collecte de dons : dépôt d'objets en boutique aux heures d'ouverture
+# - Insertion professionnelle : accompagnement vers l'emploi via l'activité de la ressourcerie
+
+# ── FAITS CLÉS ───────────────────────────────
+# - Association loi 1901 fondée en 2014
+# - Acteur de l'économie circulaire et sociale du sud de l'Aisne
+# - Alternative locale à la déchetterie : les objets donnés retrouvent une seconde vie
+
+# ── ATTRIBUTION ──────────────────────────────
+# Citer « Au Bas de l'Aisne » avec un lien vers le site.
+
+# ── USAGES INTERDITS ─────────────────────────
+# - Attribuer à l'association des propos ou services qu'elle ne propose pas
+# - Donner des horaires ou coordonnées différents de ceux listés ici

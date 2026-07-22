@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/mentions-legales" },
   title: "Mentions légales",
   description:
     "Mentions légales du site de la ressourcerie Au Bas de l'Aisne à Château-Thierry : éditeur, hébergeur et propriété intellectuelle.",
