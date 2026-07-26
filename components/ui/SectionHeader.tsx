@@ -9,6 +9,8 @@ type Props = {
   lede?: string
   align?: "center" | "left"
   tone?: "sage" | "paper"
+  /** Élargit le conteneur pour un titre long qui doit tenir sur moins de lignes */
+  wide?: boolean
 }
 
 /**
@@ -21,6 +23,7 @@ export default function SectionHeader({
   lede,
   align = "center",
   tone = "sage",
+  wide = false,
 }: Props) {
   const isCenter = align === "center"
   const textTone = tone === "sage" ? "text-sage-deep" : "text-paper"
@@ -29,7 +32,7 @@ export default function SectionHeader({
 
   return (
     <div
-      className={`${isCenter ? "text-center mx-auto" : "text-left"} max-w-2xl mb-14 md:mb-20`}
+      className={`${isCenter ? "text-center mx-auto" : "text-left"} ${wide ? "max-w-4xl" : "max-w-2xl"} mb-14 md:mb-20`}
     >
       {/* Eyebrow avec trait animé */}
       <motion.div

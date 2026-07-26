@@ -6,6 +6,7 @@ import { Leaf, HeartHandshake, Briefcase } from "lucide-react"
 import { MISSIONS } from "@/lib/constants"
 import TiltCard from "@/components/ui/TiltCard"
 import SectionHeader from "@/components/ui/SectionHeader"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 import { useIsTouch } from "@/hooks/useIsTouch"
 
 const icons = { Leaf, HeartHandshake, Briefcase } as const
@@ -172,10 +173,12 @@ export default function Missions() {
   }, [isTouch])
 
   return (
-    <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
+      <ScrollFilaments variant="light" />
+      <div className="relative z-10 max-w-[1100px] mx-auto">
         <SectionHeader
           eyebrow="Notre Mission"
+          wide
           title={
             <>
               Des mains qui retrouvent{" "}
