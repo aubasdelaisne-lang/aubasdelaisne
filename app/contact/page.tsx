@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import MapEmbed from "@/components/ui/MapEmbed"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -53,8 +54,9 @@ export default function ContactPage() {
       </section>
 
       {/* Coordonnées */}
-      <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1200px] mx-auto">
+      <section className="relative overflow-hidden py-20 md:py-24 px-4 md:px-8 bg-paper">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 
             {/* Panneau contact direct */}

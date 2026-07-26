@@ -5,6 +5,7 @@ import { Phone, Calendar, Check, AlertCircle } from "lucide-react"
 import { ITEMS, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import StepsTimeline from "@/components/ui/StepsTimeline"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 
 export default function DonnerPage() {
 
@@ -40,8 +41,9 @@ export default function DonnerPage() {
       </section>
 
       {/* Étapes */}
-      <section className="py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1100px] mx-auto">
+      <section className="relative overflow-hidden py-24 px-4 md:px-8 bg-paper">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Le processus
@@ -129,8 +131,9 @@ export default function DonnerPage() {
       </section>
 
       {/* Contact pour un don */}
-      <section id="formulaire" className="py-24 px-4 md:px-8 bg-paper">
-        <div className="max-w-[900px] mx-auto">
+      <section id="formulaire" className="relative overflow-hidden py-24 px-4 md:px-8 bg-paper">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[900px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

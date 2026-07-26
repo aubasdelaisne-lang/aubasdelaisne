@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Leaf, HeartHandshake, Briefcase, Quote } from "lucide-react"
 import { MISSIONS, TIMELINE, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 
 const icons = { Leaf, HeartHandshake, Briefcase } as const
 
@@ -65,8 +66,9 @@ export default function MissionPage() {
       </section>
 
       {/* 3 engagements */}
-      <section className="py-24 md:py-32 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1100px] mx-auto">
+      <section className="relative overflow-hidden py-24 md:py-32 px-4 md:px-8 bg-paper">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Nos engagements
@@ -114,8 +116,9 @@ export default function MissionPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
-        <div className="max-w-[900px] mx-auto">
+      <section className="relative overflow-hidden py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[900px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Notre histoire
