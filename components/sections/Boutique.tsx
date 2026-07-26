@@ -8,6 +8,7 @@ import { ITEMS } from "@/lib/constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 import { useIsTouch } from "@/hooks/useIsTouch"
 
 export default function BoutiqueSection() {
@@ -27,6 +28,7 @@ export default function BoutiqueSection() {
       <div className="max-w-[1300px] mx-auto">
         {/* Bloc sauge avec image + contenu */}
         <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">
+          <ScrollFilaments variant="dark" />
           <ShineSweep delay={0.4} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center relative z-10">
             {/* Texte */}
@@ -64,17 +66,18 @@ export default function BoutiqueSection() {
               </div>
             </div>
 
-            {/* Image avec reveal clip-path + zoom hover */}
+            {/* Image avec reveal clip-path + zoom hover + élévation */}
             <motion.div
               initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
               whileInView={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-              className="relative aspect-[4/5] grain overflow-hidden border-4 border-paper group"
+              whileHover={{ y: -10, transition: { type: "spring", stiffness: 300, damping: 22 } }}
+              className="group relative aspect-[4/5] grain overflow-hidden border-4 border-paper rounded-tl-[48px] rounded-br-[48px] shadow-[0_36px_70px_-28px_rgba(0,0,0,0.7)]"
             >
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ scale: 1.07 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0"
               >
                 <Image
@@ -85,6 +88,34 @@ export default function BoutiqueSection() {
                   className="object-cover"
                 />
               </motion.div>
+
+              {/* Dégradé pour lisibilité */}
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent"
+              />
+
+              {/* Badge flottant (Kickflow) */}
+              <motion.div
+                initial={{ opacity: 0, y: -8, scale: 0.85 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 220, damping: 16, delay: 0.7 }}
+                className="absolute top-4 right-4 flex items-center gap-2 bg-paper/95 backdrop-blur-sm rounded-full pl-2.5 pr-3.5 py-1.5 shadow-lg"
+              >
+                <span aria-hidden className="w-2 h-2 rounded-full bg-terracotta animate-pulse" />
+                <span className="text-[11px] font-bold text-sage-deep tracking-tight">
+                  Nouveautés chaque semaine
+                </span>
+              </motion.div>
+
+              {/* Légende permanente */}
+              <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3">
+                <span aria-hidden className="h-px w-7 bg-terracotta" />
+                <span className="text-[11px] tracking-[0.24em] uppercase text-paper font-semibold drop-shadow">
+                  Arts de la table
+                </span>
+              </div>
             </motion.div>
           </div>
         </div>
