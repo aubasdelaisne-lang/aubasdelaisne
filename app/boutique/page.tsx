@@ -18,6 +18,7 @@ import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import SectionHeader from "@/components/ui/SectionHeader"
 import WaveDivider from "@/components/ui/WaveDivider"
+import ScrollFilaments from "@/components/ui/ScrollFilaments"
 
 type Category = {
   Icon: typeof Armchair
@@ -136,34 +137,82 @@ export default function BoutiquePage() {
         </div>
       </section>
 
-      {/* Image cover — bandeau cinématique */}
-      <section className="px-4 md:px-8 bg-paper">
-        <div className="max-w-[1300px] mx-auto">
+      {/* En boutique — split image + texte + filaments au scroll */}
+      <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
+        <ScrollFilaments variant="light" />
+        <div className="relative z-10 max-w-[1200px] mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          {/* Texte */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="group relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] grain overflow-hidden border-2 border-ink/10 rounded-tl-[60px] md:rounded-tl-[100px] rounded-br-[60px] md:rounded-br-[100px]"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span aria-hidden className="h-px w-10 bg-terracotta" />
+              <span className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
+                La boutique en vrai
+              </span>
+            </div>
+            <h2 className="font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
+              Chinez, chaque semaine.
+            </h2>
+            <p className="mt-6 max-w-md text-[15px] text-ink-soft leading-relaxed">
+              Une table dressée, un meuble qui n'attend que vous, une pile de livres à
+              emporter… Notre sélection change au fil des dons. Chaque passage réserve sa
+              surprise.
+            </p>
+            <ul className="mt-8 space-y-3">
+              {[
+                "Arrivages renouvelés chaque semaine",
+                "Prix doux, objets choisis avec soin",
+                "Ouvert du mardi au samedi",
+              ].map((t) => (
+                <li key={t} className="flex items-center gap-3 text-[14px] text-sage-deep">
+                  <span
+                    aria-hidden
+                    className="grid place-items-center w-5 h-5 rounded-full bg-terracotta/15 text-terracotta shrink-0"
+                  >
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <path
+                        d="M2.5 6.5l2.5 2.5 4.5-5"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Image plus petite */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 22 } }}
+            className="group relative mx-auto w-full max-w-sm aspect-[4/5] grain overflow-hidden border-4 border-paper rounded-tl-[60px] rounded-br-[60px] shadow-[0_30px_60px_-24px_rgba(25,20,101,0.55)]"
           >
             <Image
               src="/images/table-bois.webp"
               alt="Arts de la table et vaisselle chinés à la ressourcerie"
               fill
-              priority
-              sizes="100vw"
+              sizes="(min-width: 768px) 40vw, 90vw"
               className="ken-burns object-cover"
             />
-            {/* Dégradé pour lisibilité de la légende */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"
             />
-            {/* Légende flottante */}
-            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-terracotta" />
-              <span className="text-[11px] md:text-[12px] tracking-[0.28em] uppercase text-paper font-semibold drop-shadow">
-                Chinez, chaque semaine
+            <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3">
+              <span aria-hidden className="h-px w-7 bg-terracotta" />
+              <span className="text-[11px] tracking-[0.26em] uppercase text-paper font-semibold drop-shadow">
+                Arts de la table
               </span>
             </div>
           </motion.div>

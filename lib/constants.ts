@@ -110,8 +110,7 @@ export const TIMELINE = [
   {
     year: "2026",
     title: "Ouverture d'une nouvelle boutique",
-    // TODO: le client doit fournir le texte de description
-    desc: "TODO — description à compléter par le client.",
+    desc: "Après plusieurs années de recherche, nous avons eu l'opportunité d'agrandir nos locaux en trouvant un local situé au 22 avenue de l'Europe. Cette nouvelle boutique nous a permis de mieux accueillir notre clientèle et de poursuivre notre développement.",
   },
 ]
 
