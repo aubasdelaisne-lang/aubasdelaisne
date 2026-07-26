@@ -208,3 +208,89 @@ body {
     transition: transform 0.15s ease;
   }
 }
+
+/* ────────────────────────────────────────────────
+   Ambient background — halos colorés qui dérivent
+   lentement en arrière-plan pour dynamiser les
+   sections neutres. Réutilisable via <AmbientBackground/>
+   ──────────────────────────────────────────────── */
+.ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+}
+@keyframes ambient-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.18);
+  }
+}
+@keyframes ambient-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-7%, 7%, 0) scale(0.9);
+  }
+}
+@keyframes ambient-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate3d(5%, 8%, 0) scale(1.12);
+  }
+}
+
+/* ────────────────────────────────────────────────
+   Wave divider — dérive horizontale très lente de la
+   couche de vague arrière pour un effet vivant subtil
+   ──────────────────────────────────────────────── */
+@keyframes wave-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-8%, 0, 0);
+  }
+}
+.wave-drift {
+  animation: wave-drift 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Ken Burns — zoom/pan très lent sur une photo de bandeau */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+.ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob,
+  .wave-drift,
+  .ken-burns {
+    animation: none !important;
+  }
+}

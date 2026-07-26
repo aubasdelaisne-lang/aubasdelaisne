@@ -6,11 +6,13 @@ import SectionHeader from "@/components/ui/SectionHeader"
 import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
 import StepsTimeline from "@/components/ui/StepsTimeline"
+import AmbientBackground from "@/components/ui/AmbientBackground"
 
 export default function DonSteps() {
   return (
     <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
-      <div className="max-w-[1100px] mx-auto">
+      <AmbientBackground variant="light" />
+      <div className="relative z-10 max-w-[1100px] mx-auto">
         <SectionHeader
           eyebrow="Faire un don"
           title="Simple comme un coup de fil."

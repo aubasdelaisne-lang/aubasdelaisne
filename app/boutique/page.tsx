@@ -136,7 +136,7 @@ export default function BoutiquePage() {
         </div>
       </section>
 
-      {/* Image cover */}
+      {/* Image cover — bandeau cinématique */}
       <section className="px-4 md:px-8 bg-paper">
         <div className="max-w-[1300px] mx-auto">
           <motion.div
@@ -144,7 +144,7 @@ export default function BoutiquePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="relative aspect-[16/8] grain overflow-hidden border-2 border-ink/10 rounded-tl-[60px] md:rounded-tl-[100px] rounded-br-[60px] md:rounded-br-[100px]"
+            className="group relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] grain overflow-hidden border-2 border-ink/10 rounded-tl-[60px] md:rounded-tl-[100px] rounded-br-[60px] md:rounded-br-[100px]"
           >
             <Image
               src="/images/table-bois.webp"
@@ -152,8 +152,20 @@ export default function BoutiquePage() {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="ken-burns object-cover"
             />
+            {/* Dégradé pour lisibilité de la légende */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent"
+            />
+            {/* Légende flottante */}
+            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-terracotta" />
+              <span className="text-[11px] md:text-[12px] tracking-[0.28em] uppercase text-paper font-semibold drop-shadow">
+                Chinez, chaque semaine
+              </span>
+            </div>
           </motion.div>
         </div>
       </section>
