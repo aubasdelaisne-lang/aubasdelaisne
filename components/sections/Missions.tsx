@@ -32,13 +32,15 @@ function MissionCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay, ease }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
+      whileTap={{ scale: 0.97 }}
+      className="h-full"
     >
-      <TiltCard max={4} className="h-full">
-        <article className={`relative border-2 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px] transition-[border-color,box-shadow] duration-500 bg-sage paper-texture ${
+      <TiltCard max={5} className="h-full">
+        <article className={`relative border-2 p-8 md:p-10 flex flex-col h-full group overflow-hidden rounded-tl-[40px] rounded-br-[40px] transition-[border-color,box-shadow,background-color] duration-500 bg-sage paper-texture ${
           isActive
-            ? "border-terracotta shadow-[0_20px_40px_-15px_rgba(239,95,23,0.45)]"
-            : "border-ink/10 hover:border-terracotta hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)]"
+            ? "border-terracotta shadow-[0_34px_60px_-18px_rgba(239,95,23,0.6)]"
+            : "border-ink/10 hover:border-terracotta hover:bg-sage-deep hover:shadow-[0_34px_70px_-20px_rgba(239,95,23,0.55)]"
         }`}>
           {/* Overlay orange au hover / auto-actif */}
           <span

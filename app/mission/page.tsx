@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { Leaf, HeartHandshake, Briefcase, Quote } from "lucide-react"
@@ -8,6 +8,8 @@ import { MISSIONS, TIMELINE, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 
 const icons = { Leaf, HeartHandshake, Briefcase } as const
+
+const ease = [0.22, 1, 0.36, 1] as const
 
 const testimonials = [
   {
@@ -31,6 +33,7 @@ const testimonials = [
 ]
 
 export default function MissionPage() {
+  const reduce = useReducedMotion()
   return (
     <>
       {/* Hero */}
@@ -83,9 +86,9 @@ export default function MissionPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.12 }}
-                  whileHover={{ y: -6 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.35)] p-8 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 rounded-tl-[40px] rounded-br-[40px]"
+                  whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group relative bg-sage paper-texture border-2 border-ink/10 hover:border-terracotta hover:bg-sage-deep hover:shadow-[0_34px_70px_-20px_rgba(239,95,23,0.55)] p-8 cursor-default overflow-hidden transition-[border-color,box-shadow,background-color] duration-500 rounded-tl-[40px] rounded-br-[40px]"
                 >
                   <span aria-hidden className="pointer-events-none absolute top-0 left-0 right-0 h-0.5 bg-terracotta origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                   <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-terracotta/0 to-terracotta/0 group-hover:from-terracotta/20 group-hover:to-terracotta/5 transition-all duration-700" />
@@ -122,29 +125,104 @@ export default function MissionPage() {
             </h2>
           </div>
 
-          <div className="relative pl-8 md:pl-12">
-            <div className="absolute left-[11px] md:left-4 top-2 bottom-2 w-0.5 bg-sage/40" />
-            {TIMELINE.map((item, i) => (
-              <motion.div
-                key={item.year}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-5%" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ x: 6 }}
-                className="group relative py-5 pl-8 cursor-default"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.3, backgroundColor: "#ef5f17" }}
-                  transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                  className="absolute -left-[9px] md:-left-[2px] top-6 w-6 h-6 rounded-full bg-sage border-4 border-cream-soft"
-                />
-                <div className="font-display font-bold text-2xl text-sage-deep group-hover:text-terracotta transition-colors">{item.year}</div>
-                <h3 className="font-display font-semibold text-lg mt-1 mb-2">{item.title}</h3>
-                <p className="text-[14px] text-ink-soft leading-relaxed max-w-xl">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <ol className="relative">
+            {TIMELINE.map((item, i) => {
+              const last = i === TIMELINE.length - 1
+              return (
+                <motion.li
+                  key={item.year}
+                  initial={reduce ? false : { opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-8%" }}
+                  transition={{ duration: 0.6, delay: i * 0.1, ease }}
+                  className="group relative flex gap-5 md:gap-8 pb-12 last:pb-0"
+                >
+                  {/* Colonne nœud + connecteur */}
+                  <div className="relative shrink-0 w-16 flex justify-center">
+                    {/* Connecteur terracotta vers l'étape suivante */}
+                    {!last && (
+                      <span
+                        aria-hidden
+                        className="absolute left-1/2 -translate-x-1/2 top-16 -bottom-4 w-[3px] rounded-full bg-gradient-to-b from-terracotta to-terracotta/30"
+                      />
+                    )}
+                    {/* Flèche animée qui descend le long du connecteur */}
+                    {!last && !reduce && (
+                      <motion.span
+                        aria-hidden
+                        initial={{ y: 0, opacity: 0 }}
+                        animate={{ y: [0, 14, 0], opacity: [0, 1, 0] }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: i * 0.25,
+                        }}
+                        className="absolute left-1/2 -translate-x-1/2 top-[74px] text-terracotta"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path
+                            d="M8 3v10m0 0l-4-4m4 4l4-4"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </motion.span>
+                    )}
+                    {/* Anneau pulsant */}
+                    {!reduce && (
+                      <motion.span
+                        aria-hidden
+                        initial={{ scale: 0.9, opacity: 0.5 }}
+                        animate={{ scale: [0.9, 1.4], opacity: [0.5, 0] }}
+                        transition={{
+                          duration: 2.4,
+                          repeat: Infinity,
+                          ease: "easeOut",
+                          delay: i * 0.3,
+                        }}
+                        className="absolute top-0 h-16 w-16 rounded-tl-[20px] rounded-br-[20px] bg-terracotta/25"
+                      />
+                    )}
+                    {/* Nœud année */}
+                    <motion.div
+                      whileHover={
+                        reduce ? undefined : { y: -5, scale: 1.08, rotate: -3 }
+                      }
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      className="relative z-10 grid place-items-center w-16 h-16 bg-sage paper-texture rounded-tl-[20px] rounded-br-[20px] ring-4 ring-cream-soft shadow-[0_14px_30px_-12px_rgba(25,20,101,0.7)] transition-colors duration-500 group-hover:bg-terracotta"
+                    >
+                      <span className="font-display font-bold text-[15px] text-paper tabular-nums">
+                        {item.year}
+                      </span>
+                    </motion.div>
+                  </div>
+
+                  {/* Carte contenu */}
+                  <motion.div
+                    whileHover={
+                      reduce
+                        ? undefined
+                        : { y: -6, transition: { type: "spring", stiffness: 320, damping: 20 } }
+                    }
+                    className="flex-1 bg-paper border-2 border-ink/10 group-hover:border-terracotta rounded-tl-[28px] rounded-br-[28px] p-5 md:p-6 shadow-sm hover:shadow-[0_28px_55px_-22px_rgba(25,20,101,0.45)] transition-[border-color,box-shadow] duration-500 cursor-default"
+                  >
+                    <div className="font-display font-bold text-xl md:text-2xl text-terracotta leading-none">
+                      {item.year}
+                    </div>
+                    <h3 className="font-display font-semibold text-lg mt-2 mb-2 text-sage-deep">
+                      {item.title}
+                    </h3>
+                    <p className="text-[14px] text-ink-soft leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                </motion.li>
+              )
+            })}
+          </ol>
         </div>
       </section>
 
