@@ -221,9 +221,9 @@ export default function BoutiquePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-10%" }}
                   transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -8 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-5 md:p-6 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_20px_40px_-15px_rgba(239,95,23,0.3)] ${sizeClasses[cat.size]} ${t.bg} ${t.text}`}
+                  whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-5 md:p-6 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_34px_70px_-20px_rgba(239,95,23,0.5)] ${sizeClasses[cat.size]} ${t.bg} ${t.text}`}
                 >
                   {/* Shimmer diagonal au hover */}
                   <span
@@ -312,14 +312,11 @@ export default function BoutiquePage() {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                className="absolute bottom-5 left-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              >
-                <p className="font-display text-paper text-lg font-semibold">Notre boutique</p>
-                <p className="text-paper/80 text-[13px]">22 avenue de l'Europe, Château-Thierry</p>
-              </motion.div>
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/90" />
+              <div className="absolute bottom-5 left-5 right-5">
+                <p className="font-display text-paper text-lg font-semibold drop-shadow">Notre boutique</p>
+                <p className="text-paper/85 text-[13px]">22 avenue de l'Europe, Château-Thierry</p>
+              </div>
             </motion.div>
 
             {/* Image haut droite */}
@@ -337,8 +334,8 @@ export default function BoutiquePage() {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/90" />
+              <motion.div className="absolute bottom-4 left-4 right-4">
                 <p className="font-display text-paper text-base font-semibold">Collecte à domicile</p>
                 <p className="text-paper/80 text-[12px]">On vient chercher vos dons</p>
               </motion.div>
@@ -359,8 +356,8 @@ export default function BoutiquePage() {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <motion.div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/90" />
+              <motion.div className="absolute bottom-4 left-4 right-4">
                 <p className="font-display text-paper text-base font-semibold">Nos rayons</p>
                 <p className="text-paper/80 text-[12px]">Livres, romans, BD & plus</p>
               </motion.div>
