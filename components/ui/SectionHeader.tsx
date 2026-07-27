@@ -66,7 +66,7 @@ export default function SectionHeader({
 
       <h2
         className={`mt-4 font-display font-medium ${textTone} leading-[1.1] tracking-tight`}
-        style={{ fontSize: "clamp(1.9rem, 1rem + 3vw, 3.25rem)" }}
+        style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
       >
         <RevealText delay={0.1}>{title}</RevealText>
       </h2>

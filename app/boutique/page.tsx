@@ -139,7 +139,7 @@ export default function BoutiquePage() {
       </section>
 
       {/* En boutique — split image + texte + filaments au scroll */}
-      <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
+      <section className="relative py-16 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[1200px] mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Texte */}
@@ -221,7 +221,7 @@ export default function BoutiquePage() {
       </section>
 
       {/* Catégories — bento grid asymétrique */}
-      <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
+      <section className="relative py-16 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
         <div className="relative max-w-[1200px] mx-auto">
           {/* Header asymétrique */}
           <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -420,7 +420,7 @@ export default function BoutiquePage() {
       <ArcDivider top="text-cream-soft" bottom="bg-paper" />
 
       {/* Infos pratiques : horaires + adresse */}
-      <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeader
             eyebrow="Infos pratiques"
@@ -504,7 +504,7 @@ export default function BoutiquePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-4 md:px-8 bg-paper">
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

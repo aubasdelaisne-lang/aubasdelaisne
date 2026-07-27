@@ -10,7 +10,7 @@ import AmbientBackground from "@/components/ui/AmbientBackground"
 
 export default function DonSteps() {
   return (
-    <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
+    <section className="relative py-16 md:py-32 px-4 md:px-8 bg-paper overflow-hidden">
       <AmbientBackground variant="light" />
       <div className="relative z-10 max-w-[1100px] mx-auto">
         <SectionHeader

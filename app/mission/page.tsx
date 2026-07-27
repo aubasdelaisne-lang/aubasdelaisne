@@ -66,7 +66,7 @@ export default function MissionPage() {
       </section>
 
       {/* 3 engagements */}
-      <section className="relative overflow-hidden py-24 md:py-32 px-4 md:px-8 bg-paper">
+      <section className="relative overflow-hidden py-16 md:py-32 px-4 md:px-8 bg-paper">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
@@ -116,7 +116,7 @@ export default function MissionPage() {
       </section>
 
       {/* Timeline */}
-      <section className="relative overflow-hidden py-24 md:py-32 px-4 md:px-8 bg-cream-soft">
+      <section className="relative overflow-hidden py-16 md:py-32 px-4 md:px-8 bg-cream-soft">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[900px] mx-auto">
           <div className="text-center mb-14">
@@ -230,7 +230,7 @@ export default function MissionPage() {
       </section>
 
       {/* Témoignages */}
-      <section className="py-24 md:py-32 px-4 md:px-8 bg-paper">
+      <section className="py-16 md:py-32 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
@@ -310,7 +310,7 @@ export default function MissionPage() {
       </section>
 
       {/* CTA final */}
-      <section className="py-24 px-4 md:px-8 bg-paper">
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -54,7 +54,7 @@ export default function ContactPage() {
       </section>
 
       {/* Coordonnées */}
-      <section className="relative overflow-hidden py-20 md:py-24 px-4 md:px-8 bg-paper">
+      <section className="relative overflow-hidden py-16 md:py-24 px-4 md:px-8 bg-paper">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">

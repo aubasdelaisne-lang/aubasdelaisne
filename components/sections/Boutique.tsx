@@ -25,7 +25,7 @@ export default function BoutiqueSection() {
     return () => clearInterval(id)
   }, [isTouch])
   return (
-    <section className="relative py-24 md:py-32 px-4 md:px-8 bg-paper">
+    <section className="relative py-16 md:py-32 px-4 md:px-8 bg-paper">
       <div className="max-w-[1300px] mx-auto">
         {/* Bloc sauge avec image + contenu */}
         <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 md:p-14 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] overflow-hidden">

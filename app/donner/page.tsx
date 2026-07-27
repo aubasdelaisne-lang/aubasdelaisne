@@ -41,7 +41,7 @@ export default function DonnerPage() {
       </section>
 
       {/* Étapes */}
-      <section className="relative overflow-hidden py-24 px-4 md:px-8 bg-paper">
+      <section className="relative overflow-hidden py-16 md:py-24 px-4 md:px-8 bg-paper">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
@@ -131,7 +131,7 @@ export default function DonnerPage() {
       </section>
 
       {/* Contact pour un don */}
-      <section id="formulaire" className="relative overflow-hidden py-24 px-4 md:px-8 bg-paper">
+      <section id="formulaire" className="relative overflow-hidden py-16 md:py-24 px-4 md:px-8 bg-paper">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[900px] mx-auto">
           <motion.div
