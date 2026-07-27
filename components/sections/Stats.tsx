@@ -126,14 +126,14 @@ export default function Stats() {
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full"
         viewBox="0 0 1200 1000"
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="none"
         fill="none"
       >
-        <motion.path d="M -60 980 C 100 780 280 500 550 320 C 780 170 1000 200 1260 60" stroke="rgba(239,95,23,0.5)" strokeWidth="2" strokeLinecap="round" style={{ pathLength: draw1 }} />
-        <motion.path d="M -40 700 C 200 620 420 660 640 500 C 860 340 1040 420 1260 300" stroke="rgba(239,95,23,0.28)" strokeWidth="1.5" strokeLinecap="round" style={{ pathLength: draw2 }} />
-        <motion.path d="M -60 300 C 180 360 380 240 600 300 C 840 366 1020 260 1260 340" stroke="rgba(255,255,255,0.12)" strokeWidth="1" strokeLinecap="round" style={{ pathLength: draw3 }} />
-        <motion.path d="M -40 120 C 220 240 460 180 700 260 C 920 334 1080 300 1260 420" stroke="rgba(239,95,23,0.2)" strokeWidth="1.5" strokeLinecap="round" style={{ pathLength: draw4 }} />
-        <motion.path d="M -60 520 C 160 460 360 540 560 460 C 800 366 1040 540 1260 500" stroke="rgba(255,255,255,0.07)" strokeWidth="1" strokeLinecap="round" style={{ pathLength: draw5 }} />
+        <motion.path d="M -60 980 C 100 780 280 500 550 320 C 780 170 1000 200 1260 60" stroke="rgba(239,95,23,0.5)" strokeWidth="2" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ pathLength: draw1 }} />
+        <motion.path d="M -40 700 C 200 620 420 660 640 500 C 860 340 1040 420 1260 300" stroke="rgba(239,95,23,0.28)" strokeWidth="1.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ pathLength: draw2 }} />
+        <motion.path d="M -60 300 C 180 360 380 240 600 300 C 840 366 1020 260 1260 340" stroke="rgba(255,255,255,0.12)" strokeWidth="1" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ pathLength: draw3 }} />
+        <motion.path d="M -40 120 C 220 240 460 180 700 260 C 920 334 1080 300 1260 420" stroke="rgba(239,95,23,0.2)" strokeWidth="1.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ pathLength: draw4 }} />
+        <motion.path d="M -60 520 C 160 460 360 540 560 460 C 800 366 1040 540 1260 500" stroke="rgba(255,255,255,0.07)" strokeWidth="1" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ pathLength: draw5 }} />
       </svg>
 
       {/* Chiffres fantômes en parallaxe */}

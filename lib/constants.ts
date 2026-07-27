@@ -7,8 +7,7 @@ export const SITE = {
   phone: "03 64 13 48 64",
   phoneHref: "tel:+33364134864",
   facebook: "https://www.facebook.com/aubasdelaisne",
-  // TODO: remplacer "#" par l'URL Instagram définitive dès confirmation client
-  instagram: "https://www.instagram.com/ressourcerie_aubasdelaisne/",
+  instagram: "https://www.instagram.com/ressourcerie_aubasdelaisne",
   siret: "800 130 494 000 27",
   founded: "16 janvier 2014",
   registration: "Sous-préfecture de Château-Thierry (N° W021001352)",
