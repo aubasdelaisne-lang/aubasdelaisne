@@ -18,6 +18,7 @@ import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import SectionHeader from "@/components/ui/SectionHeader"
 import WaveDivider from "@/components/ui/WaveDivider"
+import ArcDivider from "@/components/ui/ArcDivider"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
 
 type Category = {
@@ -415,8 +416,8 @@ export default function BoutiquePage() {
         </div>
       </section>
 
-      {/* Vague inversée : cream-soft → paper */}
-      <WaveDivider top="text-cream-soft" bottom="bg-paper" />
+      {/* Arc organique (creux) : cream-soft → paper */}
+      <ArcDivider top="text-cream-soft" bottom="bg-paper" />
 
       {/* Infos pratiques : horaires + adresse */}
       <section className="py-20 md:py-24 px-4 md:px-8 bg-paper">

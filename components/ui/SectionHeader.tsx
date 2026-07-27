@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ReactNode } from "react"
+import RevealText from "@/components/ui/RevealText"
 
 type Props = {
   eyebrow: string
@@ -63,15 +64,12 @@ export default function SectionHeader({
         />
       </motion.div>
 
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className={`mt-4 font-display font-medium text-3xl md:text-5xl ${textTone} leading-[1.1] tracking-tight`}
+      <h2
+        className={`mt-4 font-display font-medium ${textTone} leading-[1.1] tracking-tight`}
+        style={{ fontSize: "clamp(1.9rem, 1rem + 3vw, 3.25rem)" }}
       >
-        {title}
-      </motion.h2>
+        <RevealText delay={0.1}>{title}</RevealText>
+      </h2>
 
       {lede && (
         <motion.p

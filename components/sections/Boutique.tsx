@@ -9,6 +9,7 @@ import MagneticButton from "@/components/ui/MagneticButton"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
+import RevealText from "@/components/ui/RevealText"
 import { useIsTouch } from "@/hooks/useIsTouch"
 
 export default function BoutiqueSection() {
@@ -36,17 +37,15 @@ export default function BoutiqueSection() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 La Boutique
               </div>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="mt-4 font-display font-medium text-4xl md:text-5xl text-paper leading-[1.1]"
+              <h2
+                className="mt-4 font-display font-medium text-paper leading-[1.1] tracking-tight"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.4vw, 3rem)" }}
               >
-                Des trésors
-                <br />
-                à petits prix.
-              </motion.h2>
+                <RevealText delay={0.1}>
+                  Des trésors
+                  <br />à petits prix.
+                </RevealText>
+              </h2>
               <p className="mt-6 text-paper/85 text-[15px] leading-relaxed max-w-md">
                 Meubles, livres, vaisselle, jouets, vélos… Une sélection triée
                 avec soin, renouvelée chaque semaine.

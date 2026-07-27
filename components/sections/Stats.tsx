@@ -10,6 +10,7 @@ import {
   useMotionValue,
 } from "framer-motion"
 import { STATS } from "@/lib/constants"
+import RevealText from "@/components/ui/RevealText"
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -175,15 +176,12 @@ export default function Stats() {
             </span>
             <span aria-hidden className="h-px w-10 bg-terracotta" />
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease }}
-            className="font-display font-medium text-3xl md:text-5xl text-paper leading-[1.1]"
+          <h2
+            className="font-display font-medium text-paper leading-[1.1] tracking-tight"
+            style={{ fontSize: "clamp(1.9rem, 1rem + 3vw, 3.25rem)" }}
           >
-            Dix ans d'engagement local.
-          </motion.h2>
+            <RevealText delay={0.1}>Dix ans d'engagement local.</RevealText>
+          </h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
