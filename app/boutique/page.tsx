@@ -124,11 +124,18 @@ export default function BoutiquePage() {
                 className="mt-4 font-display font-medium text-paper leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                <RevealText delay={0.2}>
-                  Chiner. Donner.
-                  <br />
-                  Recommencer.
-                </RevealText>
+                <span className="block overflow-hidden pb-[0.12em]">
+                  <motion.span
+                    initial={{ y: "115%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="block"
+                  >
+                    Chiner. Donner.
+                    <br />
+                    Recommencer.
+                  </motion.span>
+                </span>
               </h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Une boutique solidaire qui se renouvelle chaque semaine. Prix
