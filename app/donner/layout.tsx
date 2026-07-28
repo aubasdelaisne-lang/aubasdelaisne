@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/donner" },
   title: "Faire un Don",
   description:
-    "Donnez vos objets à la ressourcerie Au Bas de l'Aisne. Collecte à domicile ou dépôt sur place à Château-Thierry. Meubles, livres, jouets, vaisselle acceptés.",
+    "Donnez vos objets à la ressourcerie de Château-Thierry. Dépôt sans rendez-vous ou collecte à domicile. Meubles, livres, jouets, vaisselle acceptés.",
   openGraph: {
     title: "Faire un Don · Au Bas de l'Aisne",
     description:

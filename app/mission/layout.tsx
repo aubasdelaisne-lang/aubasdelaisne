@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/mission" },
   title: "Notre Mission",
   description:
-    "Réduire les déchets, créer du lien social et réinsérer des personnes en difficulté. Découvrez l'histoire et les engagements de l'association Au Bas de l'Aisne.",
+    "Ressourcerie solidaire dans l'Aisne — réduction des déchets, lien social et insertion. Histoire et engagements de l'association Au Bas de l'Aisne depuis 2014.",
   openGraph: {
     title: "Notre Mission · Au Bas de l'Aisne",
     description:

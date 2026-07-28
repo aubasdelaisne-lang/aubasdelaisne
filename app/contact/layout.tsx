@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
   title: "Contact",
   description:
-    "Contactez la ressourcerie Au Bas de l'Aisne à Château-Thierry. Téléphone, réseaux sociaux, accès et horaires. Nous répondons rapidement à vos questions.",
+    "Contactez la ressourcerie Au Bas de l'Aisne à Château-Thierry. Téléphone, horaires d'ouverture et accès. Réponse rapide à vos questions.",
   openGraph: {
     title: "Contact · Au Bas de l'Aisne",
     description:

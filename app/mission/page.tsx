@@ -61,7 +61,7 @@ export default function MissionPage() {
                   >
                     Réinsérer, relier,
                     <br />
-                    réduire.
+                    réduire — dans l&apos;Aisne.
                   </motion.span>
                 </span>
               </h1>

@@ -33,9 +33,9 @@ export default function DonnerPage() {
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     className="block"
                   >
-                    Un objet oublié,
+                    Donnez vos objets
                     <br />
-                    une seconde vie.
+                    à Château-Thierry.
                   </motion.span>
                 </span>
               </h1>

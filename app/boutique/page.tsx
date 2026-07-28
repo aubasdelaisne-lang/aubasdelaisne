@@ -131,9 +131,9 @@ export default function BoutiquePage() {
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     className="block"
                   >
-                    Chiner. Donner.
+                    Boutique solidaire
                     <br />
-                    Recommencer.
+                    à Château-Thierry.
                   </motion.span>
                 </span>
               </h1>
