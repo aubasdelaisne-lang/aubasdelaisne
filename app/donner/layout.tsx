@@ -1,4 +1,7 @@
 import type { Metadata } from "next"
+import BreadcrumbJsonLd from "@/components/ui/BreadcrumbJsonLd"
+
+export const dynamic = "force-static"
 
 export const metadata: Metadata = {
   alternates: { canonical: "/donner" },
@@ -14,5 +17,10 @@ export const metadata: Metadata = {
 }
 
 export default function DonnerLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <BreadcrumbJsonLd name="Faire un Don" path="/donner" />
+      {children}
+    </>
+  )
 }

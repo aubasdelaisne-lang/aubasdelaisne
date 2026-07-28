@@ -1,4 +1,7 @@
 import type { Metadata } from "next"
+import BreadcrumbJsonLd from "@/components/ui/BreadcrumbJsonLd"
+
+export const dynamic = "force-static"
 
 export const metadata: Metadata = {
   alternates: { canonical: "/boutique" },
@@ -14,5 +17,10 @@ export const metadata: Metadata = {
 }
 
 export default function BoutiqueLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <BreadcrumbJsonLd name="La Boutique" path="/boutique" />
+      {children}
+    </>
+  )
 }

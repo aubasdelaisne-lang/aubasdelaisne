@@ -52,7 +52,7 @@ export default function JsonLd() {
         closes: "12:00",
       },
     ],
-    sameAs: [SITE.facebook],
+    sameAs: [SITE.facebook, SITE.instagram],
     priceRange: "€",
     currenciesAccepted: "EUR",
     paymentAccepted: "Cash, Card",
