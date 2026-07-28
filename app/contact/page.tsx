@@ -7,6 +7,7 @@ import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import MapEmbed from "@/components/ui/MapEmbed"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
+import RevealText from "@/components/ui/RevealText"
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -36,14 +37,12 @@ export default function ContactPage() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Contact
               </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mt-4 font-display font-medium text-4xl md:text-6xl text-paper leading-[1.05]"
+              <h1
+                className="mt-4 font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                À votre écoute.
-              </motion.h1>
+                <RevealText delay={0.2}>À votre écoute.</RevealText>
+              </h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Une question, un projet de don, ou simplement envie de passer ?
                 Écrivez-nous ou appelez directement.

@@ -7,6 +7,8 @@ import { Leaf, HeartHandshake, Briefcase, Quote } from "lucide-react"
 import { MISSIONS, TIMELINE, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
+import RevealText from "@/components/ui/RevealText"
+import ArcDivider from "@/components/ui/ArcDivider"
 
 const icons = { Leaf, HeartHandshake, Briefcase } as const
 
@@ -46,16 +48,16 @@ export default function MissionPage() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Notre mission
               </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mt-4 font-display font-medium text-4xl md:text-6xl text-paper leading-[1.05]"
+              <h1
+                className="mt-4 font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                Réinsérer, relier,
-                <br />
-                réduire.
-              </motion.h1>
+                <RevealText delay={0.2}>
+                  Réinsérer, relier,
+                  <br />
+                  réduire.
+                </RevealText>
+              </h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Depuis le 16 janvier 2014, nous œuvrons pour un territoire plus
                 juste et plus durable dans l'Aisne.
@@ -73,8 +75,11 @@ export default function MissionPage() {
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Nos engagements
             </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Trois gestes, un même combat.
+            <h2
+              className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>Trois gestes, un même combat.</RevealText>
             </h2>
           </div>
 
@@ -116,6 +121,7 @@ export default function MissionPage() {
       </section>
 
       {/* Timeline */}
+      <ArcDivider top="text-paper" bottom="bg-cream-soft" />
       <section className="relative overflow-hidden py-16 md:py-32 px-4 md:px-8 bg-cream-soft">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[900px] mx-auto">
@@ -123,8 +129,11 @@ export default function MissionPage() {
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Notre histoire
             </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Dix ans dans l'Aisne.
+            <h2
+              className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>Dix ans dans l&apos;Aisne.</RevealText>
             </h2>
           </div>
 
@@ -230,14 +239,18 @@ export default function MissionPage() {
       </section>
 
       {/* Témoignages */}
+      <ArcDivider top="text-cream-soft" bottom="bg-paper" />
       <section className="py-16 md:py-32 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Ils témoignent
             </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Des voix du territoire.
+            <h2
+              className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>Des voix du territoire.</RevealText>
             </h2>
           </div>
 
@@ -277,6 +290,7 @@ export default function MissionPage() {
       </section>
 
       {/* Label Tremplin */}
+      <ArcDivider top="text-paper" bottom="bg-cream-soft" />
       <section className="py-16 px-4 md:px-8 bg-cream-soft">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -310,6 +324,7 @@ export default function MissionPage() {
       </section>
 
       {/* CTA final */}
+      <ArcDivider top="text-cream-soft" bottom="bg-paper" />
       <section className="py-16 md:py-24 px-4 md:px-8 bg-paper">
         <div className="max-w-[1100px] mx-auto">
           <motion.div
@@ -324,8 +339,11 @@ export default function MissionPage() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/70 font-semibold mb-5">
                 Agir avec nous
               </div>
-              <h2 className="font-display font-medium text-4xl md:text-5xl text-paper leading-[1.05]">
-                Rejoignez le mouvement.
+              <h2
+                className="font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
+              >
+                <RevealText delay={0.1}>Rejoignez le mouvement.</RevealText>
               </h2>
               <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
                 Donner un objet, chiner une trouvaille ou simplement passer nous

@@ -6,6 +6,8 @@ import { ITEMS, SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import StepsTimeline from "@/components/ui/StepsTimeline"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
+import RevealText from "@/components/ui/RevealText"
+import ArcDivider from "@/components/ui/ArcDivider"
 
 export default function DonnerPage() {
 
@@ -20,16 +22,16 @@ export default function DonnerPage() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 Faire un don
               </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mt-4 font-display font-medium text-4xl md:text-6xl text-paper leading-[1.05]"
+              <h1
+                className="mt-4 font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                Un objet oublié,
-                <br />
-                une seconde vie.
-              </motion.h1>
+                <RevealText delay={0.2}>
+                  Un objet oublié,
+                  <br />
+                  une seconde vie.
+                </RevealText>
+              </h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Vos affaires dont vous n'avez plus besoin peuvent servir à
                 d'autres. Déposez-les ou faites-les collecter — on s'occupe du
@@ -48,8 +50,11 @@ export default function DonnerPage() {
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               Le processus
             </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Quatre étapes simples.
+            <h2
+              className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>Quatre étapes simples.</RevealText>
             </h2>
           </div>
 
@@ -58,6 +63,7 @@ export default function DonnerPage() {
       </section>
 
       {/* Objets acceptés + Horaires */}
+      <ArcDivider top="text-paper" bottom="bg-cream-soft" />
       <section className="py-16 px-4 md:px-8 bg-cream-soft">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           <motion.div
@@ -131,6 +137,7 @@ export default function DonnerPage() {
       </section>
 
       {/* Contact pour un don */}
+      <ArcDivider top="text-cream-soft" bottom="bg-paper" />
       <section id="formulaire" className="relative overflow-hidden py-16 md:py-24 px-4 md:px-8 bg-paper">
         <ScrollFilaments variant="light" />
         <div className="relative z-10 max-w-[900px] mx-auto">

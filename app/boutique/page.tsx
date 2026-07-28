@@ -17,6 +17,7 @@ import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
 import SectionHeader from "@/components/ui/SectionHeader"
+import RevealText from "@/components/ui/RevealText"
 import WaveDivider from "@/components/ui/WaveDivider"
 import ArcDivider from "@/components/ui/ArcDivider"
 import ScrollFilaments from "@/components/ui/ScrollFilaments"
@@ -119,16 +120,16 @@ export default function BoutiquePage() {
               <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
                 La Boutique
               </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mt-4 font-display font-medium text-4xl md:text-6xl text-paper leading-[1.05]"
+              <h1
+                className="mt-4 font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                Chiner. Donner.
-                <br />
-                Recommencer.
-              </motion.h1>
+                <RevealText delay={0.2}>
+                  Chiner. Donner.
+                  <br />
+                  Recommencer.
+                </RevealText>
+              </h1>
               <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
                 Une boutique solidaire qui se renouvelle chaque semaine. Prix
                 doux, objets choisis, ambiance brocante.
@@ -155,8 +156,11 @@ export default function BoutiquePage() {
                 La boutique en vrai
               </span>
             </div>
-            <h2 className="font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              Chinez, chaque semaine.
+            <h2
+              className="font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>Chinez, chaque semaine.</RevealText>
             </h2>
             <p className="mt-6 max-w-md text-[15px] text-ink-soft leading-relaxed">
               Une table dressée, un meuble qui n'attend que vous, une pile de livres à
@@ -238,15 +242,12 @@ export default function BoutiquePage() {
                   Nos Rayons
                 </span>
               </motion.div>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-display font-medium text-4xl md:text-6xl text-sage-deep leading-[1]"
+              <h2
+                className="font-display font-medium text-sage-deep leading-[1]"
+                style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
               >
-                Ce qu'on propose.
-              </motion.h2>
+                <RevealText delay={0.1}>Ce qu&apos;on propose.</RevealText>
+              </h2>
             </div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -340,8 +341,11 @@ export default function BoutiquePage() {
             <div className="text-[11px] tracking-[0.3em] uppercase text-sage-deep font-semibold">
               En images
             </div>
-            <h2 className="mt-4 font-display font-medium text-3xl md:text-5xl text-sage-deep leading-[1.1]">
-              La boutique en vrai.
+            <h2
+              className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
+              style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
+            >
+              <RevealText delay={0.1}>La boutique en vrai.</RevealText>
             </h2>
           </div>
 
