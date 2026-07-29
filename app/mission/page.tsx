@@ -86,7 +86,7 @@ export default function MissionPage() {
               className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>Trois gestes, un même combat.</RevealText>
+              <RevealText delay={0.1} immediate>Trois gestes, un même combat.</RevealText>
             </h2>
           </div>
 

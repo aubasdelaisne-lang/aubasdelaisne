@@ -167,7 +167,7 @@ export default function BoutiquePage() {
               className="font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>Chinez, chaque semaine.</RevealText>
+              <RevealText delay={0.1} immediate>Chinez, chaque semaine.</RevealText>
             </h2>
             <p className="mt-6 max-w-md text-[15px] text-ink-soft leading-relaxed">
               Une table dressée, un meuble qui n'attend que vous, une pile de livres à

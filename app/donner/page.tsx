@@ -61,7 +61,7 @@ export default function DonnerPage() {
               className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>Quatre étapes simples.</RevealText>
+              <RevealText delay={0.1} immediate>Quatre étapes simples.</RevealText>
             </h2>
           </div>
 
