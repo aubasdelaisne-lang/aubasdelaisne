@@ -140,7 +140,14 @@ export default function MissionPage() {
               className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>Dix ans dans l&apos;Aisne.</RevealText>
+              <motion.span
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                className="block"
+              >
+                Dix ans dans l&apos;Aisne.
+              </motion.span>
             </h2>
           </div>
 
@@ -257,7 +264,14 @@ export default function MissionPage() {
               className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>Des voix du territoire.</RevealText>
+              <motion.span
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                className="block"
+              >
+                Des voix du territoire.
+              </motion.span>
             </h2>
           </div>
 
@@ -350,7 +364,14 @@ export default function MissionPage() {
                 className="font-display font-medium text-paper leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                <RevealText delay={0.1}>Rejoignez le mouvement.</RevealText>
+                <motion.span
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                  className="block"
+                >
+                  Rejoignez le mouvement.
+                </motion.span>
               </h2>
               <p className="mt-5 text-paper/85 text-[15px] max-w-md mx-auto leading-relaxed">
                 Donner un objet, chiner une trouvaille ou simplement passer nous

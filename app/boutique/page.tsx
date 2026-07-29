@@ -253,7 +253,14 @@ export default function BoutiquePage() {
                 className="font-display font-medium text-sage-deep leading-[1]"
                 style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
               >
-                <RevealText delay={0.1}>Ce qu&apos;on propose.</RevealText>
+                <motion.span
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                  className="block"
+                >
+                  Ce qu&apos;on propose.
+                </motion.span>
               </h2>
             </div>
             <motion.p
@@ -352,7 +359,14 @@ export default function BoutiquePage() {
               className="mt-4 font-display font-medium text-sage-deep leading-[1.1]"
               style={{ fontSize: "clamp(1.8rem, 0.9rem + 2.6vw, 3rem)" }}
             >
-              <RevealText delay={0.1}>La boutique en vrai.</RevealText>
+              <motion.span
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                className="block"
+              >
+                La boutique en vrai.
+              </motion.span>
             </h2>
           </div>
 
