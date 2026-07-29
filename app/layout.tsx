@@ -8,6 +8,7 @@ import CookieBanner from "@/components/ui/CookieBanner"
 import SpotlightInit from "@/components/ui/SpotlightInit"
 import ScrollProgress from "@/components/ui/ScrollProgress"
 import JsonLd from "@/components/ui/JsonLd"
+import SplashScreen from "@/components/ui/SplashScreen"
 import { SITE } from "@/lib/constants"
 
 // Typo officielle de l'asso : Montserrat (titres + textes)
@@ -70,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={montserrat.variable}>
       <body className="min-h-screen flex flex-col antialiased bg-paper text-ink">
+        <SplashScreen />
         <JsonLd />
         <ScrollProgress />
         <Navbar />
