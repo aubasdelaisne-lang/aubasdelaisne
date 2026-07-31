@@ -11,7 +11,6 @@ import {
 } from "framer-motion"
 import Fauteuil from "@/components/illustrations/Fauteuil"
 import Caisse from "@/components/illustrations/Caisse"
-import Main from "@/components/illustrations/Main"
 import Camion from "@/components/illustrations/Camion"
 import Atelier from "@/components/illustrations/Atelier"
 import Etagere from "@/components/illustrations/Etagere"
@@ -22,7 +21,9 @@ import { P } from "@/components/illustrations/palette"
 
 /* « La seconde vie d'un objet » — le scroll fait avancer l'histoire d'un
    fauteuil en 5 chapitres (scrub). Scène sticky plein écran, transforms GPU
-   uniquement. Version statique empilée si prefers-reduced-motion. */
+   uniquement. Chaque chapitre anime en continu sur toute sa plage : pas de
+   zone morte. Les chapitres se fondent l'un dans l'autre (crossfade).
+   Version statique empilée si prefers-reduced-motion. */
 
 type Chapter = {
   id: "don" | "collecte" | "atelier" | "rayon" | "revit"
@@ -70,32 +71,35 @@ const CHAPTERS: Chapter[] = [
   },
 ]
 
-/** Fondu d'un chapitre sur sa plage de scroll.
- *  Le premier chapitre est visible dès l'entrée de la section,
- *  le dernier le reste jusqu'à la sortie. */
+/** Fondu-enchaîné entre chapitres : la sortie de l'un chevauche l'entrée du
+ *  suivant (jamais d'écran vide). Premier chapitre visible dès l'entrée,
+ *  dernier visible jusqu'à la sortie. */
 function useChapterOpacity(
   progress: MotionValue<number>,
   [a, b]: readonly [number, number]
 ) {
-  const fade = 0.04
+  const fade = 0.018
   const pts =
     a === 0
-      ? { i: [a, b - fade, b], o: [1, 1, 0] }
+      ? { i: [a, b - fade, b + fade], o: [1, 1, 0] }
       : b === 1
-        ? { i: [a, a + fade, b], o: [0, 1, 1] }
-        : { i: [a, a + fade, b - fade, b], o: [0, 1, 1, 0] }
+        ? { i: [a - fade, a + fade, b], o: [0, 1, 1] }
+        : { i: [a - fade, a + fade, b - fade, b + fade], o: [0, 1, 1, 0] }
   return useTransform(progress, pts.i, pts.o)
 }
 
 /* ————— Scènes illustrées ————— */
 
-/** Chapitre 1 — la main dépose le fauteuil abîmé près de la caisse. */
+/** Chapitre 1 — le fauteuil est déposé en douceur près de la caisse.
+ *  Mouvement continu sur toute la plage 0 → 0,2. */
 function SceneDon({ progress }: { progress: MotionValue<number> }) {
-  const x = useTransform(progress, [0.02, 0.14], ["-46vw", "-4vw"])
-  const y = useTransform(progress, [0.02, 0.14], ["-4vh", "0vh"])
-  const decoY1 = useTransform(progress, [0, 0.2], [0, -46])
-  const decoY2 = useTransform(progress, [0, 0.2], [0, 34])
-  const decoY3 = useTransform(progress, [0, 0.2], [0, -22])
+  const x = useTransform(progress, [0.0, 0.17], ["-48vw", "-6vw"])
+  const y = useTransform(progress, [0.0, 0.1, 0.17], ["-10vh", "-4vh", "0vh"])
+  const rotate = useTransform(progress, [0.0, 0.17], [-7, 0])
+  const scale = useTransform(progress, [0.16, 0.18, 0.2], [1, 1.04, 1])
+  const decoY1 = useTransform(progress, [0, 0.2], [0, -52])
+  const decoY2 = useTransform(progress, [0, 0.2], [0, 40])
+  const decoY3 = useTransform(progress, [0, 0.2], [0, -26])
 
   return (
     <div className="absolute inset-0">
@@ -118,30 +122,33 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
         <Caisse className="w-full" />
       </span>
 
-      {/* Main qui apporte le fauteuil */}
+      {/* Le fauteuil arrive en douceur */}
       <motion.div
-        style={{ x, y }}
-        className="absolute bottom-[calc(9vh+40px)] left-1/2 -translate-x-full w-40 md:w-56"
+        style={{ x, y, rotate, scale }}
+        className="absolute bottom-[9vh] left-1/2 -translate-x-full w-36 md:w-48"
       >
-        <Fauteuil state="abime" className="w-3/4 mx-auto" />
-        <Main className="w-full -mt-5" />
+        <Fauteuil state="abime" className="w-full" />
       </motion.div>
     </div>
   )
 }
 
-/** Chapitre 2 — le camion roule, paysage en parallaxe. */
+/** Chapitre 2 — le camion roule sans s'arrêter, paysage en parallaxe. */
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
-  const camionX = useTransform(progress, [0.2, 0.31], ["-55vw", "6vw"])
+  const camionX = useTransform(
+    progress,
+    [0.2, 0.315, 0.4],
+    ["-55vw", "2vw", "8vw"]
+  )
   const camionRotate = useTransform(
     progress,
-    [0.31, 0.34, 0.37, 0.4],
-    [0, -1.2, 1.2, 0]
+    [0.3, 0.325, 0.35, 0.375, 0.4],
+    [0, -1.2, 1, -0.8, 0]
   )
-  const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -90])
-  const collinesAvantX = useTransform(progress, [0.2, 0.4], [0, -180])
-  const routeDashX = useTransform(progress, [0.2, 0.4], [0, -520])
-  const nuageX = useTransform(progress, [0.2, 0.4], [0, -60])
+  const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -110])
+  const collinesAvantX = useTransform(progress, [0.2, 0.4], [0, -220])
+  const routeDashX = useTransform(progress, [0.2, 0.4], [0, -640])
+  const nuageX = useTransform(progress, [0.2, 0.4], [0, -80])
 
   return (
     <div className="absolute inset-0">
@@ -204,31 +211,44 @@ function Etincelle({ className = "" }: { className?: string }) {
   )
 }
 
-/** Chapitre 3 — l'atelier : le fauteuil abîmé devient éclatant. */
+/** Chapitre 3 — l'atelier : l'établi arrive, le fauteuil est posé,
+ *  transformé, puis rebondit de joie. Animation continue 0,4 → 0,6. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  const abimeOpacity = useTransform(progress, [0.48, 0.52], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.48, 0.52], [0, 1])
-  const raviveScale = useTransform(progress, [0.48, 0.52, 0.56], [0.96, 1.05, 1])
-  const s1 = useTransform(progress, [0.46, 0.49, 0.53], [0, 1, 0])
-  const s2 = useTransform(progress, [0.49, 0.52, 0.56], [0, 1, 0])
-  const s3 = useTransform(progress, [0.47, 0.51, 0.55], [0, 1, 0])
+  const etabliY = useTransform(progress, [0.4, 0.46], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.43, 0.485], ["-34vh", "0vh"])
+  const abimeOpacity = useTransform(progress, [0.5, 0.535], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.5, 0.535], [0, 1])
+  const raviveScale = useTransform(
+    progress,
+    [0.5, 0.54, 0.57, 0.6],
+    [0.96, 1.06, 0.99, 1.02]
+  )
+  const s1 = useTransform(progress, [0.47, 0.505, 0.545], [0, 1, 0])
+  const s2 = useTransform(progress, [0.5, 0.535, 0.575], [0, 1, 0])
+  const s3 = useTransform(progress, [0.485, 0.525, 0.585], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
-      {/* Établi */}
-      <span className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-72 md:w-96">
+      {/* Établi qui monte en scène */}
+      <motion.span
+        style={{ y: etabliY }}
+        className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-72 md:w-96 block"
+      >
         <Atelier className="w-full" />
-      </span>
+      </motion.span>
 
-      {/* Fauteuil : les deux états superposés sur l'établi */}
-      <div className="absolute bottom-[calc(9vh+82px)] md:bottom-[calc(9vh+104px)] left-1/2 -translate-x-1/2 w-36 md:w-44">
+      {/* Fauteuil : déposé sur l'établi, puis les deux états superposés */}
+      <motion.div
+        style={{ y: fauteuilY }}
+        className="absolute bottom-[calc(9vh+82px)] md:bottom-[calc(9vh+104px)] left-1/2 -translate-x-1/2 w-36 md:w-44"
+      >
         <motion.span style={{ opacity: abimeOpacity }} className="absolute inset-0">
           <Fauteuil state="abime" className="w-full" />
         </motion.span>
         <motion.span style={{ opacity: raviveOpacity, scale: raviveScale }} className="block">
           <Fauteuil state="ravive" className="w-full" />
         </motion.span>
-      </div>
+      </motion.div>
 
       {/* Étincelles en cascade */}
       <motion.span style={{ opacity: s1, scale: s1 }} className="absolute bottom-[calc(9vh+200px)] left-[38%] w-7">
@@ -244,30 +264,40 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
   )
 }
 
-/** Chapitre 4 — en rayon, l'étiquette se balance. */
+/** Chapitre 4 — l'étagère et le fauteuil entrent en rayon,
+ *  l'étiquette descend et se balance. Continu 0,6 → 0,8. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
+  const etagereX = useTransform(progress, [0.6, 0.665], ["-42vw", "0vw"])
+  const fauteuilX = useTransform(progress, [0.61, 0.675], ["46vw", "0vw"])
+  const etiquetteY = useTransform(progress, [0.67, 0.71], ["-26vh", "0vh"])
   const balancier = useTransform(
     progress,
-    [0.6, 0.65, 0.7, 0.75, 0.8],
-    [-7, 5, -4, 4, -2]
+    [0.71, 0.735, 0.76, 0.78, 0.8],
+    [-9, 6, -5, 4, -2]
   )
 
   return (
     <div className="absolute inset-0">
       {/* Étagère */}
-      <span className="absolute bottom-[9vh] left-1/2 -translate-x-[62%] w-60 md:w-80">
+      <motion.span
+        style={{ x: etagereX }}
+        className="absolute bottom-[9vh] left-1/2 -translate-x-[62%] w-60 md:w-80 block"
+      >
         <Etagere className="w-full" />
-      </span>
+      </motion.span>
 
       {/* Fauteuil devant, à droite */}
-      <span className="absolute bottom-[9vh] left-1/2 translate-x-[26px] md:translate-x-[48px] w-32 md:w-40">
-        <Fauteuil state="ravive" className="w-full" />
-      </span>
-
-      {/* Étiquette qui se balance au-dessus */}
       <motion.span
-        style={{ rotate: balancier, transformOrigin: "top center" }}
-        className="absolute bottom-[calc(9vh+120px)] md:bottom-[calc(9vh+150px)] left-1/2 translate-x-[64px] md:translate-x-[96px] w-16 md:w-20"
+        style={{ x: fauteuilX }}
+        className="absolute bottom-[9vh] left-1/2 translate-x-[26px] md:translate-x-[48px] w-32 md:w-40 block"
+      >
+        <Fauteuil state="ravive" className="w-full" />
+      </motion.span>
+
+      {/* Étiquette qui descend puis se balance */}
+      <motion.span
+        style={{ y: etiquetteY, rotate: balancier, transformOrigin: "top center" }}
+        className="absolute bottom-[calc(9vh+120px)] md:bottom-[calc(9vh+150px)] left-1/2 translate-x-[64px] md:translate-x-[96px] w-16 md:w-20 block"
       >
         <Etiquette className="w-full" />
       </motion.span>
@@ -275,17 +305,22 @@ function SceneRayon({ progress }: { progress: MotionValue<number> }) {
   )
 }
 
-/** Chapitre 5 — le salon : lumière chaude, le papillon s'envole. */
+/** Chapitre 5 — le salon monte en scène, la lampe s'allume,
+ *  le papillon s'envole. Continu 0,8 → 1. */
 function SceneRevit({ progress }: { progress: MotionValue<number> }) {
-  const haloOpacity = useTransform(progress, [0.82, 0.9], [0, 0.34])
+  const salonY = useTransform(progress, [0.8, 0.855], ["20vh", "0vh"])
+  const haloOpacity = useTransform(progress, [0.86, 0.92], [0, 0.34])
   const papX = useTransform(progress, [0.9, 1], ["0vw", "24vw"])
   const papY = useTransform(progress, [0.9, 1], ["0vh", "-34vh"])
   const papRotate = useTransform(progress, [0.9, 1], [0, -14])
-  const papOpacity = useTransform(progress, [0.82, 0.86], [0, 1])
+  const papOpacity = useTransform(progress, [0.85, 0.89], [0, 1])
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 w-[340px] md:w-[520px]">
+      <motion.div
+        style={{ y: salonY }}
+        className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 w-[340px] md:w-[520px]"
+      >
         {/* Halo de la lampe */}
         <motion.span
           style={{
@@ -308,7 +343,7 @@ function SceneRevit({ progress }: { progress: MotionValue<number> }) {
         >
           <Papillon flap className="w-full" />
         </motion.span>
-      </div>
+      </motion.div>
     </div>
   )
 }
@@ -356,8 +391,8 @@ function Chapitre({
   progress: MotionValue<number>
 }) {
   const opacity = useChapterOpacity(progress, chapter.range)
-  const ctaOpacity = useTransform(progress, [0.92, 0.97], [0, 1])
-  const ctaY = useTransform(progress, [0.92, 0.97], [20, 0])
+  const ctaOpacity = useTransform(progress, [0.93, 0.98], [0, 1])
+  const ctaY = useTransform(progress, [0.93, 0.98], [20, 0])
   return (
     <motion.div
       style={{ opacity }}
@@ -443,7 +478,7 @@ export default function SecondeVie() {
     <section
       ref={ref}
       aria-label="La seconde vie d'un objet"
-      className="relative h-[400vh] md:h-[500vh] bg-sage"
+      className="relative h-[350vh] md:h-[450vh] bg-sage"
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         {CHAPTERS.map((c) => (
