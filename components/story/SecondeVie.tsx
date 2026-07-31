@@ -20,9 +20,10 @@ import Papillon from "@/components/illustrations/Papillon"
 import { P } from "@/components/illustrations/palette"
 
 /* « La seconde vie d'un objet » — le scroll fait avancer l'histoire d'un
-   fauteuil en 5 chapitres (scrub). Scène sticky plein écran, transforms GPU
-   uniquement. Chaque chapitre anime en continu sur toute sa plage : pas de
-   zone morte. Les chapitres se fondent l'un dans l'autre (crossfade).
+   fauteuil en 5 chapitres (scrub). Deux couches d'animation :
+   1. Scrub (lié au scroll) : trajets, entrées en scène, transformation.
+   2. Vie permanente (CSS, tourne même à l'arrêt) : roues, fumée, balancement
+      d'étiquette, pulsation du halo, particules, outils, papillon.
    Version statique empilée si prefers-reduced-motion. */
 
 type Chapter = {
@@ -71,6 +72,16 @@ const CHAPTERS: Chapter[] = [
   },
 ]
 
+/* Particules flottantes (vie permanente, toute la section) */
+const PARTICULES = [
+  { left: "8%", top: "22%", size: 5, cls: "bg-terracotta-soft/30", dur: 7, delay: 0, mdOnly: false },
+  { left: "90%", top: "18%", size: 4, cls: "bg-cream-soft/25", dur: 9, delay: 1.2, mdOnly: true },
+  { left: "16%", top: "72%", size: 3, cls: "bg-cream-soft/20", dur: 8, delay: 0.6, mdOnly: false },
+  { left: "84%", top: "64%", size: 5, cls: "bg-terracotta-soft/20", dur: 10, delay: 2, mdOnly: true },
+  { left: "48%", top: "12%", size: 3, cls: "bg-cream-soft/25", dur: 11, delay: 0.3, mdOnly: false },
+  { left: "68%", top: "82%", size: 4, cls: "bg-terracotta-soft/25", dur: 9, delay: 1.6, mdOnly: true },
+]
+
 /** Fondu-enchaîné entre chapitres : la sortie de l'un chevauche l'entrée du
  *  suivant (jamais d'écran vide). Premier chapitre visible dès l'entrée,
  *  dernier visible jusqu'à la sortie. */
@@ -90,13 +101,15 @@ function useChapterOpacity(
 
 /* ————— Scènes illustrées ————— */
 
-/** Chapitre 1 — le fauteuil est déposé en douceur près de la caisse.
- *  Mouvement continu sur toute la plage 0 → 0,2. */
+/** Chapitre 1 — le fauteuil est déposé en douceur près de la caisse. */
 function SceneDon({ progress }: { progress: MotionValue<number> }) {
   const x = useTransform(progress, [0.0, 0.17], ["-48vw", "-6vw"])
   const y = useTransform(progress, [0.0, 0.1, 0.17], ["-10vh", "-4vh", "0vh"])
   const rotate = useTransform(progress, [0.0, 0.17], [-7, 0])
   const scale = useTransform(progress, [0.16, 0.18, 0.2], [1, 1.04, 1])
+  const caisseScale = useTransform(progress, [0.15, 0.175, 0.2], [1, 1.06, 1])
+  const poussiereOpacity = useTransform(progress, [0.16, 0.175, 0.2], [0, 0.5, 0])
+  const poussiereScale = useTransform(progress, [0.16, 0.2], [0.4, 1.7])
   const decoY1 = useTransform(progress, [0, 0.2], [0, -52])
   const decoY2 = useTransform(progress, [0, 0.2], [0, 40])
   const decoY3 = useTransform(progress, [0, 0.2], [0, -26])
@@ -117,10 +130,19 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
         className="absolute bottom-[34%] right-[26%] w-8 h-8 rounded-full bg-cream-soft/20 hidden md:block"
       />
 
-      {/* Caisse au sol */}
-      <span className="absolute bottom-[9vh] left-1/2 translate-x-[6vw] w-48 md:w-64">
+      {/* Caisse au sol (petit sursaut à l'atterrissage) */}
+      <motion.span
+        style={{ scale: caisseScale, transformOrigin: "bottom center" }}
+        className="absolute bottom-[9vh] left-1/2 translate-x-[6vw] w-48 md:w-64 block"
+      >
         <Caisse className="w-full" />
-      </span>
+      </motion.span>
+
+      {/* Nuage de poussière à l'atterrissage */}
+      <motion.span
+        style={{ opacity: poussiereOpacity, scale: poussiereScale }}
+        className="absolute bottom-[8.5vh] left-1/2 -translate-x-[120%] w-24 h-5 rounded-full bg-cream-soft/50"
+      />
 
       {/* Le fauteuil arrive en douceur */}
       <motion.div
@@ -133,25 +155,33 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
   )
 }
 
-/** Chapitre 2 — le camion roule sans s'arrêter, paysage en parallaxe. */
+/** Chapitre 2 — le camion traverse l'écran sans s'arrêter,
+ *  roues qui tournent, fumée, paysage en parallaxe. */
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
-  const camionX = useTransform(
+  const camionX = useTransform(progress, [0.2, 0.4], ["-58vw", "30vw"])
+  const camionY = useTransform(
     progress,
-    [0.2, 0.315, 0.4],
-    ["-55vw", "2vw", "8vw"]
+    [0.2, 0.24, 0.28, 0.32, 0.36, 0.4],
+    [0, -4, 2, -3, 2, 0]
   )
   const camionRotate = useTransform(
     progress,
-    [0.3, 0.325, 0.35, 0.375, 0.4],
-    [0, -1.2, 1, -0.8, 0]
+    [0.2, 0.25, 0.3, 0.35, 0.4],
+    [0, -1, 0.8, -0.8, 0]
   )
-  const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -110])
-  const collinesAvantX = useTransform(progress, [0.2, 0.4], [0, -220])
-  const routeDashX = useTransform(progress, [0.2, 0.4], [0, -640])
-  const nuageX = useTransform(progress, [0.2, 0.4], [0, -80])
+  const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -200])
+  const collinesAvantX = useTransform(progress, [0.2, 0.4], [0, -400])
+  const routeDashX = useTransform(progress, [0.2, 0.4], [0, -1200])
+  const nuageX = useTransform(progress, [0.2, 0.4], [0, -120])
 
   return (
     <div className="absolute inset-0">
+      {/* Soleil */}
+      <span
+        className="absolute top-[15%] left-[10%] w-12 md:w-16 h-12 md:h-16 rounded-full bg-terracotta-soft/25"
+        style={{ animation: "_sv-float 9s ease-in-out infinite" }}
+      />
+
       {/* Nuages */}
       <motion.div style={{ x: nuageX }} className="absolute inset-x-0 top-[26%] hidden md:block">
         <span className="absolute left-[16%] w-24 h-8 rounded-full bg-paper/15" />
@@ -160,7 +190,7 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
       </motion.div>
 
       {/* Collines arrière */}
-      <motion.div style={{ x: collinesArriereX }} className="absolute bottom-[13vh] left-0 w-[140%]">
+      <motion.div style={{ x: collinesArriereX }} className="absolute bottom-[13vh] left-0 w-[170%]">
         <svg viewBox="0 0 1400 160" className="w-full" preserveAspectRatio="none" aria-hidden="true">
           <path
             d="M0,160 L0,110 Q170,40 360,95 T720,80 T1080,100 T1400,70 L1400,160 Z"
@@ -169,7 +199,7 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
         </svg>
       </motion.div>
       {/* Collines avant */}
-      <motion.div style={{ x: collinesAvantX }} className="absolute bottom-[8vh] left-0 w-[160%]">
+      <motion.div style={{ x: collinesAvantX }} className="absolute bottom-[8vh] left-0 w-[200%]">
         <svg viewBox="0 0 1600 120" className="w-full" preserveAspectRatio="none" aria-hidden="true">
           <path
             d="M0,120 L0,80 Q220,30 440,70 T880,60 T1320,80 T1600,55 L1600,120 Z"
@@ -188,12 +218,24 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
         className="absolute bottom-[7.5vh] left-0 right-0 h-[4px] rounded-full"
       />
 
-      {/* Camion */}
+      {/* Camion : roues qui tournent + fumée d'échappement */}
       <motion.div
-        style={{ x: camionX, rotate: camionRotate }}
+        style={{ x: camionX, y: camionY, rotate: camionRotate }}
         className="absolute bottom-[8.5vh] left-1/2 -translate-x-1/2 w-64 md:w-96"
       >
-        <Camion className="w-full" />
+        <span
+          className="absolute -left-1 bottom-6 w-3 h-3 rounded-full bg-paper/40"
+          style={{ animation: "_sv-smoke 1.6s ease-out infinite" }}
+        />
+        <span
+          className="absolute -left-2 bottom-5 w-2.5 h-2.5 rounded-full bg-paper/30"
+          style={{ animation: "_sv-smoke 1.6s ease-out 0.55s infinite" }}
+        />
+        <span
+          className="absolute left-0 bottom-7 w-2 h-2 rounded-full bg-paper/35"
+          style={{ animation: "_sv-smoke 1.6s ease-out 1.1s infinite" }}
+        />
+        <Camion rolling className="w-full" />
       </motion.div>
     </div>
   )
@@ -212,7 +254,7 @@ function Etincelle({ className = "" }: { className?: string }) {
 }
 
 /** Chapitre 3 — l'atelier : l'établi arrive, le fauteuil est posé,
- *  transformé, puis rebondit de joie. Animation continue 0,4 → 0,6. */
+ *  transformé, puis rebondit. Outils et étincelles vivent en continu. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
   const etabliY = useTransform(progress, [0.4, 0.46], ["22vh", "0vh"])
   const fauteuilY = useTransform(progress, [0.43, 0.485], ["-34vh", "0vh"])
@@ -234,7 +276,7 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
         style={{ y: etabliY }}
         className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-72 md:w-96 block"
       >
-        <Atelier className="w-full" />
+        <Atelier anime className="w-full" />
       </motion.span>
 
       {/* Fauteuil : déposé sur l'établi, puis les deux états superposés */}
@@ -250,7 +292,7 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
         </motion.span>
       </motion.div>
 
-      {/* Étincelles en cascade */}
+      {/* Étincelles de transformation en cascade */}
       <motion.span style={{ opacity: s1, scale: s1 }} className="absolute bottom-[calc(9vh+200px)] left-[38%] w-7">
         <Etincelle className="w-full" />
       </motion.span>
@@ -265,16 +307,12 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 }
 
 /** Chapitre 4 — l'étagère et le fauteuil entrent en rayon,
- *  l'étiquette descend et se balance. Continu 0,6 → 0,8. */
+ *  l'étiquette descend puis se balance toute seule. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
   const etagereX = useTransform(progress, [0.6, 0.665], ["-42vw", "0vw"])
   const fauteuilX = useTransform(progress, [0.61, 0.675], ["46vw", "0vw"])
   const etiquetteY = useTransform(progress, [0.67, 0.71], ["-26vh", "0vh"])
-  const balancier = useTransform(
-    progress,
-    [0.71, 0.735, 0.76, 0.78, 0.8],
-    [-9, 6, -5, 4, -2]
-  )
+  const etiquetteOpacity = useTransform(progress, [0.67, 0.69], [0, 1])
 
   return (
     <div className="absolute inset-0">
@@ -294,22 +332,27 @@ function SceneRayon({ progress }: { progress: MotionValue<number> }) {
         <Fauteuil state="ravive" className="w-full" />
       </motion.span>
 
-      {/* Étiquette qui descend puis se balance */}
+      {/* Étiquette : descend (scroll) puis balance en continu (CSS) */}
       <motion.span
-        style={{ y: etiquetteY, rotate: balancier, transformOrigin: "top center" }}
+        style={{ y: etiquetteY, opacity: etiquetteOpacity }}
         className="absolute bottom-[calc(9vh+120px)] md:bottom-[calc(9vh+150px)] left-1/2 translate-x-[64px] md:translate-x-[96px] w-16 md:w-20 block"
       >
-        <Etiquette className="w-full" />
+        <span
+          className="block"
+          style={{ animation: "_sv-swing 2.8s ease-in-out infinite", transformOrigin: "top center" }}
+        >
+          <Etiquette className="w-full" />
+        </span>
       </motion.span>
     </div>
   )
 }
 
-/** Chapitre 5 — le salon monte en scène, la lampe s'allume,
- *  le papillon s'envole. Continu 0,8 → 1. */
+/** Chapitre 5 — le salon monte en scène, la lampe pulse doucement,
+ *  le papillon s'envole. */
 function SceneRevit({ progress }: { progress: MotionValue<number> }) {
   const salonY = useTransform(progress, [0.8, 0.855], ["20vh", "0vh"])
-  const haloOpacity = useTransform(progress, [0.86, 0.92], [0, 0.34])
+  const haloOpacity = useTransform(progress, [0.86, 0.92], [0, 1])
   const papX = useTransform(progress, [0.9, 1], ["0vw", "24vw"])
   const papY = useTransform(progress, [0.9, 1], ["0vh", "-34vh"])
   const papRotate = useTransform(progress, [0.9, 1], [0, -14])
@@ -321,15 +364,20 @@ function SceneRevit({ progress }: { progress: MotionValue<number> }) {
         style={{ y: salonY }}
         className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 w-[340px] md:w-[520px]"
       >
-        {/* Halo de la lampe */}
+        {/* Halo de la lampe (pulse en continu une fois allumé) */}
         <motion.span
-          style={{
-            opacity: haloOpacity,
-            background:
-              "radial-gradient(circle, rgba(245,142,92,0.85) 0%, rgba(245,142,92,0) 68%)",
-          }}
-          className="absolute left-[58%] -top-[10%] w-44 h-44 md:w-56 md:h-56 rounded-full"
-        />
+          style={{ opacity: haloOpacity }}
+          className="absolute left-[58%] -top-[10%] w-44 h-44 md:w-56 md:h-56"
+        >
+          <span
+            className="block w-full h-full rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(245,142,92,0.85) 0%, rgba(245,142,92,0) 68%)",
+              animation: "_sv-pulse 3.2s ease-in-out infinite",
+            }}
+          />
+        </motion.span>
         {/* Décor salon */}
         <Salon className="w-full" />
         {/* Fauteuil sur le tapis */}
@@ -390,7 +438,13 @@ function Chapitre({
   chapter: Chapter
   progress: MotionValue<number>
 }) {
+  const [a] = chapter.range
   const opacity = useChapterOpacity(progress, chapter.range)
+  const textY = useTransform(
+    progress,
+    a === 0 ? [0, 1] : [a - 0.018, a + 0.045],
+    a === 0 ? [0, 0] : [30, 0]
+  )
   const ctaOpacity = useTransform(progress, [0.93, 0.98], [0, 1])
   const ctaY = useTransform(progress, [0.93, 0.98], [20, 0])
   return (
@@ -398,8 +452,11 @@ function Chapitre({
       style={{ opacity }}
       className="absolute inset-0 pointer-events-none"
     >
-      {/* Texte du chapitre */}
-      <div className="absolute inset-x-0 top-[16vh] px-6 text-center z-10">
+      {/* Texte du chapitre (glisse en entrant) */}
+      <motion.div
+        style={{ y: textY }}
+        className="absolute inset-x-0 top-[14vh] md:top-[16vh] px-6 text-center z-10"
+      >
         <div className="text-[11px] tracking-[0.3em] uppercase text-terracotta-soft font-semibold">
           {chapter.kicker}
         </div>
@@ -420,10 +477,29 @@ function Chapitre({
             <CtaBoutons />
           </motion.div>
         )}
-      </div>
+      </motion.div>
       {/* Scène illustrée */}
       <Scene id={chapter.id} progress={progress} />
     </motion.div>
+  )
+}
+
+/** Point de l'indicateur de chapitres (bord droit). */
+function PointChapitre({
+  progress,
+  range,
+}: {
+  progress: MotionValue<number>
+  range: readonly [number, number]
+}) {
+  const active = useChapterOpacity(progress, range)
+  const opacity = useTransform(active, [0, 1], [0.25, 1])
+  const scale = useTransform(active, [0, 1], [1, 1.45])
+  return (
+    <motion.span
+      style={{ opacity, scale }}
+      className="block w-2 h-2 rounded-full bg-paper"
+    />
   )
 }
 
@@ -478,12 +554,53 @@ export default function SecondeVie() {
     <section
       ref={ref}
       aria-label="La seconde vie d'un objet"
-      className="relative h-[350vh] md:h-[450vh] bg-sage"
+      className="relative h-[320vh] md:h-[400vh] bg-sage"
     >
+      <style>{`
+        @keyframes _sv-float {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-16px); }
+        }
+        @keyframes _sv-smoke {
+          0%   { opacity: 0.5; transform: translate(0, 0) scale(0.6); }
+          100% { opacity: 0; transform: translate(-26px, -36px) scale(1.4); }
+        }
+        @keyframes _sv-swing {
+          0%, 100% { transform: rotate(6deg); }
+          50%      { transform: rotate(-6deg); }
+        }
+        @keyframes _sv-pulse {
+          0%, 100% { opacity: 0.7; }
+          50%      { opacity: 1; }
+        }
+      `}</style>
       <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Particules flottantes (toute la section) */}
+        {PARTICULES.map((p, i) => (
+          <span
+            key={i}
+            aria-hidden
+            className={`absolute rounded-full ${p.cls} ${p.mdOnly ? "hidden md:block" : ""}`}
+            style={{
+              left: p.left,
+              top: p.top,
+              width: p.size,
+              height: p.size,
+              animation: `_sv-float ${p.dur}s ease-in-out ${p.delay}s infinite`,
+            }}
+          />
+        ))}
+
         {CHAPTERS.map((c) => (
           <Chapitre key={c.id} chapter={c} progress={scrollYProgress} />
         ))}
+
+        {/* Indicateur de chapitres */}
+        <div className="absolute right-5 md:right-9 top-1/2 -translate-y-1/2 hidden sm:flex flex-col gap-3">
+          {CHAPTERS.map((c) => (
+            <PointChapitre key={c.id} progress={scrollYProgress} range={c.range} />
+          ))}
+        </div>
       </div>
     </section>
   )

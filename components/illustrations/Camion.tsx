@@ -1,10 +1,14 @@
 import { P } from "./palette"
 
-type Props = { className?: string }
+type Props = {
+  className?: string
+  /** Roues qui tournent en continu (scène de collecte) */
+  rolling?: boolean
+}
 
 /** Camion de collecte vu de profil, roulant vers la droite.
  *  Panneau papillon sur la caisse. Flat design, contours épais. */
-export default function Camion({ className = "" }: Props) {
+export default function Camion({ className = "", rolling = false }: Props) {
   return (
     <svg
       viewBox="0 0 280 160"
@@ -12,6 +16,12 @@ export default function Camion({ className = "" }: Props) {
       className={className}
       aria-hidden="true"
     >
+      {rolling && (
+        <style>{`
+          @keyframes _cam-spin { to { transform: rotate(360deg); } }
+          ._cam-wheel { animation: _cam-spin 0.9s linear infinite; }
+        `}</style>
+      )}
       {/* Traits de vitesse */}
       <g stroke={P.terracottaSoft} strokeWidth="7" strokeLinecap="round" opacity="0.9">
         <line x1="8" y1="56" x2="38" y2="56" />
@@ -82,11 +92,23 @@ export default function Camion({ className = "" }: Props) {
       {/* Phare */}
       <circle cx="245" cy="105" r="5.5" fill={P.terracotta} stroke={P.sageDeep} strokeWidth="4" />
 
-      {/* Roues */}
-      <g>
+      {/* Roues (rayons visibles pour que la rotation se voie) */}
+      <g
+        className={rolling ? "_cam-wheel" : undefined}
+        style={{ transformOrigin: "88px 124px", transformBox: "view-box" }}
+      >
         <circle cx="88" cy="124" r="18" fill={P.sageDeep} />
+        <line x1="88" y1="109" x2="88" y2="139" stroke={P.paper} strokeWidth="3" opacity="0.55" />
+        <line x1="73" y1="124" x2="103" y2="124" stroke={P.paper} strokeWidth="3" opacity="0.55" />
         <circle cx="88" cy="124" r="7" fill={P.paper} stroke={P.sageDeep} strokeWidth="4" />
+      </g>
+      <g
+        className={rolling ? "_cam-wheel" : undefined}
+        style={{ transformOrigin: "212px 124px", transformBox: "view-box" }}
+      >
         <circle cx="212" cy="124" r="18" fill={P.sageDeep} />
+        <line x1="212" y1="109" x2="212" y2="139" stroke={P.paper} strokeWidth="3" opacity="0.55" />
+        <line x1="197" y1="124" x2="227" y2="124" stroke={P.paper} strokeWidth="3" opacity="0.55" />
         <circle cx="212" cy="124" r="7" fill={P.paper} stroke={P.sageDeep} strokeWidth="4" />
       </g>
     </svg>
