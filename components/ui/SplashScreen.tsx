@@ -118,8 +118,8 @@ export default function SplashScreen() {
               </div>
             ) : (
               <>
-                {/* Nom de la marque (révélé à 3,5 s) */}
-                <div className="absolute top-[30%] left-0 w-full text-center px-6">
+                {/* Nom de la marque (révélé à 3,5 s, à la place des messages) */}
+                <div className="absolute top-[20%] left-0 w-full text-center px-6">
                   <span className="block overflow-hidden pb-[0.12em]">
                     <span
                       className="block font-display font-medium text-paper leading-none tracking-tight"
@@ -173,13 +173,14 @@ export default function SplashScreen() {
                   <Caisse className="w-full" />
                 </span>
 
-                {/* Messages */}
-                <div className="absolute bottom-[6vh] left-0 w-full px-6">
+                {/* Messages — en haut de l'écran, bien visibles */}
+                <div className="absolute top-[20%] left-0 w-full px-6">
                   {OBJETS.map(({ label, at }, i) => (
                     <p
                       key={i}
-                      className="absolute inset-x-0 text-center text-paper/80 text-[13px] tracking-[0.12em] uppercase"
+                      className="absolute inset-x-0 text-center text-paper font-display font-medium"
                       style={{
+                        fontSize: "clamp(1.15rem, 0.8rem + 1.6vw, 1.8rem)",
                         opacity: 0,
                         animation: `_splash-label 1.1s linear ${at}s both`,
                       }}

@@ -13,6 +13,8 @@ import Fauteuil from "@/components/illustrations/Fauteuil"
 import Caisse from "@/components/illustrations/Caisse"
 import Camion from "@/components/illustrations/Camion"
 import Atelier from "@/components/illustrations/Atelier"
+import Cle from "@/components/illustrations/Cle"
+import Tournevis from "@/components/illustrations/Tournevis"
 import Etagere from "@/components/illustrations/Etagere"
 import Etiquette from "@/components/illustrations/Etiquette"
 import Salon from "@/components/illustrations/Salon"
@@ -101,15 +103,17 @@ function useChapterOpacity(
 
 /* ————— Scènes illustrées ————— */
 
-/** Chapitre 1 — le fauteuil est déposé en douceur près de la caisse. */
+/** Chapitre 1 — le fauteuil vole jusqu'au-dessus de la caisse à dons,
+ *  puis plonge dedans (la paroi avant le recouvre). */
 function SceneDon({ progress }: { progress: MotionValue<number> }) {
-  const x = useTransform(progress, [0.0, 0.17], ["-48vw", "-6vw"])
-  const y = useTransform(progress, [0.0, 0.1, 0.17], ["-10vh", "-4vh", "0vh"])
-  const rotate = useTransform(progress, [0.0, 0.17], [-7, 0])
-  const scale = useTransform(progress, [0.16, 0.18, 0.2], [1, 1.04, 1])
-  const caisseScale = useTransform(progress, [0.15, 0.175, 0.2], [1, 1.06, 1])
-  const poussiereOpacity = useTransform(progress, [0.16, 0.175, 0.2], [0, 0.5, 0])
-  const poussiereScale = useTransform(progress, [0.16, 0.2], [0.4, 1.7])
+  const x = useTransform(progress, [0.0, 0.13], ["-48vw", "0vw"])
+  const yVol = useTransform(progress, [0.0, 0.08, 0.13], ["-8vh", "-3vh", "0vh"])
+  const yPlongee = useTransform(progress, [0.145, 0.19], [0, 78])
+  const rotate = useTransform(progress, [0.0, 0.13], [-7, 0])
+  const scale = useTransform(progress, [0.145, 0.19], [1, 0.9])
+  const caisseScale = useTransform(progress, [0.17, 0.19, 0.21], [1, 1.06, 1])
+  const poussiereOpacity = useTransform(progress, [0.175, 0.19, 0.21], [0, 0.5, 0])
+  const poussiereScale = useTransform(progress, [0.175, 0.21], [0.4, 1.7])
   const decoY1 = useTransform(progress, [0, 0.2], [0, -52])
   const decoY2 = useTransform(progress, [0, 0.2], [0, 40])
   const decoY3 = useTransform(progress, [0, 0.2], [0, -26])
@@ -130,27 +134,31 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
         className="absolute bottom-[34%] right-[26%] w-8 h-8 rounded-full bg-cream-soft/20 hidden md:block"
       />
 
-      {/* Caisse au sol (petit sursaut à l'atterrissage) */}
+      {/* Le fauteuil (derrière la caisse : il disparaît dedans en plongeant) */}
+      <motion.div
+        style={{ x, rotate }}
+        className="absolute bottom-[calc(9vh+72px)] md:bottom-[calc(9vh+96px)] left-1/2 -translate-x-1/2 w-32 md:w-40"
+      >
+        <motion.div style={{ y: yVol }}>
+          <motion.div style={{ y: yPlongee, scale }}>
+            <Fauteuil state="abime" className="w-full" />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Caisse au premier plan (sursaute quand le fauteuil plonge) */}
       <motion.span
         style={{ scale: caisseScale, transformOrigin: "bottom center" }}
-        className="absolute bottom-[9vh] left-1/2 translate-x-[6vw] w-48 md:w-64 block"
+        className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-48 md:w-64 block"
       >
         <Caisse className="w-full" />
       </motion.span>
 
-      {/* Nuage de poussière à l'atterrissage */}
+      {/* Nuage de poussière quand il plonge */}
       <motion.span
         style={{ opacity: poussiereOpacity, scale: poussiereScale }}
-        className="absolute bottom-[8.5vh] left-1/2 -translate-x-[120%] w-24 h-5 rounded-full bg-cream-soft/50"
+        className="absolute bottom-[8.5vh] left-1/2 -translate-x-1/2 w-28 h-5 rounded-full bg-cream-soft/50"
       />
-
-      {/* Le fauteuil arrive en douceur */}
-      <motion.div
-        style={{ x, y, rotate, scale }}
-        className="absolute bottom-[9vh] left-1/2 -translate-x-full w-36 md:w-48"
-      >
-        <Fauteuil state="abime" className="w-full" />
-      </motion.div>
     </div>
   )
 }
@@ -253,36 +261,49 @@ function Etincelle({ className = "" }: { className?: string }) {
   )
 }
 
-/** Chapitre 3 — l'atelier : l'établi arrive, le fauteuil est posé,
- *  transformé, puis rebondit. Outils et étincelles vivent en continu. */
+/** Chapitre 3 — l'atelier, lisible : l'établi nu monte en scène, le fauteuil
+ *  abîmé est posé DESSUS, la clé et le tournevis volent depuis les côtés et
+ *  travaillent autour de lui pendant la transformation. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  const etabliY = useTransform(progress, [0.4, 0.46], ["22vh", "0vh"])
-  const fauteuilY = useTransform(progress, [0.43, 0.485], ["-34vh", "0vh"])
-  const abimeOpacity = useTransform(progress, [0.5, 0.535], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.5, 0.535], [0, 1])
+  const etabliY = useTransform(progress, [0.4, 0.455], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.425, 0.475], ["-34vh", "0vh"])
+  const cleX = useTransform(progress, [0.44, 0.49], ["-30vw", "0vw"])
+  const cleRotate = useTransform(
+    progress,
+    [0.5, 0.52, 0.54, 0.56],
+    [0, -28, 8, -12]
+  )
+  const tournevisX = useTransform(progress, [0.45, 0.5], ["30vw", "0vw"])
+  const tournevisRotate = useTransform(
+    progress,
+    [0.5, 0.525, 0.545, 0.565],
+    [0, 24, -10, 14]
+  )
+  const abimeOpacity = useTransform(progress, [0.51, 0.545], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.51, 0.545], [0, 1])
   const raviveScale = useTransform(
     progress,
-    [0.5, 0.54, 0.57, 0.6],
+    [0.51, 0.55, 0.58, 0.6],
     [0.96, 1.06, 0.99, 1.02]
   )
-  const s1 = useTransform(progress, [0.47, 0.505, 0.545], [0, 1, 0])
-  const s2 = useTransform(progress, [0.5, 0.535, 0.575], [0, 1, 0])
-  const s3 = useTransform(progress, [0.485, 0.525, 0.585], [0, 1, 0])
+  const s1 = useTransform(progress, [0.49, 0.52, 0.555], [0, 1, 0])
+  const s2 = useTransform(progress, [0.515, 0.545, 0.58], [0, 1, 0])
+  const s3 = useTransform(progress, [0.5, 0.535, 0.59], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
-      {/* Établi qui monte en scène */}
+      {/* Établi nu qui monte en scène */}
       <motion.span
         style={{ y: etabliY }}
         className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-72 md:w-96 block"
       >
-        <Atelier anime className="w-full" />
+        <Atelier anime outils={false} className="w-full" />
       </motion.span>
 
-      {/* Fauteuil : déposé sur l'établi, puis les deux états superposés */}
+      {/* Fauteuil posé SUR l'établi : les deux états superposés */}
       <motion.div
         style={{ y: fauteuilY }}
-        className="absolute bottom-[calc(9vh+82px)] md:bottom-[calc(9vh+104px)] left-1/2 -translate-x-1/2 w-36 md:w-44"
+        className="absolute bottom-[calc(9vh+62px)] md:bottom-[calc(9vh+86px)] left-1/2 -translate-x-1/2 w-36 md:w-44"
       >
         <motion.span style={{ opacity: abimeOpacity }} className="absolute inset-0">
           <Fauteuil state="abime" className="w-full" />
@@ -291,6 +312,26 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
           <Fauteuil state="ravive" className="w-full" />
         </motion.span>
       </motion.div>
+
+      {/* La clé vole à gauche du fauteuil et pique vers lui */}
+      <motion.span
+        style={{ x: cleX, rotate: cleRotate }}
+        className="absolute bottom-[calc(9vh+150px)] md:bottom-[calc(9vh+190px)] left-[8%] md:left-[22%] w-20 md:w-28 block"
+      >
+        <span className="block" style={{ animation: "_sv-float 3.2s ease-in-out infinite" }}>
+          <Cle className="w-full" />
+        </span>
+      </motion.span>
+
+      {/* Le tournevis vole à droite */}
+      <motion.span
+        style={{ x: tournevisX, rotate: tournevisRotate }}
+        className="absolute bottom-[calc(9vh+130px)] md:bottom-[calc(9vh+165px)] right-[6%] md:right-[20%] w-20 md:w-28 block"
+      >
+        <span className="block" style={{ animation: "_sv-float 2.7s ease-in-out 0.6s infinite" }}>
+          <Tournevis className="w-full" />
+        </span>
+      </motion.span>
 
       {/* Étincelles de transformation en cascade */}
       <motion.span style={{ opacity: s1, scale: s1 }} className="absolute bottom-[calc(9vh+200px)] left-[38%] w-7">

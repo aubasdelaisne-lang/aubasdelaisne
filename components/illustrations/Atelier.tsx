@@ -4,10 +4,13 @@ type Props = {
   className?: string
   /** Outils qui se balancent + étincelles qui scintillent en continu */
   anime?: boolean
+  /** Afficher les outils croisés au-dessus de l'établi (false = établi nu,
+   *  les outils sont alors animés séparément dans la scène) */
+  outils?: boolean
 }
 
 /** Établi d'atelier : outils croisés + étincelles de remise à neuf. */
-export default function Atelier({ className = "", anime = false }: Props) {
+export default function Atelier({ className = "", anime = false, outils = true }: Props) {
   return (
     <svg viewBox="0 0 240 160" fill="none" className={className} aria-hidden="true">
       {anime && (
@@ -32,6 +35,7 @@ export default function Atelier({ className = "", anime = false }: Props) {
       <path className={anime ? "_atl-s3" : undefined} d="M216 68 L218 74 L224 76 L218 78 L216 84 L214 78 L208 76 L214 74 Z" fill={P.terracotta} />
 
       {/* Outils (balancés ensemble si anime) */}
+      {outils && (
       <g
         className={anime ? "_atl-tools" : undefined}
         style={{ transformOrigin: "120px 90px", transformBox: "view-box" }}
@@ -53,6 +57,7 @@ export default function Atelier({ className = "", anime = false }: Props) {
           <rect x="108" y="65" width="42" height="18" rx="8" fill={P.terracotta} stroke={P.sageDeep} strokeWidth="5" />
         </g>
       </g>
+      )}
 
       {/* Plateau d'établi */}
       <rect x="18" y="104" width="204" height="20" rx="8" fill={P.sage} stroke={P.sageDeep} strokeWidth="7" />
