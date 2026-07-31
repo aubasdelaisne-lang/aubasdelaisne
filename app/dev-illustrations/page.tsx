@@ -1,5 +1,14 @@
 import Fauteuil from "@/components/illustrations/Fauteuil"
 import Camion from "@/components/illustrations/Camion"
+import Caisse from "@/components/illustrations/Caisse"
+import Theiere from "@/components/illustrations/Theiere"
+import Livres from "@/components/illustrations/Livres"
+import Papillon from "@/components/illustrations/Papillon"
+import Main from "@/components/illustrations/Main"
+import Atelier from "@/components/illustrations/Atelier"
+import Etagere from "@/components/illustrations/Etagere"
+import Etiquette from "@/components/illustrations/Etiquette"
+import Salon from "@/components/illustrations/Salon"
 
 export const metadata = { robots: { index: false, follow: false } }
 
@@ -8,28 +17,25 @@ export const metadata = { robots: { index: false, follow: false } }
 export default function DevIllustrations() {
   return (
     <main className="min-h-screen bg-paper px-8 pt-24 pb-8">
-      <div className="flex flex-wrap items-start gap-6">
-        <section>
-          <h2 className="font-display text-sage-deep text-sm mb-2">
-            Fauteuil — ravivé / abîmé / petit
-          </h2>
-          <div className="flex items-end gap-4 flex-wrap">
-            <Fauteuil state="ravive" className="w-44" />
-            <Fauteuil state="abime" className="w-44" />
-            <Fauteuil state="ravive" className="w-16" />
-          </div>
-        </section>
-        <section>
-          <h2 className="font-display text-sage-deep text-sm mb-2">Camion</h2>
-          <Camion className="w-72" />
-        </section>
+      <div className="flex flex-wrap items-end gap-x-8 gap-y-4">
+        <Fauteuil state="ravive" className="w-36" />
+        <Fauteuil state="abime" className="w-36" />
+        <Camion className="w-56" />
+        <Caisse className="w-48" />
+        <Theiere className="w-32" />
+        <Livres className="w-32" />
+        <Papillon flap className="w-40" />
+        <Main className="w-32" />
+        <Atelier className="w-48" />
+        <Etagere className="w-44" />
+        <Etiquette className="w-20" />
+        <Salon className="w-72" />
       </div>
-      <section className="mt-6 bg-sage p-8 rounded-2xl">
-        <h2 className="font-display text-paper text-sm mb-3">Sur fond sombre</h2>
-        <div className="flex items-end gap-6 flex-wrap">
-          <Fauteuil state="ravive" className="w-44" />
-          <Camion className="w-72" />
-        </div>
+      <section className="mt-4 bg-sage p-6 rounded-2xl flex flex-wrap items-end gap-6">
+        <Caisse className="w-48" />
+        <Papillon flap className="w-40" />
+        <Salon className="w-72" />
+        <Etiquette className="w-20" />
       </section>
     </main>
   )
