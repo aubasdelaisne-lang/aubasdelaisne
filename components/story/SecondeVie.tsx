@@ -166,15 +166,17 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
 /** Chapitre 2 — le camion traverse l'écran sans s'arrêter,
  *  roues qui tournent, fumée, paysage en parallaxe. */
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
-  const camionX = useTransform(progress, [0.2, 0.4], ["-58vw", "30vw"])
+  /* Le camion traverse ET SORT de l'écran par la droite avant la fin du
+     chapitre — pas d'arrêt sur place au moment du fondu. */
+  const camionX = useTransform(progress, [0.2, 0.395], ["-58vw", "85vw"])
   const camionY = useTransform(
     progress,
-    [0.2, 0.24, 0.28, 0.32, 0.36, 0.4],
+    [0.2, 0.24, 0.28, 0.32, 0.36, 0.395],
     [0, -4, 2, -3, 2, 0]
   )
   const camionRotate = useTransform(
     progress,
-    [0.2, 0.25, 0.3, 0.35, 0.4],
+    [0.2, 0.25, 0.3, 0.35, 0.395],
     [0, -1, 0.8, -0.8, 0]
   )
   const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -200])
@@ -265,15 +267,17 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  abîmé est posé DESSUS, la clé et le tournevis volent depuis les côtés et
  *  travaillent autour de lui pendant la transformation. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  const etabliY = useTransform(progress, [0.4, 0.455], ["22vh", "0vh"])
-  const fauteuilY = useTransform(progress, [0.425, 0.475], ["-34vh", "0vh"])
-  const cleX = useTransform(progress, [0.44, 0.49], ["-30vw", "0vw"])
+  /* L'atelier se monte PENDANT le fondu-enchaîné avec le camion :
+     dès qu'on le voit, il est déjà en mouvement. */
+  const etabliY = useTransform(progress, [0.385, 0.435], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.41, 0.455], ["-34vh", "0vh"])
+  const cleX = useTransform(progress, [0.43, 0.475], ["-30vw", "0vw"])
   const cleRotate = useTransform(
     progress,
     [0.5, 0.52, 0.54, 0.56],
     [0, -28, 8, -12]
   )
-  const tournevisX = useTransform(progress, [0.45, 0.5], ["30vw", "0vw"])
+  const tournevisX = useTransform(progress, [0.44, 0.485], ["30vw", "0vw"])
   const tournevisRotate = useTransform(
     progress,
     [0.5, 0.525, 0.545, 0.565],
