@@ -37,37 +37,39 @@ type Chapter = {
 }
 
 const CHAPTERS: Chapter[] = [
+  /* Plages pondérées : l'atelier (le pivot de l'histoire) reçoit le plus
+     de scroll pour qu'on ait le temps de le découvrir. */
   {
     id: "don",
-    range: [0.0, 0.2],
+    range: [0.0, 0.17],
     kicker: "Chapitre 1",
     title: "Tout commence par un geste",
     text: "Un fauteuil dont vous n'avez plus besoin ? Quelqu'un, quelque part, en rêve.",
   },
   {
     id: "collecte",
-    range: [0.2, 0.4],
+    range: [0.17, 0.37],
     kicker: "Chapitre 2",
     title: "On vient le chercher",
     text: "Dépôt sur place ou collecte à domicile — notre camion sillonne le sud de l'Aisne.",
   },
   {
     id: "atelier",
-    range: [0.4, 0.6],
+    range: [0.37, 0.65],
     kicker: "Chapitre 3",
     title: "On lui redonne vie",
     text: "Trié, nettoyé, réparé par notre équipe en insertion. Chaque objet repart de zéro.",
   },
   {
     id: "rayon",
-    range: [0.6, 0.8],
+    range: [0.65, 0.83],
     kicker: "Chapitre 4",
     title: "Il attend sa nouvelle maison",
     text: "En rayon à petit prix, au milieu de mille autres trouvailles.",
   },
   {
     id: "revit",
-    range: [0.8, 1.0],
+    range: [0.83, 1.0],
     kicker: "Chapitre 5",
     title: "Et l'histoire recommence",
     text: "Un objet sauvé, un emploi soutenu, des déchets évités. Tout le monde y gagne.",
@@ -91,7 +93,7 @@ function useChapterOpacity(
   progress: MotionValue<number>,
   [a, b]: readonly [number, number]
 ) {
-  const fade = 0.018
+  const fade = 0.03
   const pts =
     a === 0
       ? { i: [a, b - fade, b + fade], o: [1, 1, 0] }
@@ -106,17 +108,17 @@ function useChapterOpacity(
 /** Chapitre 1 — le fauteuil vole jusqu'au-dessus de la caisse à dons,
  *  puis plonge dedans (la paroi avant le recouvre). */
 function SceneDon({ progress }: { progress: MotionValue<number> }) {
-  const x = useTransform(progress, [0.0, 0.13], ["-48vw", "0vw"])
-  const yVol = useTransform(progress, [0.0, 0.08, 0.13], ["-8vh", "-3vh", "0vh"])
-  const yPlongee = useTransform(progress, [0.145, 0.19], [0, 78])
-  const rotate = useTransform(progress, [0.0, 0.13], [-7, 0])
-  const scale = useTransform(progress, [0.145, 0.19], [1, 0.9])
-  const caisseScale = useTransform(progress, [0.17, 0.19, 0.21], [1, 1.06, 1])
-  const poussiereOpacity = useTransform(progress, [0.175, 0.19, 0.21], [0, 0.5, 0])
-  const poussiereScale = useTransform(progress, [0.175, 0.21], [0.4, 1.7])
-  const decoY1 = useTransform(progress, [0, 0.2], [0, -52])
-  const decoY2 = useTransform(progress, [0, 0.2], [0, 40])
-  const decoY3 = useTransform(progress, [0, 0.2], [0, -26])
+  const x = useTransform(progress, [0.0, 0.11], ["-48vw", "0vw"])
+  const yVol = useTransform(progress, [0.0, 0.07, 0.11], ["-8vh", "-3vh", "0vh"])
+  const yPlongee = useTransform(progress, [0.12, 0.16], [0, 78])
+  const rotate = useTransform(progress, [0.0, 0.11], [-7, 0])
+  const scale = useTransform(progress, [0.12, 0.16], [1, 0.9])
+  const caisseScale = useTransform(progress, [0.145, 0.16, 0.18], [1, 1.06, 1])
+  const poussiereOpacity = useTransform(progress, [0.15, 0.165, 0.185], [0, 0.5, 0])
+  const poussiereScale = useTransform(progress, [0.15, 0.185], [0.4, 1.7])
+  const decoY1 = useTransform(progress, [0, 0.17], [0, -52])
+  const decoY2 = useTransform(progress, [0, 0.17], [0, 40])
+  const decoY3 = useTransform(progress, [0, 0.17], [0, -26])
 
   return (
     <div className="absolute inset-0">
@@ -168,21 +170,21 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
   /* Le camion traverse ET SORT de l'écran par la droite avant la fin du
      chapitre — pas d'arrêt sur place au moment du fondu. */
-  const camionX = useTransform(progress, [0.2, 0.395], ["-58vw", "85vw"])
+  const camionX = useTransform(progress, [0.17, 0.363], ["-58vw", "85vw"])
   const camionY = useTransform(
     progress,
-    [0.2, 0.24, 0.28, 0.32, 0.36, 0.395],
+    [0.17, 0.21, 0.25, 0.29, 0.33, 0.363],
     [0, -4, 2, -3, 2, 0]
   )
   const camionRotate = useTransform(
     progress,
-    [0.2, 0.25, 0.3, 0.35, 0.395],
+    [0.17, 0.22, 0.27, 0.32, 0.363],
     [0, -1, 0.8, -0.8, 0]
   )
-  const collinesArriereX = useTransform(progress, [0.2, 0.4], [0, -200])
-  const collinesAvantX = useTransform(progress, [0.2, 0.4], [0, -400])
-  const routeDashX = useTransform(progress, [0.2, 0.4], [0, -1200])
-  const nuageX = useTransform(progress, [0.2, 0.4], [0, -120])
+  const collinesArriereX = useTransform(progress, [0.17, 0.37], [0, -200])
+  const collinesAvantX = useTransform(progress, [0.17, 0.37], [0, -400])
+  const routeDashX = useTransform(progress, [0.17, 0.37], [0, -1200])
+  const nuageX = useTransform(progress, [0.17, 0.37], [0, -120])
 
   return (
     <div className="absolute inset-0">
@@ -269,30 +271,32 @@ function Etincelle({ className = "" }: { className?: string }) {
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
   /* L'atelier se monte PENDANT le fondu-enchaîné avec le camion :
      dès qu'on le voit, il est déjà en mouvement. */
-  const etabliY = useTransform(progress, [0.385, 0.435], ["22vh", "0vh"])
-  const fauteuilY = useTransform(progress, [0.41, 0.455], ["-34vh", "0vh"])
-  const cleX = useTransform(progress, [0.43, 0.475], ["-30vw", "0vw"])
+  /* Déroulé en 4 temps sur la grande plage [0,37 → 0,65] :
+     installation → outils au travail → transformation → célébration. */
+  const etabliY = useTransform(progress, [0.36, 0.41], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.39, 0.44], ["-34vh", "0vh"])
+  const cleX = useTransform(progress, [0.42, 0.47], ["-30vw", "0vw"])
   const cleRotate = useTransform(
     progress,
-    [0.5, 0.52, 0.54, 0.56],
-    [0, -28, 8, -12]
+    [0.5, 0.525, 0.55, 0.575, 0.6],
+    [0, -28, 6, -22, 0]
   )
-  const tournevisX = useTransform(progress, [0.44, 0.485], ["30vw", "0vw"])
+  const tournevisX = useTransform(progress, [0.43, 0.48], ["30vw", "0vw"])
   const tournevisRotate = useTransform(
     progress,
-    [0.5, 0.525, 0.545, 0.565],
-    [0, 24, -10, 14]
+    [0.51, 0.535, 0.56, 0.585, 0.61],
+    [0, 24, -8, 18, 0]
   )
-  const abimeOpacity = useTransform(progress, [0.51, 0.545], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.51, 0.545], [0, 1])
+  const abimeOpacity = useTransform(progress, [0.555, 0.59], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.555, 0.59], [0, 1])
   const raviveScale = useTransform(
     progress,
-    [0.51, 0.55, 0.58, 0.6],
-    [0.96, 1.06, 0.99, 1.02]
+    [0.555, 0.6, 0.625, 0.65],
+    [0.96, 1.07, 0.99, 1.02]
   )
-  const s1 = useTransform(progress, [0.49, 0.52, 0.555], [0, 1, 0])
-  const s2 = useTransform(progress, [0.515, 0.545, 0.58], [0, 1, 0])
-  const s3 = useTransform(progress, [0.5, 0.535, 0.59], [0, 1, 0])
+  const s1 = useTransform(progress, [0.5, 0.54, 0.58], [0, 1, 0])
+  const s2 = useTransform(progress, [0.545, 0.585, 0.625], [0, 1, 0])
+  const s3 = useTransform(progress, [0.52, 0.565, 0.61], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
@@ -354,10 +358,10 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 /** Chapitre 4 — l'étagère et le fauteuil entrent en rayon,
  *  l'étiquette descend puis se balance toute seule. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
-  const etagereX = useTransform(progress, [0.6, 0.665], ["-42vw", "0vw"])
-  const fauteuilX = useTransform(progress, [0.61, 0.675], ["46vw", "0vw"])
-  const etiquetteY = useTransform(progress, [0.67, 0.71], ["-26vh", "0vh"])
-  const etiquetteOpacity = useTransform(progress, [0.67, 0.69], [0, 1])
+  const etagereX = useTransform(progress, [0.65, 0.71], ["-42vw", "0vw"])
+  const fauteuilX = useTransform(progress, [0.66, 0.72], ["46vw", "0vw"])
+  const etiquetteY = useTransform(progress, [0.72, 0.765], ["-26vh", "0vh"])
+  const etiquetteOpacity = useTransform(progress, [0.72, 0.74], [0, 1])
 
   return (
     <div className="absolute inset-0">
@@ -396,12 +400,12 @@ function SceneRayon({ progress }: { progress: MotionValue<number> }) {
 /** Chapitre 5 — le salon monte en scène, la lampe pulse doucement,
  *  le papillon s'envole. */
 function SceneRevit({ progress }: { progress: MotionValue<number> }) {
-  const salonY = useTransform(progress, [0.8, 0.855], ["20vh", "0vh"])
-  const haloOpacity = useTransform(progress, [0.86, 0.92], [0, 1])
-  const papX = useTransform(progress, [0.9, 1], ["0vw", "24vw"])
-  const papY = useTransform(progress, [0.9, 1], ["0vh", "-34vh"])
-  const papRotate = useTransform(progress, [0.9, 1], [0, -14])
-  const papOpacity = useTransform(progress, [0.85, 0.89], [0, 1])
+  const salonY = useTransform(progress, [0.83, 0.88], ["20vh", "0vh"])
+  const haloOpacity = useTransform(progress, [0.88, 0.93], [0, 1])
+  const papX = useTransform(progress, [0.92, 1], ["0vw", "24vw"])
+  const papY = useTransform(progress, [0.92, 1], ["0vh", "-34vh"])
+  const papRotate = useTransform(progress, [0.92, 1], [0, -14])
+  const papOpacity = useTransform(progress, [0.88, 0.91], [0, 1])
 
   return (
     <div className="absolute inset-0">
@@ -490,8 +494,8 @@ function Chapitre({
     a === 0 ? [0, 1] : [a - 0.018, a + 0.045],
     a === 0 ? [0, 0] : [30, 0]
   )
-  const ctaOpacity = useTransform(progress, [0.93, 0.98], [0, 1])
-  const ctaY = useTransform(progress, [0.93, 0.98], [20, 0])
+  const ctaOpacity = useTransform(progress, [0.94, 0.985], [0, 1])
+  const ctaY = useTransform(progress, [0.94, 0.985], [20, 0])
   return (
     <motion.div
       style={{ opacity }}
@@ -599,7 +603,7 @@ export default function SecondeVie() {
     <section
       ref={ref}
       aria-label="La seconde vie d'un objet"
-      className="relative h-[320vh] md:h-[400vh] bg-sage"
+      className="relative h-[380vh] md:h-[480vh] bg-sage"
     >
       <style>{`
         @keyframes _sv-float {
