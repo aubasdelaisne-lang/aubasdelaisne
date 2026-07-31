@@ -93,7 +93,7 @@ function useChapterOpacity(
   progress: MotionValue<number>,
   [a, b]: readonly [number, number]
 ) {
-  const fade = 0.03
+  const fade = 0.022
   const pts =
     a === 0
       ? { i: [a, b - fade, b + fade], o: [1, 1, 0] }
@@ -185,7 +185,9 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
   )
   const collinesArriereX = useTransform(progress, [0.17, 0.37], [0, -200])
   const collinesAvantX = useTransform(progress, [0.17, 0.37], [0, -400])
-  const routeDashX = useTransform(progress, [0.17, 0.37], [0, -1200])
+  /* Route : translation GPU d'une bande large (pas d'animation de
+     background-position, qui forçait un redessin à chaque image) */
+  const routeX = useTransform(progress, [0.17, 0.37], ["0%", "-30%"])
   const nuageX = useTransform(progress, [0.17, 0.37], [0, -120])
 
   return (
@@ -222,15 +224,17 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
         </svg>
       </motion.div>
 
-      {/* Route pointillée */}
-      <motion.div
-        style={{
-          backgroundPositionX: routeDashX,
-          backgroundImage:
-            "repeating-linear-gradient(90deg, rgba(250,250,255,0.5) 0 34px, transparent 34px 68px)",
-        }}
-        className="absolute bottom-[7.5vh] left-0 right-0 h-[4px] rounded-full"
-      />
+      {/* Route pointillée (bande large translatée sur le GPU) */}
+      <div className="absolute bottom-[7.5vh] left-0 right-0 h-[4px] overflow-hidden">
+        <motion.div
+          style={{
+            x: routeX,
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(250,250,255,0.5) 0 34px, transparent 34px 68px)",
+          }}
+          className="h-full w-[200%]"
+        />
+      </div>
 
       {/* Camion : roues qui tournent + fumée d'échappement */}
       <motion.div
@@ -491,6 +495,11 @@ function Chapitre({
 }) {
   const [a, b] = chapter.range
   const opacity = useChapterOpacity(progress, chapter.range)
+  /* Perf : un chapitre invisible n'est PAS dessiné du tout — le navigateur
+     ne peint qu'une ou deux scènes à la fois au lieu de cinq. */
+  const visibility = useTransform(opacity, (v) =>
+    v <= 0.001 ? "hidden" : "visible"
+  )
   /* Les textes ne se croisent JAMAIS : l'ancien s'échappe vers le haut et
      disparaît avant la couture, le nouveau monte depuis le bas juste après.
      (Seules les scènes se chevauchent pendant le fondu.) */
@@ -516,7 +525,7 @@ function Chapitre({
   const ctaY = useTransform(progress, [0.94, 0.985], [20, 0])
   return (
     <motion.div
-      style={{ opacity }}
+      style={{ opacity, visibility }}
       className="absolute inset-0 pointer-events-none"
     >
       {/* Texte du chapitre (entre par le bas, s'échappe par le haut) */}
@@ -548,6 +557,29 @@ function Chapitre({
       {/* Scène illustrée */}
       <Scene id={chapter.id} progress={progress} />
     </motion.div>
+  )
+}
+
+/** « Coup de balai » : deux panneaux inclinés balaient l'écran à la couture
+ *  camion → atelier. Ils masquent l'échange des scènes (la plus lourde des
+ *  transitions) et en font un moment de design à part entière. */
+function TransitionBalai({ progress }: { progress: MotionValue<number> }) {
+  const x1 = useTransform(progress, [0.345, 0.408], ["-135%", "135%"])
+  const x2 = useTransform(progress, [0.351, 0.414], ["-135%", "135%"])
+  return (
+    <div
+      aria-hidden
+      className="absolute inset-0 z-20 pointer-events-none overflow-hidden"
+    >
+      <motion.div
+        style={{ x: x2 }}
+        className="absolute inset-y-[-5%] -left-[15%] w-[130%] bg-cream-soft skew-x-[-10deg]"
+      />
+      <motion.div
+        style={{ x: x1 }}
+        className="absolute inset-y-[-5%] -left-[15%] w-[130%] bg-terracotta skew-x-[-10deg]"
+      />
+    </div>
   )
 }
 
@@ -661,6 +693,9 @@ export default function SecondeVie() {
         {CHAPTERS.map((c) => (
           <Chapitre key={c.id} chapter={c} progress={scrollYProgress} />
         ))}
+
+        {/* Coup de balai à la couture camion → atelier */}
+        <TransitionBalai progress={scrollYProgress} />
 
         {/* Indicateur de chapitres */}
         <div className="absolute right-5 md:right-9 top-1/2 -translate-y-1/2 hidden sm:flex flex-col gap-3">
