@@ -170,15 +170,17 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
   /* Le camion traverse ET SORT de l'écran par la droite avant la fin du
      chapitre — pas d'arrêt sur place au moment du fondu. */
-  const camionX = useTransform(progress, [0.17, 0.363], ["-58vw", "85vw"])
+  /* Le camion sort par la droite PENDANT que l'établi du chapitre suivant
+     monte déjà : l'action traverse la couture sans interruption. */
+  const camionX = useTransform(progress, [0.17, 0.372], ["-58vw", "85vw"])
   const camionY = useTransform(
     progress,
-    [0.17, 0.21, 0.25, 0.29, 0.33, 0.363],
+    [0.17, 0.21, 0.25, 0.29, 0.33, 0.372],
     [0, -4, 2, -3, 2, 0]
   )
   const camionRotate = useTransform(
     progress,
-    [0.17, 0.22, 0.27, 0.32, 0.363],
+    [0.17, 0.22, 0.27, 0.32, 0.372],
     [0, -1, 0.8, -0.8, 0]
   )
   const collinesArriereX = useTransform(progress, [0.17, 0.37], [0, -200])
@@ -273,15 +275,15 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
      dès qu'on le voit, il est déjà en mouvement. */
   /* Déroulé en 4 temps sur la grande plage [0,37 → 0,65] :
      installation → outils au travail → transformation → célébration. */
-  const etabliY = useTransform(progress, [0.36, 0.41], ["22vh", "0vh"])
-  const fauteuilY = useTransform(progress, [0.39, 0.44], ["-34vh", "0vh"])
-  const cleX = useTransform(progress, [0.42, 0.47], ["-30vw", "0vw"])
+  const etabliY = useTransform(progress, [0.355, 0.405], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.385, 0.43], ["-34vh", "0vh"])
+  const cleX = useTransform(progress, [0.415, 0.465], ["-30vw", "0vw"])
   const cleRotate = useTransform(
     progress,
     [0.5, 0.525, 0.55, 0.575, 0.6],
     [0, -28, 6, -22, 0]
   )
-  const tournevisX = useTransform(progress, [0.43, 0.48], ["30vw", "0vw"])
+  const tournevisX = useTransform(progress, [0.425, 0.475], ["30vw", "0vw"])
   const tournevisRotate = useTransform(
     progress,
     [0.51, 0.535, 0.56, 0.585, 0.61],
@@ -487,12 +489,28 @@ function Chapitre({
   chapter: Chapter
   progress: MotionValue<number>
 }) {
-  const [a] = chapter.range
+  const [a, b] = chapter.range
   const opacity = useChapterOpacity(progress, chapter.range)
+  /* Les textes ne se croisent JAMAIS : l'ancien s'échappe vers le haut et
+     disparaît avant la couture, le nouveau monte depuis le bas juste après.
+     (Seules les scènes se chevauchent pendant le fondu.) */
+  const textOpacity = useTransform(
+    progress,
+    a === 0
+      ? [b - 0.05, b - 0.005]
+      : b === 1
+        ? [a + 0.005, a + 0.05]
+        : [a + 0.005, a + 0.05, b - 0.05, b - 0.005],
+    a === 0 ? [1, 0] : b === 1 ? [0, 1] : [0, 1, 1, 0]
+  )
   const textY = useTransform(
     progress,
-    a === 0 ? [0, 1] : [a - 0.018, a + 0.045],
-    a === 0 ? [0, 0] : [30, 0]
+    a === 0
+      ? [b - 0.05, b - 0.005]
+      : b === 1
+        ? [a + 0.005, a + 0.05]
+        : [a + 0.005, a + 0.05, b - 0.05, b - 0.005],
+    a === 0 ? [0, -24] : b === 1 ? [24, 0] : [24, 0, 0, -24]
   )
   const ctaOpacity = useTransform(progress, [0.94, 0.985], [0, 1])
   const ctaY = useTransform(progress, [0.94, 0.985], [20, 0])
@@ -501,9 +519,9 @@ function Chapitre({
       style={{ opacity }}
       className="absolute inset-0 pointer-events-none"
     >
-      {/* Texte du chapitre (glisse en entrant) */}
+      {/* Texte du chapitre (entre par le bas, s'échappe par le haut) */}
       <motion.div
-        style={{ y: textY }}
+        style={{ y: textY, opacity: textOpacity }}
         className="absolute inset-x-0 top-[14vh] md:top-[16vh] px-6 text-center z-10"
       >
         <div className="text-[11px] tracking-[0.3em] uppercase text-terracotta-soft font-semibold">
