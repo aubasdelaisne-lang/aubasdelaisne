@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero"
+import SecondeVie from "@/components/story/SecondeVie"
 import Ticker from "@/components/sections/Ticker"
 import Missions from "@/components/sections/Missions"
 import BoutiqueSection from "@/components/sections/Boutique"
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <SecondeVie />
       <Ticker />
       <Missions />
       <BoutiqueSection />
