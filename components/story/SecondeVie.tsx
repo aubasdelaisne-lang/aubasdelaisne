@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Link from "next/link"
 import {
   motion,
   useScroll,
@@ -327,6 +328,26 @@ function Scene({
   return <SceneRevit progress={progress} />
 }
 
+/** Les deux boutons de fin d'histoire. */
+function CtaBoutons({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex flex-wrap justify-center gap-4 ${className}`}>
+      <Link
+        href="/donner"
+        className="bg-terracotta text-paper px-8 py-4 rounded-full font-bold text-[13px] uppercase tracking-[0.2em] hover:bg-terracotta-soft transition-colors"
+      >
+        Donner un objet
+      </Link>
+      <Link
+        href="/boutique"
+        className="border-2 border-paper/50 text-paper px-8 py-4 rounded-full font-bold text-[13px] uppercase tracking-[0.2em] hover:border-paper transition-colors"
+      >
+        Venir chiner
+      </Link>
+    </div>
+  )
+}
+
 function Chapitre({
   chapter,
   progress,
@@ -335,6 +356,8 @@ function Chapitre({
   progress: MotionValue<number>
 }) {
   const opacity = useChapterOpacity(progress, chapter.range)
+  const ctaOpacity = useTransform(progress, [0.92, 0.97], [0, 1])
+  const ctaY = useTransform(progress, [0.92, 0.97], [20, 0])
   return (
     <motion.div
       style={{ opacity }}
@@ -354,6 +377,14 @@ function Chapitre({
         <p className="mt-4 max-w-md mx-auto text-paper/75 text-[15px] leading-relaxed">
           {chapter.text}
         </p>
+        {chapter.id === "revit" && (
+          <motion.div
+            style={{ opacity: ctaOpacity, y: ctaY }}
+            className="mt-7 pointer-events-auto"
+          >
+            <CtaBoutons />
+          </motion.div>
+        )}
       </div>
       {/* Scène illustrée */}
       <Scene id={chapter.id} progress={progress} />
@@ -361,13 +392,23 @@ function Chapitre({
   )
 }
 
+/** Illustration principale de chaque chapitre (version statique). */
+function IllustrationStatique({ id }: { id: Chapter["id"] }) {
+  if (id === "don") return <Fauteuil state="abime" className="w-36 mx-auto" />
+  if (id === "collecte") return <Camion className="w-56 mx-auto" />
+  if (id === "atelier") return <Fauteuil state="ravive" className="w-36 mx-auto" />
+  if (id === "rayon") return <Etagere className="w-48 mx-auto" />
+  return <Salon className="w-72 max-w-full mx-auto" />
+}
+
 /** Version sans animations : chapitres empilés (prefers-reduced-motion). */
 function SecondeVieStatique() {
   return (
     <section aria-label="La seconde vie d'un objet" className="bg-sage">
       {CHAPTERS.map((c) => (
-        <div key={c.id} className="py-16 px-6 text-center">
-          <div className="text-[11px] tracking-[0.3em] uppercase text-terracotta-soft font-semibold">
+        <div key={c.id} className="py-14 px-6 text-center">
+          <IllustrationStatique id={c.id} />
+          <div className="mt-6 text-[11px] tracking-[0.3em] uppercase text-terracotta-soft font-semibold">
             {c.kicker}
           </div>
           <h2
@@ -381,6 +422,9 @@ function SecondeVieStatique() {
           </p>
         </div>
       ))}
+      <div className="pb-16 px-6">
+        <CtaBoutons />
+      </div>
     </section>
   )
 }
