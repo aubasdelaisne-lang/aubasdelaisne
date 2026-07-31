@@ -9,12 +9,14 @@ import Theiere from "@/components/illustrations/Theiere"
 import Livres from "@/components/illustrations/Livres"
 import Papillon from "@/components/illustrations/Papillon"
 
-/* Timeline (~4,6 s) :
+/* Timeline (~6,4 s) :
    0,2–1,2  fauteuil tombe dans la caisse  + « On récupère un fauteuil… »
    1,3–2,3  théière tombe                  + « On chine une théière… »
    2,4–3,4  livres tombent                 + « On sauve une pile de livres… »
-   3,4–4,6  papillon se pose sur la caisse + « Au Bas de l'Aisne »
-   4,6      sortie iris (0,9 s)
+   3,4–4,5  papillon se pose sur la caisse + « Au Bas de l'Aisne » (3,5 s)
+   4,6–5,9  ENVOL : le papillon grossit et vient se poser près du nom —
+            temps d'arrêt sur la marque, le lieu et le logo
+   6,4      sortie iris (0,9 s)
    Clic ou touche = passage immédiat. Une fois par session. */
 
 const OBJETS = [
@@ -31,7 +33,7 @@ export default function SplashScreen() {
     if (sessionStorage.getItem("splash_shown")) return
     sessionStorage.setItem("splash_shown", "1")
     setVisible(true)
-    const t = setTimeout(() => setVisible(false), reduce ? 2000 : 4600)
+    const t = setTimeout(() => setVisible(false), reduce ? 2000 : 6400)
     return () => clearTimeout(t)
   }, [reduce])
 
@@ -67,6 +69,11 @@ export default function SplashScreen() {
           12%  { opacity: 1; }
           60%  { transform: translate(6vw, -6vh) rotate(6deg); }
           100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+        }
+        @keyframes _splash-envol {
+          0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+          45%  { transform: translate(-7vw, -32vh) scale(1.7) rotate(-9deg); }
+          100% { transform: translate(-3.5vw, -55vh) scale(2.5) rotate(0deg); }
         }
         @keyframes _splash-slide-up {
           from { transform: translateY(115%); }
@@ -157,12 +164,16 @@ export default function SplashScreen() {
                   </span>
                 ))}
 
-                {/* Papillon qui se pose (3,4 s) */}
+                {/* Papillon : se pose sur la caisse (3,4 s) puis s'envole,
+                    grossit et vient se poser près du nom (4,6 s) */}
                 <span
                   className="absolute z-10 left-1/2 translate-x-[52px] bottom-[calc(14vh+122px)] w-16"
                   style={{
                     opacity: 0,
-                    animation: "_splash-fly 1.1s cubic-bezier(0.22, 1, 0.36, 1) 3.4s both",
+                    animation: [
+                      "_splash-fly 1.1s cubic-bezier(0.22, 1, 0.36, 1) 3.4s both",
+                      "_splash-envol 1.3s cubic-bezier(0.34, 1.2, 0.4, 1) 4.6s both",
+                    ].join(", "),
                   }}
                 >
                   <Papillon flap className="w-full" />
@@ -196,7 +207,7 @@ export default function SplashScreen() {
                   style={{
                     transformOrigin: "left center",
                     transform: "scaleX(0)",
-                    animation: "_splash-progress 4.2s linear 0.2s forwards",
+                    animation: "_splash-progress 6s linear 0.2s forwards",
                   }}
                 />
               </>

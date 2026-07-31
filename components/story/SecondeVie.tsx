@@ -275,15 +275,15 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
      dès qu'on le voit, il est déjà en mouvement. */
   /* Déroulé en 4 temps sur la grande plage [0,37 → 0,65] :
      installation → outils au travail → transformation → célébration. */
-  const etabliY = useTransform(progress, [0.355, 0.405], ["22vh", "0vh"])
-  const fauteuilY = useTransform(progress, [0.385, 0.43], ["-34vh", "0vh"])
-  const cleX = useTransform(progress, [0.415, 0.465], ["-30vw", "0vw"])
+  const etabliY = useTransform(progress, [0.345, 0.395], ["22vh", "0vh"])
+  const fauteuilY = useTransform(progress, [0.375, 0.42], ["-34vh", "0vh"])
+  const cleX = useTransform(progress, [0.405, 0.455], ["-30vw", "0vw"])
   const cleRotate = useTransform(
     progress,
     [0.5, 0.525, 0.55, 0.575, 0.6],
     [0, -28, 6, -22, 0]
   )
-  const tournevisX = useTransform(progress, [0.425, 0.475], ["30vw", "0vw"])
+  const tournevisX = useTransform(progress, [0.415, 0.465], ["30vw", "0vw"])
   const tournevisRotate = useTransform(
     progress,
     [0.51, 0.535, 0.56, 0.585, 0.61],
@@ -497,19 +497,19 @@ function Chapitre({
   const textOpacity = useTransform(
     progress,
     a === 0
-      ? [b - 0.05, b - 0.005]
+      ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a + 0.005, a + 0.05]
-        : [a + 0.005, a + 0.05, b - 0.05, b - 0.005],
+        ? [a - 0.008, a + 0.028]
+        : [a - 0.008, a + 0.028, b - 0.035, b - 0.006],
     a === 0 ? [1, 0] : b === 1 ? [0, 1] : [0, 1, 1, 0]
   )
   const textY = useTransform(
     progress,
     a === 0
-      ? [b - 0.05, b - 0.005]
+      ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a + 0.005, a + 0.05]
-        : [a + 0.005, a + 0.05, b - 0.05, b - 0.005],
+        ? [a - 0.008, a + 0.028]
+        : [a - 0.008, a + 0.028, b - 0.035, b - 0.006],
     a === 0 ? [0, -24] : b === 1 ? [24, 0] : [24, 0, 0, -24]
   )
   const ctaOpacity = useTransform(progress, [0.94, 0.985], [0, 1])
