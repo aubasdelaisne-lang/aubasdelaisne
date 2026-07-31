@@ -33,7 +33,7 @@ function MissionCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay, ease }}
-      whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
+      whileHover={{ y: -14, rotate: -1, transition: { type: "spring", stiffness: 320, damping: 20 } }}
       whileTap={{ scale: 0.97 }}
       className="h-full"
     >

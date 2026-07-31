@@ -49,8 +49,8 @@ export default function CookieBanner() {
 
             {/* Texte */}
             <p className="flex-1 text-[13px] text-paper/85 leading-relaxed">
-              Ce site n'utilise aucun cookie de suivi ni de publicité. La carte de la page Contact
-              n'est affichée qu'avec votre accord.{" "}
+              Ici, on ne collecte que les objets — aucun cookie de suivi ni de pub.
+              Seule la carte de la page Contact demande votre accord pour s'afficher.{" "}
               <a
                 href="/cookies"
                 className="text-terracotta-soft underline underline-offset-2 hover:text-paper transition-colors"
@@ -66,13 +66,13 @@ export default function CookieBanner() {
                 onClick={refuse}
                 className="px-4 py-2 text-[11px] uppercase tracking-[0.18em] font-bold border border-paper/20 text-paper/60 hover:text-paper hover:border-paper/50 transition-colors"
               >
-                Refuser
+                Non merci
               </button>
               <button
                 onClick={accept}
                 className="px-4 py-2 text-[11px] uppercase tracking-[0.18em] font-bold bg-terracotta text-paper hover:bg-terracotta-soft transition-colors"
               >
-                Accepter
+                D&apos;accord !
               </button>
               <button
                 onClick={refuse}
