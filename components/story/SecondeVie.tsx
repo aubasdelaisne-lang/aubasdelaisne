@@ -12,6 +12,11 @@ import Fauteuil from "@/components/illustrations/Fauteuil"
 import Caisse from "@/components/illustrations/Caisse"
 import Main from "@/components/illustrations/Main"
 import Camion from "@/components/illustrations/Camion"
+import Atelier from "@/components/illustrations/Atelier"
+import Etagere from "@/components/illustrations/Etagere"
+import Etiquette from "@/components/illustrations/Etiquette"
+import Salon from "@/components/illustrations/Salon"
+import Papillon from "@/components/illustrations/Papillon"
 import { P } from "@/components/illustrations/palette"
 
 /* « La seconde vie d'un objet » — le scroll fait avancer l'histoire d'un
@@ -186,7 +191,128 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
   )
 }
 
-/** Aiguillage des scènes par chapitre (atelier/rayon/revit : Task 6). */
+/** Étincelle 8 branches pour la remise à neuf. */
+function Etincelle({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        d="M12 1 L14.6 9.4 L23 12 L14.6 14.6 L12 23 L9.4 14.6 L1 12 L9.4 9.4 Z"
+        fill={P.terracotta}
+      />
+    </svg>
+  )
+}
+
+/** Chapitre 3 — l'atelier : le fauteuil abîmé devient éclatant. */
+function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
+  const abimeOpacity = useTransform(progress, [0.48, 0.52], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.48, 0.52], [0, 1])
+  const raviveScale = useTransform(progress, [0.48, 0.52, 0.56], [0.96, 1.05, 1])
+  const s1 = useTransform(progress, [0.46, 0.49, 0.53], [0, 1, 0])
+  const s2 = useTransform(progress, [0.49, 0.52, 0.56], [0, 1, 0])
+  const s3 = useTransform(progress, [0.47, 0.51, 0.55], [0, 1, 0])
+
+  return (
+    <div className="absolute inset-0">
+      {/* Établi */}
+      <span className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-72 md:w-96">
+        <Atelier className="w-full" />
+      </span>
+
+      {/* Fauteuil : les deux états superposés sur l'établi */}
+      <div className="absolute bottom-[calc(9vh+82px)] md:bottom-[calc(9vh+104px)] left-1/2 -translate-x-1/2 w-36 md:w-44">
+        <motion.span style={{ opacity: abimeOpacity }} className="absolute inset-0">
+          <Fauteuil state="abime" className="w-full" />
+        </motion.span>
+        <motion.span style={{ opacity: raviveOpacity, scale: raviveScale }} className="block">
+          <Fauteuil state="ravive" className="w-full" />
+        </motion.span>
+      </div>
+
+      {/* Étincelles en cascade */}
+      <motion.span style={{ opacity: s1, scale: s1 }} className="absolute bottom-[calc(9vh+200px)] left-[38%] w-7">
+        <Etincelle className="w-full" />
+      </motion.span>
+      <motion.span style={{ opacity: s2, scale: s2 }} className="absolute bottom-[calc(9vh+170px)] left-[60%] w-5">
+        <Etincelle className="w-full" />
+      </motion.span>
+      <motion.span style={{ opacity: s3, scale: s3 }} className="absolute bottom-[calc(9vh+120px)] left-[32%] w-4">
+        <Etincelle className="w-full" />
+      </motion.span>
+    </div>
+  )
+}
+
+/** Chapitre 4 — en rayon, l'étiquette se balance. */
+function SceneRayon({ progress }: { progress: MotionValue<number> }) {
+  const balancier = useTransform(
+    progress,
+    [0.6, 0.65, 0.7, 0.75, 0.8],
+    [-7, 5, -4, 4, -2]
+  )
+
+  return (
+    <div className="absolute inset-0">
+      {/* Étagère */}
+      <span className="absolute bottom-[9vh] left-1/2 -translate-x-[62%] w-60 md:w-80">
+        <Etagere className="w-full" />
+      </span>
+
+      {/* Fauteuil devant, à droite */}
+      <span className="absolute bottom-[9vh] left-1/2 translate-x-[26px] md:translate-x-[48px] w-32 md:w-40">
+        <Fauteuil state="ravive" className="w-full" />
+      </span>
+
+      {/* Étiquette qui se balance au-dessus */}
+      <motion.span
+        style={{ rotate: balancier, transformOrigin: "top center" }}
+        className="absolute bottom-[calc(9vh+120px)] md:bottom-[calc(9vh+150px)] left-1/2 translate-x-[64px] md:translate-x-[96px] w-16 md:w-20"
+      >
+        <Etiquette className="w-full" />
+      </motion.span>
+    </div>
+  )
+}
+
+/** Chapitre 5 — le salon : lumière chaude, le papillon s'envole. */
+function SceneRevit({ progress }: { progress: MotionValue<number> }) {
+  const haloOpacity = useTransform(progress, [0.82, 0.9], [0, 0.34])
+  const papX = useTransform(progress, [0.9, 1], ["0vw", "24vw"])
+  const papY = useTransform(progress, [0.9, 1], ["0vh", "-34vh"])
+  const papRotate = useTransform(progress, [0.9, 1], [0, -14])
+  const papOpacity = useTransform(progress, [0.82, 0.86], [0, 1])
+
+  return (
+    <div className="absolute inset-0">
+      <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 w-[340px] md:w-[520px]">
+        {/* Halo de la lampe */}
+        <motion.span
+          style={{
+            opacity: haloOpacity,
+            background:
+              "radial-gradient(circle, rgba(245,142,92,0.85) 0%, rgba(245,142,92,0) 68%)",
+          }}
+          className="absolute left-[58%] -top-[10%] w-44 h-44 md:w-56 md:h-56 rounded-full"
+        />
+        {/* Décor salon */}
+        <Salon className="w-full" />
+        {/* Fauteuil sur le tapis */}
+        <span className="absolute left-[34%] bottom-[6%] w-28 md:w-36">
+          <Fauteuil state="ravive" className="w-full" />
+        </span>
+        {/* Papillon qui s'envole */}
+        <motion.span
+          style={{ x: papX, y: papY, rotate: papRotate, opacity: papOpacity }}
+          className="absolute left-[46%] bottom-[52%] w-12 md:w-14"
+        >
+          <Papillon flap className="w-full" />
+        </motion.span>
+      </div>
+    </div>
+  )
+}
+
+/** Aiguillage des scènes par chapitre. */
 function Scene({
   id,
   progress,
@@ -196,7 +322,9 @@ function Scene({
 }) {
   if (id === "don") return <SceneDon progress={progress} />
   if (id === "collecte") return <SceneCollecte progress={progress} />
-  return null
+  if (id === "atelier") return <SceneAtelier progress={progress} />
+  if (id === "rayon") return <SceneRayon progress={progress} />
+  return <SceneRevit progress={progress} />
 }
 
 function Chapitre({
