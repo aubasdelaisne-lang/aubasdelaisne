@@ -252,17 +252,18 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  const groupeX = useTransform(progress, [0.37, 0.46], ["70vw", "0vw"])
-  const abimeOpacity = useTransform(progress, [0.52, 0.56], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.52, 0.56], [0, 1])
+  /* Entre dès que le camion entame sa sortie — pas de temps mort. */
+  const groupeX = useTransform(progress, [0.355, 0.42], ["70vw", "0vw"])
+  const abimeOpacity = useTransform(progress, [0.5, 0.54], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.5, 0.54], [0, 1])
   const raviveScale = useTransform(
     progress,
-    [0.52, 0.57, 0.61, 0.65],
+    [0.5, 0.55, 0.6, 0.65],
     [0.96, 1.07, 0.99, 1.02]
   )
-  const s1 = useTransform(progress, [0.48, 0.53, 0.58], [0, 1, 0])
-  const s2 = useTransform(progress, [0.52, 0.57, 0.62], [0, 1, 0])
-  const s3 = useTransform(progress, [0.5, 0.55, 0.6], [0, 1, 0])
+  const s1 = useTransform(progress, [0.46, 0.51, 0.56], [0, 1, 0])
+  const s2 = useTransform(progress, [0.5, 0.55, 0.6], [0, 1, 0])
+  const s3 = useTransform(progress, [0.48, 0.53, 0.58], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
@@ -447,8 +448,8 @@ function Chapitre({
     a === 0
       ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a - 0.008, a + 0.028]
-        : [a - 0.008, a + 0.028, b - 0.035, b - 0.006],
+        ? [a - 0.012, a + 0.02]
+        : [a - 0.012, a + 0.02, b - 0.035, b - 0.006],
     a === 0 ? [1, 0] : b === 1 ? [0, 1] : [0, 1, 1, 0]
   )
   const textY = useTransform(
@@ -456,8 +457,8 @@ function Chapitre({
     a === 0
       ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a - 0.008, a + 0.028]
-        : [a - 0.008, a + 0.028, b - 0.035, b - 0.006],
+        ? [a - 0.012, a + 0.02]
+        : [a - 0.012, a + 0.02, b - 0.035, b - 0.006],
     a === 0 ? [0, -24] : b === 1 ? [24, 0] : [24, 0, 0, -24]
   )
   const ctaOpacity = useTransform(progress, [0.94, 0.985], [0, 1])
