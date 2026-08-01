@@ -96,6 +96,10 @@ export default function SplashScreen() {
           from { transform: scaleX(0); }
           to   { transform: scaleX(1); }
         }
+        @keyframes _splash-to-center {
+          from { transform: translateY(0); }
+          to   { transform: translateY(27vh); }
+        }
       `}</style>
 
       <AnimatePresence>
@@ -135,7 +139,10 @@ export default function SplashScreen() {
             ) : (
               <>
                 {/* Nom de la marque (révélé à 3,5 s, à la place des messages) */}
-                <div className="absolute top-[20%] left-0 w-full text-center px-6">
+                <div
+                  className="absolute top-[20%] left-0 w-full text-center px-6"
+                  style={{ animation: "_splash-to-center 0.7s cubic-bezier(0.16,1,0.3,1) 5.7s both" }}
+                >
                   <span className="block overflow-hidden pb-[0.12em]">
                     <span
                       className="block font-display font-medium text-paper leading-none tracking-tight"
@@ -149,8 +156,12 @@ export default function SplashScreen() {
                     </span>
                   </span>
                   <p
-                    className="mt-3 text-paper/55 text-[11px] tracking-[0.3em] uppercase"
-                    style={{ opacity: 0, animation: "_splash-fade-in 0.6s ease-out 3.9s forwards" }}
+                    className="mt-4 text-paper/80 tracking-[0.2em] uppercase"
+                    style={{
+                      fontSize: "clamp(0.85rem, 0.7rem + 0.6vw, 1.1rem)",
+                      opacity: 0,
+                      animation: "_splash-fade-in 0.6s ease-out 3.9s forwards",
+                    }}
                   >
                     Ressourcerie · Château-Thierry
                   </p>
