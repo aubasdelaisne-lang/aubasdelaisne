@@ -25,28 +25,37 @@ const OBJETS = [
   { Comp: Livres, label: "On sauve une pile de livres…", at: 2.4, w: "w-24" },
 ]
 
+type Phase = "checking" | "showing" | "done"
+
 export default function SplashScreen() {
-  const [visible, setVisible] = useState(false)
+  const [phase, setPhase] = useState<Phase>("checking")
   const reduce = useReducedMotion()
 
   useEffect(() => {
-    if (sessionStorage.getItem("splash_shown")) return
+    if (sessionStorage.getItem("splash_shown")) {
+      setPhase("done")
+      return
+    }
     sessionStorage.setItem("splash_shown", "1")
-    setVisible(true)
-    const t = setTimeout(() => setVisible(false), reduce ? 2000 : 6400)
+    setPhase("showing")
+    const t = setTimeout(() => setPhase("done"), reduce ? 2000 : 6400)
     return () => clearTimeout(t)
   }, [reduce])
 
-  const skip = useCallback(() => setVisible(false), [])
+  const skip = useCallback(() => setPhase("done"), [])
 
   useEffect(() => {
-    if (!visible) return
+    if (phase !== "showing") return
     window.addEventListener("keydown", skip)
     return () => window.removeEventListener("keydown", skip)
-  }, [visible, skip])
+  }, [phase, skip])
 
   return (
     <>
+      {/* Bloque le Hero pendant le check sessionStorage (évite le flash) */}
+      {phase === "checking" && (
+        <div className="fixed inset-0 z-[9999] bg-paper" aria-hidden />
+      )}
       <style>{`
         @keyframes _splash-drop {
           0%   { transform: translateY(-62vh) rotate(-8deg); opacity: 1; }
@@ -90,7 +99,7 @@ export default function SplashScreen() {
       `}</style>
 
       <AnimatePresence>
-        {visible && (
+        {phase === "showing" && (
           <motion.div
             key="splash"
             initial={{ clipPath: "circle(150% at 50% 50%)" }}
