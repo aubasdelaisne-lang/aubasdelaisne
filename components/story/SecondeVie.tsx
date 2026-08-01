@@ -262,10 +262,15 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  /* Entrée depuis 45vw, départ à 0.285 (avant le snap de couche à 0.297)
-     pour que le groupe soit déjà en mouvement quand il apparaît — arrivée
-     au centre à 0.33 (= début de range), transformation immédiate. */
-  const groupeX = useTransform(progress, [0.285, 0.33], ["45vw", "0vw"])
+  /* Entrée depuis 45vw (p=0.285→0.33), poser au centre, transformation,
+     puis sortie vers la gauche (p=0.46→0.57) : même principe que le camion.
+     Le mouvement est continu — plus de zone morte entre la fin de l'atelier
+     et l'entrée du rayon. */
+  const groupeX = useTransform(
+    progress,
+    [0.285, 0.33, 0.46, 0.57],
+    ["45vw", "0vw", "0vw", "-65vw"]
+  )
   const abimeOpacity = useTransform(progress, [0.33, 0.44], [1, 0])
   const raviveOpacity = useTransform(progress, [0.33, 0.44], [0, 1])
   const raviveScale = useTransform(
@@ -329,7 +334,9 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 /** Ch.4 — MÊME PRINCIPE QUE LE FAUTEUIL DU CH.1 : tout le rayon (étagère
  *  + fauteuil + étiquette) entre par la gauche d'un seul mouvement. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
-  const groupeX = useTransform(progress, [0.56, 0.63], ["-55vw", "0vw"])
+  /* Entrée calée sur l'apparition du calque ch4 (p≈0.537) pour que la scène
+     soit déjà en mouvement dès qu'elle devient visible — même vitesse qu'avant. */
+  const groupeX = useTransform(progress, [0.537, 0.607], ["-55vw", "0vw"])
 
   return (
     <div className="absolute inset-0">
