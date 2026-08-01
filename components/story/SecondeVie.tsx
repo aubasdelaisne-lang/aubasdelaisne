@@ -34,6 +34,10 @@ type Chapter = {
   kicker: string
   title: string
   text: string
+  /** true = le calque devient opaque immédiatement : la scène entre par le
+   *  côté/le bas, son mouvement EST son apparition (pas de fondu d'entrée
+   *  qui masquerait la traversée). */
+  entreeDirecte?: boolean
 }
 
 const CHAPTERS: Chapter[] = [
@@ -58,6 +62,7 @@ const CHAPTERS: Chapter[] = [
     kicker: "Chapitre 3",
     title: "On lui redonne vie",
     text: "Trié, nettoyé, réparé par notre équipe en insertion. Chaque objet repart de zéro.",
+    entreeDirecte: true,
   },
   {
     id: "rayon",
@@ -65,6 +70,7 @@ const CHAPTERS: Chapter[] = [
     kicker: "Chapitre 4",
     title: "Il attend sa nouvelle maison",
     text: "En rayon à petit prix, au milieu de mille autres trouvailles.",
+    entreeDirecte: true,
   },
   {
     id: "revit",
@@ -72,6 +78,7 @@ const CHAPTERS: Chapter[] = [
     kicker: "Chapitre 5",
     title: "Et l'histoire recommence",
     text: "Un objet sauvé, un emploi soutenu, des déchets évités. Tout le monde y gagne.",
+    entreeDirecte: true,
   },
 ]
 
@@ -85,19 +92,22 @@ const PARTICULES = [
   { left: "68%", top: "82%", size: 4, cls: "bg-terracotta-soft/25", dur: 9, delay: 1.6, mdOnly: true },
 ]
 
-/** Fondu-enchaîné entre chapitres. Premier visible dès l'entrée,
- *  dernier visible jusqu'à la sortie. */
+/** Opacité d'un calque de chapitre. Premier visible dès l'entrée, dernier
+ *  jusqu'à la sortie. `direct` = opaque immédiatement (la scène entre par
+ *  le côté : son mouvement doit se jouer en pleine visibilité). */
 function useChapterOpacity(
   progress: MotionValue<number>,
-  [a, b]: readonly [number, number]
+  [a, b]: readonly [number, number],
+  direct = false
 ) {
   const fade = 0.022
+  const inPts = direct ? [a - 0.034, a - 0.033] : [a - fade, a + fade]
   const pts =
     a === 0
       ? { i: [a, b - fade, b + fade], o: [1, 1, 0] }
       : b === 1
-        ? { i: [a - fade, a + fade, b], o: [0, 1, 1] }
-        : { i: [a - fade, a + fade, b - fade, b + fade], o: [0, 1, 1, 0] }
+        ? { i: [...inPts, b], o: [0, 1, 1] }
+        : { i: [...inPts, b - fade, b + fade], o: [0, 1, 1, 0] }
   return useTransform(progress, pts.i, pts.o)
 }
 
@@ -252,8 +262,8 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  /* Entre dès que le camion entame sa sortie — pas de temps mort. */
-  const groupeX = useTransform(progress, [0.355, 0.42], ["70vw", "0vw"])
+  /* Entre en pleine visibilité, croise le camion qui sort. */
+  const groupeX = useTransform(progress, [0.36, 0.43], ["70vw", "0vw"])
   const abimeOpacity = useTransform(progress, [0.5, 0.54], [1, 0])
   const raviveOpacity = useTransform(progress, [0.5, 0.54], [0, 1])
   const raviveScale = useTransform(
@@ -317,7 +327,7 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 /** Ch.4 — MÊME PRINCIPE QUE LE FAUTEUIL DU CH.1 : tout le rayon (étagère
  *  + fauteuil + étiquette) entre par la gauche d'un seul mouvement. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
-  const groupeX = useTransform(progress, [0.65, 0.73], ["-70vw", "0vw"])
+  const groupeX = useTransform(progress, [0.64, 0.72], ["-70vw", "0vw"])
 
   return (
     <div className="absolute inset-0">
@@ -352,7 +362,7 @@ function SceneRayon({ progress }: { progress: MotionValue<number> }) {
 /** Ch.5 — le salon monte depuis le bas d'un seul mouvement,
  *  la lampe pulse, le papillon s'envole. */
 function SceneRevit({ progress }: { progress: MotionValue<number> }) {
-  const salonY = useTransform(progress, [0.83, 0.9], ["55vh", "0vh"])
+  const salonY = useTransform(progress, [0.82, 0.89], ["55vh", "0vh"])
   const haloOpacity = useTransform(progress, [0.89, 0.94], [0, 1])
   const papX = useTransform(progress, [0.93, 1], ["0vw", "24vw"])
   const papY = useTransform(progress, [0.93, 1], ["0vh", "-34vh"])
@@ -440,7 +450,7 @@ function Chapitre({
   progress: MotionValue<number>
 }) {
   const [a, b] = chapter.range
-  const opacity = useChapterOpacity(progress, chapter.range)
+  const opacity = useChapterOpacity(progress, chapter.range, chapter.entreeDirecte)
   /* Les textes ne se croisent jamais : l'ancien s'échappe vers le haut
      avant la couture, le nouveau monte depuis le bas juste après. */
   const textOpacity = useTransform(
