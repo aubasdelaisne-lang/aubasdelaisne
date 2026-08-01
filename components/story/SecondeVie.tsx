@@ -227,7 +227,10 @@ function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
           className="absolute -left-2 bottom-5 w-2.5 h-2.5 rounded-full bg-paper/30"
           style={{ animation: "_sv-smoke 1.6s ease-out 0.55s infinite" }}
         />
-        <Camion rolling className="w-full" />
+        {/* Pas de rotation interne des roues : les animations DANS un SVG
+            tournent sur le processeur (pas la carte graphique) et saturent
+            les machines modestes. La fumée + les traits de vitesse suffisent. */}
+        <Camion className="w-full" />
       </motion.div>
     </div>
   )
@@ -268,8 +271,8 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
         style={{ x: groupeX }}
         className="absolute bottom-[9vh] left-1/2 -translate-x-1/2 w-80 md:w-[420px]"
       >
-        {/* Établi nu */}
-        <Atelier anime outils={false} className="w-full" />
+        {/* Établi nu (sans animations SVG internes — coût processeur) */}
+        <Atelier outils={false} className="w-full" />
 
         {/* Fauteuil posé sur l'établi (les deux états superposés) */}
         <div className="absolute left-1/2 -translate-x-1/2 bottom-[62%] w-32 md:w-40">
@@ -383,7 +386,10 @@ function SceneRevit({ progress }: { progress: MotionValue<number> }) {
           style={{ x: papX, y: papY, rotate: papRotate, opacity: papOpacity }}
           className="absolute left-[46%] bottom-[52%] w-12 md:w-14"
         >
-          <Papillon flap className="w-full" />
+          {/* Flottement HTML (GPU) plutôt que battement d'ailes SVG (CPU) */}
+          <span className="block" style={{ animation: "_sv-float 2.4s ease-in-out infinite" }}>
+            <Papillon className="w-full" />
+          </span>
         </motion.span>
       </motion.div>
     </div>
