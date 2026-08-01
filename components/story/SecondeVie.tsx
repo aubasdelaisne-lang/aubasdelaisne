@@ -262,14 +262,15 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  /* Entrée depuis 45vw (p=0.285→0.33), poser au centre, transformation,
-     puis sortie vers la gauche (p=0.46→0.57) : même principe que le camion.
-     Le mouvement est continu — plus de zone morte entre la fin de l'atelier
-     et l'entrée du rayon. */
+  /* Entrée depuis 45vw (p=0.285→0.33), transformation (0.33→0.44),
+     puis sortie vers la gauche jusqu'à -100vw (0.44→0.537).
+     -100vw garantit la sortie complète sur mobile (≥92.7vw nécessaire)
+     ET desktop (≥66.4vw). Fin calée sur l'apparition du calque ch4 (0.537)
+     → zéro zone morte entre atelier et rayon. */
   const groupeX = useTransform(
     progress,
-    [0.285, 0.33, 0.46, 0.57],
-    ["45vw", "0vw", "0vw", "-65vw"]
+    [0.285, 0.33, 0.44, 0.537],
+    ["45vw", "0vw", "0vw", "-100vw"]
   )
   const abimeOpacity = useTransform(progress, [0.33, 0.44], [1, 0])
   const raviveOpacity = useTransform(progress, [0.33, 0.44], [0, 1])
@@ -334,9 +335,15 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 /** Ch.4 — MÊME PRINCIPE QUE LE FAUTEUIL DU CH.1 : tout le rayon (étagère
  *  + fauteuil + étiquette) entre par la gauche d'un seul mouvement. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
-  /* Entrée calée sur l'apparition du calque ch4 (p≈0.537) pour que la scène
-     soit déjà en mouvement dès qu'elle devient visible — même vitesse qu'avant. */
-  const groupeX = useTransform(progress, [0.537, 0.607], ["-55vw", "0vw"])
+  /* Entrée calée sur l'apparition du calque ch4 (p=0.537), sortie vers la
+     droite (100vw) jusqu'à p=0.706 (apparition ch5). Direction opposée à
+     l'entrée → pas de collision. 100vw garantit sortie complète
+     mobile+desktop avant que le salon ch5 monte. */
+  const groupeX = useTransform(
+    progress,
+    [0.537, 0.607, 0.645, 0.706],
+    ["-55vw", "0vw", "0vw", "100vw"]
+  )
 
   return (
     <div className="absolute inset-0">
