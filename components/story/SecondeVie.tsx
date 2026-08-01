@@ -262,19 +262,20 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  /* Entre depuis 55vw (plus proche), traversée [0.31,0.38] —
-     transformation démarre dès l'arrivée, zéro scroll mort. */
-  const groupeX = useTransform(progress, [0.31, 0.38], ["55vw", "0vw"])
-  const abimeOpacity = useTransform(progress, [0.38, 0.42], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.38, 0.42], [0, 1])
+  /* Entrée depuis 45vw, départ à 0.285 (avant le snap de couche à 0.297)
+     pour que le groupe soit déjà en mouvement quand il apparaît — arrivée
+     au centre à 0.33 (= début de range), transformation immédiate. */
+  const groupeX = useTransform(progress, [0.285, 0.33], ["45vw", "0vw"])
+  const abimeOpacity = useTransform(progress, [0.33, 0.44], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.33, 0.44], [0, 1])
   const raviveScale = useTransform(
     progress,
-    [0.38, 0.43, 0.48, 0.52],
+    [0.33, 0.38, 0.44, 0.48],
     [0.96, 1.07, 0.99, 1.02]
   )
-  const s1 = useTransform(progress, [0.36, 0.40, 0.44], [0, 1, 0])
-  const s2 = useTransform(progress, [0.39, 0.43, 0.47], [0, 1, 0])
-  const s3 = useTransform(progress, [0.37, 0.41, 0.45], [0, 1, 0])
+  const s1 = useTransform(progress, [0.31, 0.355, 0.40], [0, 1, 0])
+  const s2 = useTransform(progress, [0.33, 0.375, 0.42], [0, 1, 0])
+  const s3 = useTransform(progress, [0.32, 0.365, 0.41], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
@@ -452,15 +453,17 @@ function Chapitre({
 }) {
   const [a, b] = chapter.range
   const opacity = useChapterOpacity(progress, chapter.range, chapter.entreeDirecte)
-  /* Les textes ne se croisent jamais : l'ancien s'échappe vers le haut
-     avant la couture, le nouveau monte depuis le bas juste après. */
+  /* Pour les chapitres entreeDirecte la couche saute à opacité 1 à a-0.033.
+     Le texte doit s'aligner sur cet instant, pas sur a, pour éviter le blanc. */
+  const ti0 = chapter.entreeDirecte ? a - 0.034 : a - 0.012
+  const ti1 = chapter.entreeDirecte ? a - 0.003 : a + 0.020
   const textOpacity = useTransform(
     progress,
     a === 0
       ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a - 0.012, a + 0.02]
-        : [a - 0.012, a + 0.02, b - 0.035, b - 0.006],
+        ? [ti0, ti1]
+        : [ti0, ti1, b - 0.035, b - 0.006],
     a === 0 ? [1, 0] : b === 1 ? [0, 1] : [0, 1, 1, 0]
   )
   const textY = useTransform(
@@ -468,8 +471,8 @@ function Chapitre({
     a === 0
       ? [b - 0.035, b - 0.006]
       : b === 1
-        ? [a - 0.012, a + 0.02]
-        : [a - 0.012, a + 0.02, b - 0.035, b - 0.006],
+        ? [ti0, ti1]
+        : [ti0, ti1, b - 0.035, b - 0.006],
     a === 0 ? [0, -24] : b === 1 ? [24, 0] : [24, 0, 0, -24]
   )
   const ctaOpacity = useTransform(progress, [0.94, 0.985], [0, 1])
