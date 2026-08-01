@@ -480,7 +480,7 @@ function Chapitre({
   return (
     <motion.div
       style={{ opacity }}
-      className="absolute inset-0 pointer-events-none"
+      className="absolute inset-0 pointer-events-none isolate"
     >
       <motion.div
         style={{ y: textY, opacity: textOpacity }}
