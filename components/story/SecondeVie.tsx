@@ -44,21 +44,21 @@ const CHAPTERS: Chapter[] = [
   /* Plages pondérées : l'atelier (le pivot) reçoit le plus de scroll. */
   {
     id: "don",
-    range: [0.0, 0.17],
+    range: [0.0, 0.16],
     kicker: "Chapitre 1",
     title: "Tout commence par un geste",
     text: "Un fauteuil dont vous n'avez plus besoin ? Quelqu'un, quelque part, en rêve.",
   },
   {
     id: "collecte",
-    range: [0.17, 0.37],
+    range: [0.16, 0.33],
     kicker: "Chapitre 2",
     title: "On vient le chercher",
     text: "Dépôt sur place ou collecte à domicile — notre camion sillonne le sud de l'Aisne.",
   },
   {
     id: "atelier",
-    range: [0.37, 0.65],
+    range: [0.33, 0.57],
     kicker: "Chapitre 3",
     title: "On lui redonne vie",
     text: "Trié, nettoyé, réparé par notre équipe en insertion. Chaque objet repart de zéro.",
@@ -66,7 +66,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     id: "rayon",
-    range: [0.65, 0.83],
+    range: [0.57, 0.74],
     kicker: "Chapitre 4",
     title: "Il attend sa nouvelle maison",
     text: "En rayon à petit prix, au milieu de mille autres trouvailles.",
@@ -74,7 +74,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     id: "revit",
-    range: [0.83, 1.0],
+    range: [0.74, 1.0],
     kicker: "Chapitre 5",
     title: "Et l'histoire recommence",
     text: "Un objet sauvé, un emploi soutenu, des déchets évités. Tout le monde y gagne.",
@@ -115,16 +115,16 @@ function useChapterOpacity(
 
 /** Ch.1 — le fauteuil vole depuis la gauche et plonge dans la caisse. */
 function SceneDon({ progress }: { progress: MotionValue<number> }) {
-  const x = useTransform(progress, [0.0, 0.11], ["-48vw", "0vw"])
-  const yVol = useTransform(progress, [0.0, 0.07, 0.11], ["-8vh", "-3vh", "0vh"])
-  const yPlongee = useTransform(progress, [0.12, 0.16], [0, 78])
-  const rotate = useTransform(progress, [0.0, 0.11], [-7, 0])
-  const scale = useTransform(progress, [0.12, 0.16], [1, 0.9])
-  const caisseScale = useTransform(progress, [0.145, 0.16, 0.18], [1, 1.06, 1])
-  const poussiereOpacity = useTransform(progress, [0.15, 0.165, 0.185], [0, 0.5, 0])
-  const poussiereScale = useTransform(progress, [0.15, 0.185], [0.4, 1.7])
-  const decoY1 = useTransform(progress, [0, 0.17], [0, -52])
-  const decoY2 = useTransform(progress, [0, 0.17], [0, 40])
+  const x = useTransform(progress, [0.0, 0.10], ["-48vw", "0vw"])
+  const yVol = useTransform(progress, [0.0, 0.06, 0.10], ["-8vh", "-3vh", "0vh"])
+  const yPlongee = useTransform(progress, [0.11, 0.14], [0, 78])
+  const rotate = useTransform(progress, [0.0, 0.10], [-7, 0])
+  const scale = useTransform(progress, [0.11, 0.14], [1, 0.9])
+  const caisseScale = useTransform(progress, [0.13, 0.14, 0.16], [1, 1.06, 1])
+  const poussiereOpacity = useTransform(progress, [0.13, 0.145, 0.165], [0, 0.5, 0])
+  const poussiereScale = useTransform(progress, [0.13, 0.165], [0.4, 1.7])
+  const decoY1 = useTransform(progress, [0, 0.16], [0, -52])
+  const decoY2 = useTransform(progress, [0, 0.16], [0, 40])
 
   return (
     <div className="absolute inset-0">
@@ -168,16 +168,16 @@ function SceneDon({ progress }: { progress: MotionValue<number> }) {
 
 /** Ch.2 — le camion traverse l'écran et SORT par la droite. */
 function SceneCollecte({ progress }: { progress: MotionValue<number> }) {
-  const camionX = useTransform(progress, [0.17, 0.372], ["-58vw", "85vw"])
+  const camionX = useTransform(progress, [0.16, 0.345], ["-58vw", "85vw"])
   const camionY = useTransform(
     progress,
-    [0.17, 0.21, 0.25, 0.29, 0.33, 0.372],
+    [0.16, 0.20, 0.24, 0.28, 0.31, 0.345],
     [0, -4, 2, -3, 2, 0]
   )
-  const collinesArriereX = useTransform(progress, [0.17, 0.37], [0, -200])
-  const collinesAvantX = useTransform(progress, [0.17, 0.37], [0, -400])
-  const routeX = useTransform(progress, [0.17, 0.37], ["0%", "-30%"])
-  const nuageX = useTransform(progress, [0.17, 0.37], [0, -120])
+  const collinesArriereX = useTransform(progress, [0.16, 0.33], [0, -200])
+  const collinesAvantX = useTransform(progress, [0.16, 0.33], [0, -400])
+  const routeX = useTransform(progress, [0.16, 0.33], ["0%", "-30%"])
+  const nuageX = useTransform(progress, [0.16, 0.33], [0, -120])
 
   return (
     <div className="absolute inset-0">
@@ -262,18 +262,19 @@ function Etincelle({ className = "" }: { className?: string }) {
  *  + outils) entre par la droite d'un seul mouvement, se pose au centre,
  *  puis la transformation opère sous les étincelles. */
 function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
-  /* Entre en pleine visibilité, croise le camion qui sort. */
-  const groupeX = useTransform(progress, [0.36, 0.43], ["70vw", "0vw"])
-  const abimeOpacity = useTransform(progress, [0.5, 0.54], [1, 0])
-  const raviveOpacity = useTransform(progress, [0.5, 0.54], [0, 1])
+  /* Entre depuis 55vw (plus proche), traversée [0.31,0.38] —
+     transformation démarre dès l'arrivée, zéro scroll mort. */
+  const groupeX = useTransform(progress, [0.31, 0.38], ["55vw", "0vw"])
+  const abimeOpacity = useTransform(progress, [0.38, 0.42], [1, 0])
+  const raviveOpacity = useTransform(progress, [0.38, 0.42], [0, 1])
   const raviveScale = useTransform(
     progress,
-    [0.5, 0.55, 0.6, 0.65],
+    [0.38, 0.43, 0.48, 0.52],
     [0.96, 1.07, 0.99, 1.02]
   )
-  const s1 = useTransform(progress, [0.46, 0.51, 0.56], [0, 1, 0])
-  const s2 = useTransform(progress, [0.5, 0.55, 0.6], [0, 1, 0])
-  const s3 = useTransform(progress, [0.48, 0.53, 0.58], [0, 1, 0])
+  const s1 = useTransform(progress, [0.36, 0.40, 0.44], [0, 1, 0])
+  const s2 = useTransform(progress, [0.39, 0.43, 0.47], [0, 1, 0])
+  const s3 = useTransform(progress, [0.37, 0.41, 0.45], [0, 1, 0])
 
   return (
     <div className="absolute inset-0">
@@ -327,7 +328,7 @@ function SceneAtelier({ progress }: { progress: MotionValue<number> }) {
 /** Ch.4 — MÊME PRINCIPE QUE LE FAUTEUIL DU CH.1 : tout le rayon (étagère
  *  + fauteuil + étiquette) entre par la gauche d'un seul mouvement. */
 function SceneRayon({ progress }: { progress: MotionValue<number> }) {
-  const groupeX = useTransform(progress, [0.64, 0.72], ["-70vw", "0vw"])
+  const groupeX = useTransform(progress, [0.56, 0.63], ["-55vw", "0vw"])
 
   return (
     <div className="absolute inset-0">
@@ -362,12 +363,12 @@ function SceneRayon({ progress }: { progress: MotionValue<number> }) {
 /** Ch.5 — le salon monte depuis le bas d'un seul mouvement,
  *  la lampe pulse, le papillon s'envole. */
 function SceneRevit({ progress }: { progress: MotionValue<number> }) {
-  const salonY = useTransform(progress, [0.82, 0.89], ["55vh", "0vh"])
-  const haloOpacity = useTransform(progress, [0.89, 0.94], [0, 1])
-  const papX = useTransform(progress, [0.93, 1], ["0vw", "24vw"])
-  const papY = useTransform(progress, [0.93, 1], ["0vh", "-34vh"])
-  const papRotate = useTransform(progress, [0.93, 1], [0, -14])
-  const papOpacity = useTransform(progress, [0.89, 0.92], [0, 1])
+  const salonY = useTransform(progress, [0.73, 0.80], ["55vh", "0vh"])
+  const haloOpacity = useTransform(progress, [0.80, 0.85], [0, 1])
+  const papX = useTransform(progress, [0.88, 0.98], ["0vw", "24vw"])
+  const papY = useTransform(progress, [0.88, 0.98], ["0vh", "-34vh"])
+  const papRotate = useTransform(progress, [0.88, 0.98], [0, -14])
+  const papOpacity = useTransform(progress, [0.80, 0.84], [0, 1])
 
   return (
     <div className="absolute inset-0">
@@ -578,7 +579,7 @@ export default function SecondeVie() {
     <section
       ref={ref}
       aria-label="La seconde vie d'un objet"
-      className="relative h-[380vh] md:h-[480vh] bg-sage"
+      className="relative h-[280vh] md:h-[380vh] bg-sage"
     >
       <style>{`
         @keyframes _sv-float {
