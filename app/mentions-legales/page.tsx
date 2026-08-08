@@ -18,8 +18,7 @@ export default function MentionsLegalesPage() {
         <li>Téléphone : {SITE.phone}</li>
         <li>SIRET : {SITE.siret}</li>
         <li>
-          Représentant légal (directeur de la publication) :{" "}
-          <span className="legal-fill">[Nom du président / de la présidente]</span>
+          Représentant légal (directeur de la publication) : Daniel Stocky
         </li>
       </ul>
 
@@ -33,8 +32,7 @@ export default function MentionsLegalesPage() {
         .
       </p>
       <p>
-        Le nom de domaine est déposé auprès de{" "}
-        <span className="legal-fill">[registraire du nom de domaine, ex. OVHcloud]</span>, dont
+        Le nom de domaine est déposé auprès de <strong>OVHcloud</strong>, dont
         l'association « {SITE.name} » est titulaire.
       </p>
 
