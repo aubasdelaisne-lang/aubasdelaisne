@@ -4,6 +4,7 @@ export const SITE = {
   slogan: "Réinsérer, relier, réduire…",
   address: "22 avenue de l'Europe, 02400 Château-Thierry",
   addressSecondary: "8 avenue de Château-Thierry, 02400 Brasles",
+  email: "aubasdelaisne@gmail.com",
   phone: "03 64 13 48 64",
   phoneHref: "tel:+33364134864",
   facebook: "https://www.facebook.com/aubasdelaisne",

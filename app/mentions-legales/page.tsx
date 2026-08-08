@@ -5,7 +5,7 @@ import { SITE } from "@/lib/constants"
 
 export default function MentionsLegalesPage() {
   return (
-    <LegalLayout eyebrow="Informations légales" title="Mentions légales" updatedAt="4 juin 2026">
+    <LegalLayout eyebrow="Informations légales" title="Mentions légales" updatedAt="8 août 2026">
       <h2>Éditeur du site</h2>
       <p>
         Le site <strong>{SITE.fullName}</strong> est édité par l'association{" "}
@@ -32,8 +32,12 @@ export default function MentionsLegalesPage() {
         .
       </p>
       <p>
-        Le nom de domaine est déposé auprès de <strong>OVHcloud</strong>, dont
-        l'association « {SITE.name} » est titulaire.
+        Le nom de domaine est déposé auprès de <strong>OVHcloud SAS</strong>, 2 rue
+        Kellermann, 59100 Roubaix, France —{" "}
+        <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer">
+          ovhcloud.com
+        </a>
+        . L'association « {SITE.name} » en est titulaire.
       </p>
 
       <h2>Conception et développement</h2>
@@ -67,9 +71,16 @@ export default function MentionsLegalesPage() {
 
       <h2>Contact</h2>
       <p>
-        Pour toute question relative aux présentes mentions légales, vous pouvez nous contacter
-        par téléphone au {SITE.phone} ou vous rendre à la boutique : {SITE.address}.
+        Pour toute question relative aux présentes mentions légales, vous pouvez nous contacter :
       </p>
+      <ul>
+        <li>
+          Par e-mail :{" "}
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </li>
+        <li>Par téléphone : {SITE.phone}</li>
+        <li>En boutique : {SITE.address}</li>
+      </ul>
     </LegalLayout>
   )
 }
