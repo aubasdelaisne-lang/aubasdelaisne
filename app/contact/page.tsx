@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Phone } from "lucide-react"
+import { MapPin, Phone, Mail } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import HorairesPlaque from "@/components/ui/HorairesPlaque"
@@ -126,10 +126,21 @@ export default function ContactPage() {
                   </a>
                 </div>
 
+                {/* Email */}
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="mt-auto pt-7 group"
+                >
+                  <span className="flex items-center justify-center gap-3 bg-paper text-sage-deep px-6 py-4 rounded-full font-display font-bold text-lg tracking-[0.04em] group-hover:bg-cream transition-colors">
+                    <Mail size={20} strokeWidth={2} className="text-terracotta" />
+                    {SITE.email}
+                  </span>
+                </a>
+
                 {/* Téléphone */}
                 <a
                   href={SITE.phoneHref}
-                  className="mt-auto pt-7 group"
+                  className="pt-3 group"
                 >
                   <span className="flex items-center justify-center gap-3 bg-paper text-sage-deep px-6 py-4 rounded-full font-display font-bold text-2xl tracking-[0.08em] tabular-nums group-hover:bg-cream transition-colors">
                     <Phone size={20} strokeWidth={2} className="text-terracotta" />

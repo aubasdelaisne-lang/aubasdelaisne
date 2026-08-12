@@ -21,7 +21,7 @@ export default function ConfidentialitePage() {
       <p>
         Le responsable du traitement des données est l'association « {SITE.fullName} »,{" "}
         {SITE.address}, représentée par son{" "}
-        <span className="legal-fill">[président / présidente]</span>.
+Daniel Stocky.
       </p>
 
       <h2>Le site ne collecte aucune donnée via un formulaire</h2>
