@@ -421,19 +421,20 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <WaveDivider top="text-cream" bottom="bg-paper" />
+      <WaveDivider top="text-cream" bottom="bg-ink" />
 
-      {/* ── COMMENT ÇA MARCHE (frise commune du site) ────── */}
-      <section id="comment" className="relative py-16 md:py-28 px-4 md:px-8 bg-paper overflow-hidden">
-        <AmbientBackground variant="light" />
+      {/* ── COMMENT ÇA MARCHE (frise commune, fond bleu) ─── */}
+      <section id="comment" className="relative py-16 md:py-28 px-4 md:px-8 bg-ink overflow-hidden">
+        <AmbientBackground variant="dark" />
         <div className="relative z-10 max-w-[1100px] mx-auto">
           <SectionHeader
             eyebrow="Simple et rapide"
             title="Comment ça se passe ?"
             lede="Quatre étapes, zéro effort de votre côté."
+            tone="paper"
           />
 
-          <StepsTimeline steps={ETAPES} icons={ETAPES_ICONES} />
+          <StepsTimeline steps={ETAPES} icons={ETAPES_ICONES} tone="dark" />
 
           {/* CTA bar sauge : téléphone ou mail */}
           <motion.div
@@ -441,7 +442,7 @@ export default function DebarrasPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="spotlight relative mt-16 bg-sage paper-texture border-2 border-ink/10 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
+            className="spotlight relative mt-16 bg-sage paper-texture border-2 border-paper/20 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
           >
             <ShineSweep delay={0.4} />
             <h3 className="relative z-10 font-display font-medium text-3xl md:text-4xl text-paper leading-tight">
@@ -473,6 +474,8 @@ export default function DebarrasPage() {
           </motion.div>
         </div>
       </section>
+
+      <ArcDivider top="text-ink" bottom="bg-paper" flip />
 
       {/* ── NOUS VS BENNE ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-paper">

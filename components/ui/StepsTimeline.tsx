@@ -15,22 +15,26 @@ type Step = { step: string; title: string; desc: string }
  * lumineux qui parcourt la frise en boucle. Élévation franche au survol.
  * Horizontale sur desktop, verticale sur mobile.
  * Par défaut : les étapes du don. Personnalisable via `steps` et `icons`.
+ * `tone="dark"` adapte les couleurs pour un fond sombre (bg-ink).
  */
 export default function StepsTimeline({
   steps = DON_STEPS,
   icons = stepIcons,
+  tone = "light",
 }: {
   steps?: Step[]
   icons?: typeof stepIcons
+  tone?: "light" | "dark"
 }) {
   const reduce = useReducedMotion()
+  const dark = tone === "dark"
 
   return (
     <div className="relative">
       {/* Rail de fond (desktop) */}
       <span
         aria-hidden
-        className="hidden md:block absolute top-[46px] left-[12.5%] right-[12.5%] h-[3px] rounded-full bg-stone/60"
+        className={`hidden md:block absolute top-[46px] left-[12.5%] right-[12.5%] h-[3px] rounded-full ${dark ? "bg-paper/15" : "bg-stone/60"}`}
       />
       {/* Connecteur horizontal (desktop) qui se trace */}
       <motion.span
@@ -101,7 +105,7 @@ export default function StepsTimeline({
                     reduce ? undefined : { y: -8, rotate: -4, scale: 1.06 }
                   }
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="relative grid place-items-center w-[68px] h-[68px] md:w-24 md:h-24 bg-sage paper-texture rounded-tl-[24px] rounded-br-[24px] shadow-[0_16px_34px_-12px_rgba(25,20,101,0.7)] ring-4 ring-paper transition-colors duration-500 group-hover:bg-terracotta"
+                  className={`relative grid place-items-center w-[68px] h-[68px] md:w-24 md:h-24 bg-sage paper-texture rounded-tl-[24px] rounded-br-[24px] shadow-[0_16px_34px_-12px_rgba(25,20,101,0.7)] ring-4 transition-colors duration-500 group-hover:bg-terracotta ${dark ? "ring-paper/80" : "ring-paper"}`}
                 >
                   <Icon
                     className="text-paper w-7 h-7 md:w-8 md:h-8 transition-transform duration-500 group-hover:scale-110"
@@ -116,10 +120,14 @@ export default function StepsTimeline({
 
               {/* Contenu */}
               <div className="md:mt-9 pt-1 md:pt-0 min-w-0">
-                <h3 className="font-display font-semibold text-lg md:text-xl text-sage-deep transition-colors duration-300 group-hover:text-terracotta">
+                <h3
+                  className={`font-display font-semibold text-lg md:text-xl transition-colors duration-300 group-hover:text-terracotta ${dark ? "text-paper" : "text-sage-deep"}`}
+                >
                   {step.title}
                 </h3>
-                <p className="mt-2 text-[13px] md:text-[13.5px] text-ink-soft leading-relaxed md:max-w-[15rem] md:mx-auto">
+                <p
+                  className={`mt-2 text-[13px] md:text-[13.5px] leading-relaxed md:max-w-[15rem] md:mx-auto ${dark ? "text-paper/70" : "text-ink-soft"}`}
+                >
                   {step.desc}
                 </p>
               </div>
