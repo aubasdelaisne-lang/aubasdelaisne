@@ -133,10 +133,17 @@ const AVANTAGES = [
   { label: "On emporte tout, vous ne faites rien", nous: true, benne: false },
 ]
 
-const ZONES = [
-  "Château-Thierry", "Brasles", "Essômes-sur-Marne", "Chierry",
-  "Charly-sur-Marne", "Condé-en-Brie", "Dormans", "Fère-en-Tardenois",
-  "Coincy", "Belleau", "Étampes-sur-Marne",
+const ZONE_GROUPS = [
+  {
+    label: "CA Région de Château-Thierry",
+    dept: "Aisne · 02",
+    communes: ["Château-Thierry", "Brasles", "Chierry", "Essômes-sur-Marne", "Coincy", "Belleau", "Étampes-sur-Marne"],
+  },
+  {
+    label: "CC Charly-sur-Marne et la Marne",
+    dept: "Marne · 51",
+    communes: ["Charly-sur-Marne", "Condé-en-Brie", "Dormans", "Fère-en-Tardenois"],
+  },
 ]
 
 /* ─── composants internes ────────────────────────────────── */
@@ -567,58 +574,80 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <WaveDivider top="text-paper" bottom="bg-sage" />
-
       {/* ── ZONE DE COLLECTE ─────────────────────────────── */}
-      <section className="py-20 px-4 md:px-8 bg-sage">
-        <div className="max-w-[900px] mx-auto text-center">
+      <section className="py-20 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1060px] mx-auto">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            <MapPin size={28} className="text-terracotta mx-auto mb-4" strokeWidth={1.5} />
             <h2
-              className="font-display font-medium text-paper"
+              className="font-display font-medium text-ink"
               style={{ fontSize: "clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem)" }}
             >
               Zone d'intervention
             </h2>
-            <p className="mt-3 text-paper/65 text-[15px]">
-              On intervient à Château-Thierry et dans les communes alentour de l'Aisne.
+            <p className="mt-3 text-ink/50 text-[15px]">
+              On couvre deux territoires autour de Château-Thierry.
             </p>
           </motion.div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            {ZONES.map((zone, i) => (
-              <motion.span
-                key={zone}
+          <div className="grid md:grid-cols-2 gap-5">
+            {ZONE_GROUPS.map((group, gi) => (
+              <motion.div
+                key={group.label}
                 variants={fadeUp}
-                custom={i * 0.08}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-[13px] text-paper/80 bg-paper/10 border border-paper/15 px-4 py-2 rounded-full"
+                transition={{ delay: gi * 0.12 }}
+                className="spotlight relative bg-sage paper-texture rounded-tl-[44px] rounded-br-[44px] overflow-hidden p-8 md:p-10"
               >
-                {zone}
-              </motion.span>
+                <ShineSweep delay={gi * 0.3} />
+                {/* En-tête communauté */}
+                <div className="relative z-10 flex items-start gap-3 mb-6">
+                  <span className="mt-1.5 shrink-0 w-2.5 h-2.5 rounded-full bg-terracotta" />
+                  <div>
+                    <p className="text-paper font-display font-semibold text-[1.1rem] leading-snug">
+                      {group.label}
+                    </p>
+                    <p className="text-paper/40 text-[12px] mt-0.5">{group.dept}</p>
+                  </div>
+                </div>
+                {/* Communes */}
+                <div className="relative z-10 flex flex-wrap gap-2">
+                  {group.communes.map((c) => (
+                    <span
+                      key={c}
+                      className="text-[12.5px] text-paper/80 bg-paper/10 border border-paper/15 px-3.5 py-1.5 rounded-full"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             ))}
-            <motion.span
-              variants={fadeUp}
-              custom={ZONES.length * 0.08}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="text-[13px] text-terracotta bg-terracotta/10 border border-terracotta/20 px-4 py-2 rounded-full"
-            >
-              + appelez-nous pour vérifier
-            </motion.span>
           </div>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-center mt-8 text-ink/40 text-[13px]"
+          >
+            Votre commune n&apos;est pas listée ?{" "}
+            <a href={SITE.phoneHref} className="text-terracotta underline underline-offset-2 hover:text-terracotta-soft transition-colors">
+              Appelez-nous pour vérifier
+            </a>
+          </motion.p>
         </div>
       </section>
 
-      <ArcDivider top="text-sage" bottom="bg-cream" flip />
+      <WaveDivider top="text-paper" bottom="bg-cream" />
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-cream">
