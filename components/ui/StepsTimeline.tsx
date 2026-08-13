@@ -113,10 +113,10 @@ export default function StepsTimeline({
                   whileHover={
                     reduce ? undefined : { y: -8, rotate: -4, scale: 1.06 }
                   }
-                  className={`relative grid place-items-center w-[68px] h-[68px] md:w-24 md:h-24 bg-sage paper-texture rounded-tl-[24px] rounded-br-[24px] shadow-[0_16px_34px_-12px_rgba(25,20,101,0.7)] ring-4 transition-colors duration-500 group-hover:bg-terracotta ${dark ? "ring-paper/80" : "ring-paper"}`}
+                  className={`relative grid place-items-center w-[68px] h-[68px] md:w-24 md:h-24 bg-paper rounded-tl-[24px] rounded-br-[24px] shadow-[0_16px_34px_-12px_rgba(25,20,101,0.45)] ring-4 transition-colors duration-500 group-hover:bg-terracotta ${dark ? "ring-paper/20" : "ring-ink/10"}`}
                 >
                   <Icon
-                    className="text-paper w-7 h-7 md:w-8 md:h-8 transition-transform duration-500 group-hover:scale-110"
+                    className="text-sage w-7 h-7 md:w-8 md:h-8 transition-[transform,color] duration-500 group-hover:scale-110 group-hover:text-paper"
                     strokeWidth={1.6}
                   />
                   {/* Badge numéro */}

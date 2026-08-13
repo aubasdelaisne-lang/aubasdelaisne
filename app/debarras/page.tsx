@@ -60,43 +60,7 @@ const SITUATIONS: {
   },
 ]
 
-/* Langage visuel des cartes bento, repris de la page Boutique */
-const situationTones: Record<SituationTone, { bg: string; text: string; iconBg: string; iconColor: string; pill: string }> = {
-  sage: {
-    bg: "bg-sage paper-texture",
-    text: "text-paper",
-    iconBg: "bg-terracotta",
-    iconColor: "text-paper",
-    pill: "bg-paper/12 border-paper/25 text-paper/85",
-  },
-  terracotta: {
-    bg: "bg-terracotta paper-texture",
-    text: "text-paper",
-    iconBg: "bg-paper",
-    iconColor: "text-terracotta",
-    pill: "bg-paper/15 border-paper/30 text-paper/90",
-  },
-  cream: {
-    bg: "bg-cream-soft",
-    text: "text-ink",
-    iconBg: "bg-sage",
-    iconColor: "text-paper",
-    pill: "bg-sage/10 border-ink/10 text-sage-deep",
-  },
-  paper: {
-    bg: "bg-paper",
-    text: "text-ink",
-    iconBg: "bg-sage",
-    iconColor: "text-paper",
-    pill: "bg-sage/10 border-ink/10 text-sage-deep",
-  },
-}
-
-const situationSizes: Record<SituationSize, string> = {
-  xl: "md:col-span-2 md:row-span-2 rounded-tl-[60px] rounded-br-[60px] min-h-[240px]",
-  lg: "md:col-span-2 rounded-tl-[44px] rounded-br-[44px] min-h-[150px]",
-  md: "md:col-span-1 rounded-tl-[32px] rounded-br-[32px] min-h-[150px]",
-}
+const SITUATION_ICON_BG = ["bg-sage", "bg-terracotta", "bg-sage", "bg-terracotta"]
 
 const ETAPES = [
   {
@@ -265,80 +229,6 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      {/* ── STATS ────────────────────────────────────────── */}
-      <section className="py-14 md:py-20 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1100px] mx-auto">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-10"
-          >
-            <span className="inline-flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-terracotta" />
-              <span className="text-[11px] tracking-[0.3em] uppercase text-ink/40 font-semibold">
-                Une association qui a fait ses preuves
-              </span>
-              <span aria-hidden className="h-px w-8 bg-terracotta" />
-            </span>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[
-              { Icon: CalendarDays, val: 10, suffix: " ans", label: "d'expérience locale", bg: "bg-sage" },
-              { Icon: Recycle, val: 120, suffix: " t", label: "d'objets valorisés chaque année", bg: "bg-terracotta" },
-              { Icon: HeartHandshake, val: 15, suffix: "", label: "emplois d'insertion créés", bg: "bg-ink" },
-            ].map(({ Icon, val, suffix, label, bg }, i) => (
-              <motion.div
-                key={label}
-                variants={fadeUp}
-                custom={i}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                whileHover={{ y: -6 }}
-                className={`group relative overflow-hidden ${bg} paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 text-center`}
-              >
-                {/* Halo haut */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0"
-                  style={{ background: "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(255,255,255,0.14) 0%, transparent 60%)" }}
-                />
-                {/* Chiffre fantôme */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -bottom-7 -right-2 font-display font-extrabold leading-none select-none"
-                  style={{ fontSize: "8rem", color: "rgba(255,255,255,0.07)", letterSpacing: "-0.04em" }}
-                >
-                  {val}
-                </div>
-
-                <div className="relative z-10 flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-paper/12 border border-paper/20 flex items-center justify-center">
-                    <Icon size={22} className="text-paper" strokeWidth={1.8} />
-                  </span>
-                  <div
-                    className="mt-5 font-display font-bold text-paper tabular-nums leading-none"
-                    style={{ fontSize: "clamp(2.6rem, 1.6rem + 2.5vw, 3.6rem)" }}
-                  >
-                    <Counter target={val} suffix={suffix} />
-                  </div>
-                  <span
-                    aria-hidden
-                    className="mt-5 h-1 w-10 rounded-full bg-paper/45 transition-[width] duration-500 group-hover:w-16"
-                  />
-                  <span className="mt-4 text-[12px] uppercase tracking-[0.22em] font-semibold text-paper/75 leading-snug">
-                    {label}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ArcDivider top="text-paper" bottom="bg-cream" />
 
       {/* ── SITUATIONS ───────────────────────────────────── */}
@@ -362,68 +252,46 @@ export default function DebarrasPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 auto-rows-fr">
-            {SITUATIONS.map(({ Icon, title, desc, keywords, tone, size }, i) => {
-              const t = situationTones[tone]
-              const isXL = size === "xl"
-              return (
-                <motion.article
-                  key={title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-5 md:p-6 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_34px_70px_-20px_rgba(239,95,23,0.5)] ${situationSizes[size]} ${t.bg} ${t.text}`}
-                >
-                  {/* Shimmer diagonal au hover */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-y-0 -left-full w-1/2 bg-gradient-to-r from-transparent via-paper/25 to-transparent skew-x-[-18deg] group-hover:left-[150%] transition-[left] duration-[1400ms] ease-out"
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {SITUATIONS.map(({ Icon, title, desc, keywords }, i) => (
+              <motion.article
+                key={title}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 340, damping: 22 } }}
+                className="group flex gap-5 bg-paper rounded-tl-[36px] rounded-br-[36px] p-6 md:p-8 border-2 border-ink/8 hover:border-terracotta/60 hover:shadow-[0_20px_50px_-15px_rgba(239,95,23,0.22)] transition-[border-color,box-shadow] duration-500 cursor-default"
+              >
+                {/* Icône */}
+                <div className="shrink-0 pt-0.5">
+                  <motion.div
+                    whileHover={{ rotate: -8, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                    className={`w-14 h-14 rounded-tl-[16px] rounded-br-[16px] flex items-center justify-center shadow-md ${SITUATION_ICON_BG[i]}`}
+                  >
+                    <Icon size={22} strokeWidth={1.6} className="text-paper" />
+                  </motion.div>
+                </div>
 
-                  <div className="relative z-10 flex flex-col h-full">
-                    {/* Icône */}
-                    <div className="flex justify-end mb-3">
-                      <motion.div
-                        whileHover={{ rotate: 15, scale: 1.12 }}
-                        transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm ${t.iconBg}`}
-                      >
-                        <Icon size={20} strokeWidth={1.6} className={t.iconColor} />
-                      </motion.div>
-                    </div>
-
-                    {/* Titre */}
-                    <h3
-                      className={`font-display font-semibold leading-tight mb-3 ${
-                        isXL ? "text-3xl md:text-5xl" : "text-2xl md:text-[1.75rem]"
-                      }`}
-                    >
-                      {title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className={`leading-relaxed ${isXL ? "text-[15px] max-w-md" : "text-[13px]"} opacity-80`}>
-                      {desc}
-                    </p>
-
-                    {/* Mots-clés */}
-                    <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                      {keywords.map((k) => (
-                        <span
-                          key={k}
-                          className={`text-[11px] border px-3 py-1 rounded-full ${t.pill}`}
-                        >
-                          {k}
-                        </span>
-                      ))}
-                    </div>
+                {/* Contenu */}
+                <div className="min-w-0">
+                  <h3 className="font-display font-semibold text-[1.25rem] text-ink leading-tight mb-2 group-hover:text-terracotta transition-colors duration-300">
+                    {title}
+                  </h3>
+                  <p className="text-ink/55 text-[13.5px] leading-relaxed mb-4">
+                    {desc}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {keywords.map((k) => (
+                      <span key={k} className="text-[11px] text-ink/45 border border-ink/12 px-2.5 py-1 rounded-full">
+                        {k}
+                      </span>
+                    ))}
                   </div>
-                </motion.article>
-              )
-            })}
+                </div>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>
@@ -482,7 +350,10 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <ArcDivider top="text-ink" bottom="bg-paper" flip />
+      {/* Transition diagonale bg-ink → bg-paper */}
+      <div aria-hidden className="relative h-20 overflow-hidden -mb-px bg-paper">
+        <div className="absolute inset-0 bg-ink" style={{ clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 100%)" }} />
+      </div>
 
       {/* ── NOUS VS BENNE ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-paper">
@@ -574,27 +445,147 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      {/* ── ZONE DE COLLECTE ─────────────────────────────── */}
-      <section className="py-20 px-4 md:px-8 bg-paper">
-        <div className="max-w-[1060px] mx-auto">
+      {/* ── STATS ────────────────────────────────────────── */}
+      <section className="py-14 md:py-20 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1100px] mx-auto">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 md:mb-10"
           >
-            <h2
-              className="font-display font-medium text-ink"
-              style={{ fontSize: "clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem)" }}
-            >
-              Zone d'intervention
-            </h2>
-            <p className="mt-3 text-ink/50 text-[15px]">
-              On couvre deux territoires autour de Château-Thierry.
-            </p>
+            <span className="inline-flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-terracotta" />
+              <span className="text-[11px] tracking-[0.3em] uppercase text-ink/40 font-semibold">
+                Une association qui a fait ses preuves
+              </span>
+              <span aria-hidden className="h-px w-8 bg-terracotta" />
+            </span>
           </motion.div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[
+              { Icon: CalendarDays, val: 10, suffix: " ans", label: "d'expérience locale", bg: "bg-sage" },
+              { Icon: Recycle, val: 120, suffix: " t", label: "d'objets valorisés chaque année", bg: "bg-terracotta" },
+              { Icon: HeartHandshake, val: 15, suffix: "", label: "emplois d'insertion créés", bg: "bg-ink" },
+            ].map(({ Icon, val, suffix, label, bg }, i) => (
+              <motion.div
+                key={label}
+                variants={fadeUp}
+                custom={i}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                whileHover={{ y: -6 }}
+                className={`group relative overflow-hidden ${bg} paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 text-center`}
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(255,255,255,0.14) 0%, transparent 60%)" }}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-7 -right-2 font-display font-extrabold leading-none select-none"
+                  style={{ fontSize: "8rem", color: "rgba(255,255,255,0.07)", letterSpacing: "-0.04em" }}
+                >
+                  {val}
+                </div>
+                <div className="relative z-10 flex flex-col items-center">
+                  <span className="w-12 h-12 rounded-xl bg-paper/12 border border-paper/20 flex items-center justify-center">
+                    <Icon size={22} className="text-paper" strokeWidth={1.8} />
+                  </span>
+                  <div
+                    className="mt-5 font-display font-bold text-paper tabular-nums leading-none"
+                    style={{ fontSize: "clamp(2.6rem, 1.6rem + 2.5vw, 3.6rem)" }}
+                  >
+                    <Counter target={val} suffix={suffix} />
+                  </div>
+                  <span aria-hidden className="mt-5 h-1 w-10 rounded-full bg-paper/45 transition-[width] duration-500 group-hover:w-16" />
+                  <span className="mt-4 text-[12px] uppercase tracking-[0.22em] font-semibold text-paper/75 leading-snug">
+                    {label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Transition diagonale bg-paper → bg-ink ────────── */}
+      <div aria-hidden className="relative h-20 overflow-hidden -mb-px bg-paper">
+        <div className="absolute inset-0 bg-ink" style={{ clipPath: "polygon(0 60%, 100% 0, 100% 100%, 0 100%)" }} />
+      </div>
+
+      {/* ── ZONE DE COLLECTE ─────────────────────────────── */}
+      <section className="relative py-20 px-4 md:px-8 bg-ink overflow-hidden">
+        {/* Filaments animés */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[0, 1, 2, 3].map((i) => (
+            <motion.span
+              key={i}
+              initial={{ x: "-30%", opacity: 0 }}
+              animate={{ x: ["−30%", "130%"], opacity: [0, 0.35, 0.35, 0] }}
+              transition={{
+                duration: 14 + i * 3.5,
+                delay: i * 3.2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute block"
+              style={{
+                top: `${12 + i * 22}%`,
+                left: 0,
+                right: 0,
+                height: "1px",
+                background: `linear-gradient(90deg, transparent, rgba(239,95,23,${0.18 + i * 0.04}), rgba(255,255,255,0.12), transparent)`,
+                transform: `rotate(${-8 + i * 3.5}deg) scaleX(1.6)`,
+                transformOrigin: "left center",
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="relative z-10 max-w-[1060px] mx-auto">
+          {/* En-tête + stat */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <span className="inline-flex items-center gap-2 text-terracotta text-[11px] uppercase tracking-[0.2em] font-semibold mb-3">
+                <MapPin size={12} strokeWidth={2.5} />
+                Zone desservie
+              </span>
+              <h2
+                className="font-display font-medium text-paper"
+                style={{ fontSize: "clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem)" }}
+              >
+                On intervient près de chez vous
+              </h2>
+              <p className="mt-3 text-paper/50 text-[15px] max-w-[40ch]">
+                Deux communautés de communes couvertes autour de Château-Thierry.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="shrink-0 text-right md:text-right"
+            >
+              <p className="font-display font-semibold text-paper leading-none" style={{ fontSize: "clamp(2.8rem, 1.5rem + 3vw, 4rem)" }}>
+                ~30 km
+              </p>
+              <p className="text-paper/40 text-[12.5px] mt-1 uppercase tracking-[0.15em]">de rayon autour de CT</p>
+            </motion.div>
+          </div>
+
+          {/* Cartes communautés */}
           <div className="grid md:grid-cols-2 gap-5">
             {ZONE_GROUPS.map((group, gi) => (
               <motion.div
@@ -603,26 +594,30 @@ export default function DebarrasPage() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                transition={{ delay: gi * 0.12 }}
-                className="spotlight relative bg-sage paper-texture rounded-tl-[44px] rounded-br-[44px] overflow-hidden p-8 md:p-10"
+                transition={{ delay: gi * 0.14 }}
+                className="relative bg-paper rounded-tl-[44px] rounded-br-[44px] overflow-hidden p-8 md:p-10 shadow-[0_24px_64px_-16px_rgba(10,8,56,0.55)]"
               >
-                <ShineSweep delay={gi * 0.3} />
-                {/* En-tête communauté */}
-                <div className="relative z-10 flex items-start gap-3 mb-6">
-                  <span className="mt-1.5 shrink-0 w-2.5 h-2.5 rounded-full bg-terracotta" />
-                  <div>
-                    <p className="text-paper font-display font-semibold text-[1.1rem] leading-snug">
-                      {group.label}
-                    </p>
-                    <p className="text-paper/40 text-[12px] mt-0.5">{group.dept}</p>
+                {/* Numéro décoratif */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1.5 shrink-0 w-2.5 h-2.5 rounded-full bg-terracotta" />
+                    <div>
+                      <p className="text-ink font-display font-semibold text-[1.1rem] leading-snug">
+                        {group.label}
+                      </p>
+                      <p className="text-ink/40 text-[12px] mt-0.5">{group.dept}</p>
+                    </div>
                   </div>
+                  <span className="font-display text-[2.5rem] font-bold text-ink/8 leading-none select-none">
+                    {gi + 1}
+                  </span>
                 </div>
                 {/* Communes */}
-                <div className="relative z-10 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {group.communes.map((c) => (
                     <span
                       key={c}
-                      className="text-[12.5px] text-paper/80 bg-paper/10 border border-paper/15 px-3.5 py-1.5 rounded-full"
+                      className="text-[12.5px] text-ink/65 bg-ink/5 border border-ink/12 px-3.5 py-1.5 rounded-full hover:bg-ink/10 transition-colors"
                     >
                       {c}
                     </span>
@@ -637,17 +632,18 @@ export default function DebarrasPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-center mt-8 text-ink/40 text-[13px]"
+            className="text-center mt-8 text-paper/35 text-[13px]"
           >
             Votre commune n&apos;est pas listée ?{" "}
-            <a href={SITE.phoneHref} className="text-terracotta underline underline-offset-2 hover:text-terracotta-soft transition-colors">
+            <a href={SITE.phoneHref} className="text-terracotta hover:text-terracotta/80 underline underline-offset-2 transition-colors">
               Appelez-nous pour vérifier
             </a>
           </motion.p>
         </div>
       </section>
 
-      <WaveDivider top="text-paper" bottom="bg-cream" />
+      {/* Transition bg-ink → bg-cream */}
+      <WaveDivider top="text-ink" bottom="bg-cream" />
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-cream">
@@ -681,7 +677,10 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <WaveDivider top="text-cream" bottom="bg-terracotta" />
+      {/* Transition diagonale bg-cream → bg-terracotta */}
+      <div aria-hidden className="relative h-16 overflow-hidden -mb-px bg-terracotta">
+        <div className="absolute inset-0 bg-cream" style={{ clipPath: "polygon(0 0, 100% 0, 100% 55%, 0 100%)" }} />
+      </div>
 
       {/* ── CTA FINAL ────────────────────────────────────── */}
       <section className="py-24 px-4 md:px-8 bg-terracotta text-center relative overflow-hidden">

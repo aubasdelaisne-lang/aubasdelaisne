@@ -2,12 +2,12 @@
 // et par le layout (données structurées JSON-LD pour Google).
 export const FAQS = [
   {
-    q: "Le débarras est-il gratuit ?",
-    a: "Cela dépend de la quantité et de la qualité des objets. Pour des volumes importants avec des objets valorisables, le débarras peut être sans frais. On vous fait un devis honnête après évaluation.",
+    q: "Le débarras est-il payant ?",
+    a: "Pas toujours. Lorsque les objets ont de la valeur et que le volume est important, on peut intervenir gratuitement : la revente en boutique couvre nos frais. Si les objets sont peu valorisables, une participation peut être demandée. Dans tous les cas, on vous fait un devis honnête et sans surprise avant d'intervenir.",
   },
   {
     q: "Vous intervenez à quelle distance de Château-Thierry ?",
-    a: "On intervient principalement dans Château-Thierry et les communes alentour dans l'Aisne. Appelez-nous pour vérifier si votre adresse est couverte.",
+    a: "On couvre la communauté d'agglomération de la région de Château-Thierry (Aisne) et la communauté de communes Charly-sur-Marne et la Marne. Appelez-nous pour vérifier si votre adresse est couverte.",
   },
   {
     q: "Que faites-vous des objets collectés ?",
