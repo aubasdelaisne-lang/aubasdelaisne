@@ -7,37 +7,92 @@ import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import WaveDivider from "@/components/ui/WaveDivider"
 import ArcDivider from "@/components/ui/ArcDivider"
-import TiltCard from "@/components/ui/TiltCard"
 import { FAQS } from "./faq-data"
 
 /* ─── données ────────────────────────────────────────────── */
 
-const SITUATIONS = [
+type SituationTone = "sage" | "terracotta" | "cream" | "paper"
+type SituationSize = "xl" | "lg" | "md"
+
+const SITUATIONS: {
+  Icon: typeof Truck
+  title: string
+  desc: string
+  keywords: string[]
+  tone: SituationTone
+  size: SituationSize
+}[] = [
+  {
+    Icon: KeyRound,
+    title: "Succession",
+    desc: "Vider la maison d'un proche après un décès. On s'occupe de tout, avec respect et discrétion, pendant que vous gardez l'esprit à l'essentiel.",
+    keywords: ["héritage", "vider une maison", "appartement"],
+    tone: "sage",
+    size: "xl",
+  },
   {
     Icon: Truck,
     title: "Déménagement",
     desc: "Vous partez et ne pouvez pas tout emporter ? On vient vider ce qui reste avant votre départ.",
     keywords: ["meubles", "électroménager", "cartons"],
-  },
-  {
-    Icon: KeyRound,
-    title: "Succession",
-    desc: "Vider le logement d'un proche après un décès. On s'occupe de tout, avec respect et discrétion.",
-    keywords: ["héritage", "vider appartement", "maison"],
+    tone: "terracotta",
+    size: "lg",
   },
   {
     Icon: Archive,
     title: "Grenier / cave",
-    desc: "Des années d'accumulation à évacuer ? Livres, meubles, bibelots : on trie et on valorise.",
-    keywords: ["encombrants", "vider grenier", "cave garage"],
+    desc: "Des années d'accumulation à évacuer ? On trie et on valorise.",
+    keywords: ["encombrants", "vider grenier"],
+    tone: "cream",
+    size: "md",
   },
   {
     Icon: Hammer,
     title: "Avant travaux",
-    desc: "Libérer la place avant une rénovation ou un aménagement. Rapide et sans effort de votre côté.",
-    keywords: ["rénovation", "libérer espace", "travaux"],
+    desc: "Libérer la place avant une rénovation, sans effort de votre côté.",
+    keywords: ["rénovation", "travaux"],
+    tone: "paper",
+    size: "md",
   },
 ]
+
+/* Langage visuel des cartes bento, repris de la page Boutique */
+const situationTones: Record<SituationTone, { bg: string; text: string; iconBg: string; iconColor: string; pill: string }> = {
+  sage: {
+    bg: "bg-sage paper-texture",
+    text: "text-paper",
+    iconBg: "bg-terracotta",
+    iconColor: "text-paper",
+    pill: "bg-paper/12 border-paper/25 text-paper/85",
+  },
+  terracotta: {
+    bg: "bg-terracotta paper-texture",
+    text: "text-paper",
+    iconBg: "bg-paper",
+    iconColor: "text-terracotta",
+    pill: "bg-paper/15 border-paper/30 text-paper/90",
+  },
+  cream: {
+    bg: "bg-cream-soft",
+    text: "text-ink",
+    iconBg: "bg-sage",
+    iconColor: "text-paper",
+    pill: "bg-sage/10 border-ink/10 text-sage-deep",
+  },
+  paper: {
+    bg: "bg-paper",
+    text: "text-ink",
+    iconBg: "bg-sage",
+    iconColor: "text-paper",
+    pill: "bg-sage/10 border-ink/10 text-sage-deep",
+  },
+}
+
+const situationSizes: Record<SituationSize, string> = {
+  xl: "md:col-span-2 md:row-span-2 rounded-tl-[60px] rounded-br-[60px] min-h-[240px]",
+  lg: "md:col-span-2 rounded-tl-[44px] rounded-br-[44px] min-h-[150px]",
+  md: "md:col-span-1 rounded-tl-[32px] rounded-br-[32px] min-h-[150px]",
+}
 
 const ETAPES = [
   {
@@ -297,37 +352,68 @@ export default function DebarrasPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {SITUATIONS.map(({ Icon, title, desc, keywords }, i) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                custom={i * 0.5}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-              >
-                <TiltCard className="h-full rounded-2xl">
-                  <div className="h-full bg-paper border border-ink/8 rounded-2xl p-7 flex flex-col gap-4">
-                    <span className="w-12 h-12 rounded-xl bg-sage/15 flex items-center justify-center">
-                      <Icon size={24} className="text-sage-deep" strokeWidth={1.8} />
-                    </span>
-                    <h3 className="font-display font-semibold text-ink text-[1.2rem]">{title}</h3>
-                    <p className="text-ink/60 text-[14px] leading-relaxed flex-1">{desc}</p>
-                    <div className="flex flex-wrap gap-2 mt-auto pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 auto-rows-fr">
+            {SITUATIONS.map(({ Icon, title, desc, keywords, tone, size }, i) => {
+              const t = situationTones[tone]
+              const isXL = size === "xl"
+              return (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -14, transition: { type: "spring", stiffness: 320, damping: 20 } }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`spotlight group relative border-2 border-ink/10 hover:border-terracotta p-5 md:p-6 cursor-default overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-[0_34px_70px_-20px_rgba(239,95,23,0.5)] ${situationSizes[size]} ${t.bg} ${t.text}`}
+                >
+                  {/* Shimmer diagonal au hover */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 -left-full w-1/2 bg-gradient-to-r from-transparent via-paper/25 to-transparent skew-x-[-18deg] group-hover:left-[150%] transition-[left] duration-[1400ms] ease-out"
+                  />
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    {/* Icône */}
+                    <div className="flex justify-end mb-3">
+                      <motion.div
+                        whileHover={{ rotate: 15, scale: 1.12 }}
+                        transition={{ type: "spring", stiffness: 260, damping: 16 }}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm ${t.iconBg}`}
+                      >
+                        <Icon size={20} strokeWidth={1.6} className={t.iconColor} />
+                      </motion.div>
+                    </div>
+
+                    {/* Titre */}
+                    <h3
+                      className={`font-display font-semibold leading-tight mb-3 ${
+                        isXL ? "text-3xl md:text-5xl" : "text-2xl md:text-[1.75rem]"
+                      }`}
+                    >
+                      {title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className={`leading-relaxed ${isXL ? "text-[15px] max-w-md" : "text-[13px]"} opacity-80`}>
+                      {desc}
+                    </p>
+
+                    {/* Mots-clés */}
+                    <div className="mt-auto pt-4 flex flex-wrap gap-2">
                       {keywords.map((k) => (
                         <span
                           key={k}
-                          className="text-[11px] bg-sage/10 text-sage-deep px-3 py-1 rounded-full"
+                          className={`text-[11px] border px-3 py-1 rounded-full ${t.pill}`}
                         >
                           {k}
                         </span>
                       ))}
                     </div>
                   </div>
-                </TiltCard>
-              </motion.div>
-            ))}
+                </motion.article>
+              )
+            })}
           </div>
         </div>
       </section>
