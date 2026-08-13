@@ -163,31 +163,27 @@ export default function DebarrasPage() {
         <ScrollFilaments className="absolute inset-0 opacity-30" />
 
         <div className="relative z-10 max-w-[1200px] mx-auto w-full">
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <span className="h-px w-8 bg-terracotta" />
-            <span className="text-[11px] tracking-[0.3em] uppercase text-paper/60 font-semibold">
-              Débarras à Château-Thierry
-            </span>
-          </motion.div>
-
-          {/* Headline mot par mot */}
+          {/* Headline — l'eyebrow fait partie du h1 (mot-clé SEO dans le titre) */}
           <h1
             className="font-display font-medium text-paper leading-[1.04]"
             style={{ fontSize: "clamp(2.6rem, 2rem + 4vw, 5.5rem)" }}
           >
-            {["Vous débarrassez,", "on s'occupe", "du reste."].map((line, li) => (
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-8 flex items-center gap-3 text-[11px] tracking-[0.3em] uppercase text-paper/60 font-semibold"
+            >
+              <span className="h-px w-8 bg-terracotta" />
+              Débarras à Château-Thierry
+            </motion.span>
+            {["Une maison à vider ?", "Respirez.", "On s'occupe de tout."].map((line, li) => (
               <span key={li} className="block overflow-hidden pb-[0.06em]">
                 <motion.span
                   initial={{ y: "110%" }}
                   animate={{ y: "0%" }}
                   transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 + li * 0.12 }}
-                  className="block"
+                  className={`block ${li === 1 ? "text-terracotta" : ""}`}
                 >
                   {line}
                 </motion.span>
@@ -202,9 +198,10 @@ export default function DebarrasPage() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
             className="mt-7 max-w-lg text-paper/70 text-[16px] leading-relaxed"
           >
-            Déménagement, succession, grenier à vider, appartement à libérer —
-            notre équipe se déplace à Château-Thierry et dans l'Aisne.
-            On collecte, on trie, on valorise.
+            Déménagement, succession, grenier plein à craquer — on vient, on
+            emporte, vous n'avez rien à porter. Et rien ne part inutilement à la
+            benne : vos objets retrouvent une seconde vie en boutique et
+            financent l'emploi local dans le sud de l'Aisne.
           </motion.p>
 
           {/* CTA */}
@@ -230,14 +227,24 @@ export default function DebarrasPage() {
             </a>
           </motion.div>
 
+          {/* Micro-copie de réassurance */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.85 }}
+            className="mt-4 text-paper/45 text-[13px]"
+          >
+            Un coup de fil suffit — devis gratuit, sans engagement.
+          </motion.p>
+
           {/* Badges confiance */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="mt-12 flex flex-wrap gap-4"
+            className="mt-10 flex flex-wrap gap-4"
           >
-            {["Équipe locale", "Depuis 2014", "Démarche solidaire", "Devis gratuit"].map((b) => (
+            {["Association locale depuis 2014", "Vous ne portez rien", "Tout est trié et valorisé"].map((b) => (
               <span
                 key={b}
                 className="text-[12px] text-paper/50 border border-paper/10 px-4 py-1.5 rounded-full"
