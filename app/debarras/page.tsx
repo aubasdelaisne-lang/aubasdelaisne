@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView, type Variants } from "framer-motion"
-import { Phone, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown } from "lucide-react"
+import { Phone, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import WaveDivider from "@/components/ui/WaveDivider"
@@ -201,31 +201,76 @@ export default function DebarrasPage() {
       </section>
 
       {/* ── STATS ────────────────────────────────────────── */}
-      <section className="py-16 px-4 md:px-8 bg-paper">
-        <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          {[
-            { val: 10, suffix: " ans", label: "d'expérience locale" },
-            { val: 120, suffix: " t", label: "d'objets valorisés par an" },
-            { val: 15, suffix: "", label: "emplois d'insertion créés" },
-          ].map(({ val, suffix, label }, i) => (
-            <motion.div
-              key={label}
-              variants={fadeUp}
-              custom={i}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center gap-2"
-            >
-              <span
-                className="font-display font-bold text-ink tabular-nums"
-                style={{ fontSize: "clamp(2.5rem, 1.5rem + 3vw, 4rem)" }}
-              >
-                <Counter target={val} suffix={suffix} />
+      <section className="py-14 md:py-20 px-4 md:px-8 bg-paper">
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-center mb-8 md:mb-10"
+          >
+            <span className="inline-flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-terracotta" />
+              <span className="text-[11px] tracking-[0.3em] uppercase text-ink/40 font-semibold">
+                Une association qui a fait ses preuves
               </span>
-              <span className="text-ink/50 text-[13px] uppercase tracking-[0.15em]">{label}</span>
-            </motion.div>
-          ))}
+              <span aria-hidden className="h-px w-8 bg-terracotta" />
+            </span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[
+              { Icon: CalendarDays, val: 10, suffix: " ans", label: "d'expérience locale", bg: "bg-sage" },
+              { Icon: Recycle, val: 120, suffix: " t", label: "d'objets valorisés chaque année", bg: "bg-terracotta" },
+              { Icon: HeartHandshake, val: 15, suffix: "", label: "emplois d'insertion créés", bg: "bg-ink" },
+            ].map(({ Icon, val, suffix, label, bg }, i) => (
+              <motion.div
+                key={label}
+                variants={fadeUp}
+                custom={i}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                whileHover={{ y: -6 }}
+                className={`group relative overflow-hidden ${bg} paper-texture border-2 border-ink/10 rounded-tl-[40px] rounded-br-[40px] p-8 md:p-10 text-center`}
+              >
+                {/* Halo haut */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(255,255,255,0.14) 0%, transparent 60%)" }}
+                />
+                {/* Chiffre fantôme */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-7 -right-2 font-display font-extrabold leading-none select-none"
+                  style={{ fontSize: "8rem", color: "rgba(255,255,255,0.07)", letterSpacing: "-0.04em" }}
+                >
+                  {val}
+                </div>
+
+                <div className="relative z-10 flex flex-col items-center">
+                  <span className="w-12 h-12 rounded-xl bg-paper/12 border border-paper/20 flex items-center justify-center">
+                    <Icon size={22} className="text-paper" strokeWidth={1.8} />
+                  </span>
+                  <div
+                    className="mt-5 font-display font-bold text-paper tabular-nums leading-none"
+                    style={{ fontSize: "clamp(2.6rem, 1.6rem + 2.5vw, 3.6rem)" }}
+                  >
+                    <Counter target={val} suffix={suffix} />
+                  </div>
+                  <span
+                    aria-hidden
+                    className="mt-5 h-1 w-10 rounded-full bg-paper/45 transition-[width] duration-500 group-hover:w-16"
+                  />
+                  <span className="mt-4 text-[12px] uppercase tracking-[0.22em] font-semibold text-paper/75 leading-snug">
+                    {label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
