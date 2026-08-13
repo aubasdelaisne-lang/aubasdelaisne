@@ -442,19 +442,19 @@ export default function DebarrasPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="spotlight relative mt-16 bg-sage paper-texture border-2 border-paper/20 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
+            className="spotlight relative mt-16 bg-paper border-2 border-sage/15 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(10,8,56,0.4)]"
           >
             <ShineSweep delay={0.4} />
-            <h3 className="relative z-10 font-display font-medium text-3xl md:text-4xl text-paper leading-tight">
+            <h3 className="relative z-10 font-display font-medium text-3xl md:text-4xl text-sage-deep leading-tight">
               Parlons de votre débarras.
             </h3>
-            <p className="relative z-10 mt-4 text-paper/85 text-[15px]">
+            <p className="relative z-10 mt-4 text-ink/60 text-[15px]">
               Par téléphone ou par mail, comme vous préférez. Devis gratuit, sans engagement.
             </p>
             <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-3">
               <MagneticButton
                 href={SITE.phoneHref}
-                className="bg-paper text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full"
+                className="bg-sage text-paper px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full"
               >
                 <span className="inline-flex items-center gap-2">
                   <Phone size={15} strokeWidth={2} />
@@ -463,7 +463,7 @@ export default function DebarrasPage() {
               </MagneticButton>
               <MagneticButton
                 href={`mailto:${SITE.email}`}
-                className="border-2 border-paper/40 text-paper px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full hover:border-paper"
+                className="border-2 border-sage/50 text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full hover:border-sage hover:bg-sage/5"
               >
                 <span className="inline-flex items-center gap-2">
                   <Mail size={15} strokeWidth={2} />
