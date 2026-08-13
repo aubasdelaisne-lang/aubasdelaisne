@@ -29,6 +29,11 @@ export default function StepsTimeline({
   const reduce = useReducedMotion()
   const dark = tone === "dark"
 
+  // Timing : la ligne se trace en 1.6 s, chaque icône se lève quand la ligne l'atteint
+  const RAIL_DURATION = 1.6
+  const RAIL_DELAY = 0.1
+  const itemDelays = [0.1, 0.6, 1.1, 1.6] // ~position de la ligne quand elle passe devant chaque icône
+
   return (
     <div className="relative">
       {/* Rail de fond (desktop) */}
@@ -42,7 +47,7 @@ export default function StepsTimeline({
         initial={reduce ? false : { scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.4, ease, delay: 0.2 }}
+        transition={{ duration: RAIL_DURATION, ease, delay: RAIL_DELAY }}
         className="hidden md:block absolute top-[46px] left-[12.5%] right-[12.5%] h-[3px] origin-left rounded-full bg-gradient-to-r from-terracotta via-terracotta to-terracotta"
       />
       {/* Point lumineux qui parcourt la frise (desktop) */}
@@ -55,7 +60,7 @@ export default function StepsTimeline({
             opacity: [0, 1, 1, 0],
           }}
           viewport={{ once: true }}
-          transition={{ duration: 2.6, delay: 1.4, ease: "easeInOut" }}
+          transition={{ duration: 2.2, delay: RAIL_DELAY + 0.1, ease: "easeInOut" }}
           className="hidden md:block absolute top-[46px] -mt-[6px] h-[15px] w-[15px] -translate-x-1/2 rounded-full bg-terracotta shadow-[0_0_18px_4px_rgba(239,95,23,0.7)]"
         />
       )}
@@ -66,21 +71,21 @@ export default function StepsTimeline({
         initial={reduce ? false : { scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.4, ease, delay: 0.2 }}
+        transition={{ duration: RAIL_DURATION, ease, delay: RAIL_DELAY }}
         className="md:hidden absolute top-8 bottom-8 left-[35px] w-[3px] origin-top rounded-full bg-gradient-to-b from-terracotta to-terracotta/50"
       />
 
       <ol className="relative grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-6">
         {steps.map((step, i) => {
           const Icon = icons[i]
-          const delay = i * 0.15
+          const delay = itemDelays[i] ?? i * 0.5
           return (
             <motion.li
               key={step.step}
-              initial={reduce ? false : { opacity: 0, y: 28 }}
+              initial={reduce ? false : { opacity: 0, y: 48 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay, ease }}
+              transition={{ duration: 0.55, delay, ease }}
               className="group relative flex md:flex-col items-start md:items-center gap-5 md:gap-0 md:text-center"
             >
               {/* Nœud (coins asymétriques = signature du site) */}
@@ -101,10 +106,13 @@ export default function StepsTimeline({
                   />
                 )}
                 <motion.div
+                  initial={reduce ? false : { scale: 0.5, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 280, damping: 18, delay: delay + 0.05 }}
                   whileHover={
                     reduce ? undefined : { y: -8, rotate: -4, scale: 1.06 }
                   }
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
                   className={`relative grid place-items-center w-[68px] h-[68px] md:w-24 md:h-24 bg-sage paper-texture rounded-tl-[24px] rounded-br-[24px] shadow-[0_16px_34px_-12px_rgba(25,20,101,0.7)] ring-4 transition-colors duration-500 group-hover:bg-terracotta ${dark ? "ring-paper/80" : "ring-paper"}`}
                 >
                   <Icon

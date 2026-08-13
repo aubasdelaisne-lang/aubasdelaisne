@@ -177,7 +177,7 @@ export default function BoutiquePage() {
             <ul className="mt-8 space-y-3">
               {[
                 "Arrivages renouvelés chaque semaine",
-                "Prix doux, objets choisis avec soin",
+                "Prix accessibles, objets triés avec soin",
                 "Ouvert du mardi au samedi",
               ].map((t) => (
                 <li key={t} className="flex items-center gap-3 text-[14px] text-sage-deep">
