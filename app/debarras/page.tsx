@@ -2,11 +2,15 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView, type Variants } from "framer-motion"
-import { Phone, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake } from "lucide-react"
+import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import WaveDivider from "@/components/ui/WaveDivider"
 import ArcDivider from "@/components/ui/ArcDivider"
+import SectionHeader from "@/components/ui/SectionHeader"
+import StepsTimeline from "@/components/ui/StepsTimeline"
+import MagneticButton from "@/components/ui/MagneticButton"
+import AmbientBackground from "@/components/ui/AmbientBackground"
 import { FAQS } from "./faq-data"
 
 /* ─── données ────────────────────────────────────────────── */
@@ -96,30 +100,29 @@ const situationSizes: Record<SituationSize, string> = {
 
 const ETAPES = [
   {
-    num: "01",
-    title: "Un appel suffit",
-    desc: "Décrivez-nous en quelques mots ce que vous souhaitez débarrasser. On évalue ensemble et on convient d'un créneau.",
-    color: "bg-terracotta",
+    step: "01",
+    title: "Un appel ou un mail",
+    desc: "Décrivez-nous en quelques mots ce que vous souhaitez débarrasser, par téléphone ou par écrit. On convient d'un créneau ensemble.",
   },
   {
-    num: "02",
+    step: "02",
     title: "On se déplace",
     desc: "Notre équipe vient chez vous à Château-Thierry ou dans l'Aisne pour voir les objets et vous faire un devis sur place.",
-    color: "bg-sage",
   },
   {
-    num: "03",
+    step: "03",
     title: "On collecte tout",
     desc: "Meubles, encombrants, bibelots : on emporte tout. Vous n'avez rien à trier, rien à porter, rien à amener.",
-    color: "bg-terracotta",
   },
   {
-    num: "04",
+    step: "04",
     title: "On valorise",
-    desc: "Ce qui peut être revendu part en boutique. Le reste est recyclé. Chaque objet récupéré finance l'insertion professionnelle locale.",
-    color: "bg-sage",
+    desc: "Ce qui peut être revendu part en boutique. Le reste est recyclé. Chaque objet finance l'insertion professionnelle locale.",
   },
 ]
+
+/* Icônes de la frise : contact, visite, collecte, valorisation */
+const ETAPES_ICONES = [Phone, MapPin, Truck, Recycle]
 
 const AVANTAGES = [
   { label: "Équipe locale, basée à Château-Thierry", nous: true, benne: false },
@@ -248,7 +251,7 @@ export default function DebarrasPage() {
                 </a>
               </div>
               <p className="mt-5 text-paper/60 text-[13px]">
-                Un coup de fil suffit : devis gratuit, sans engagement.
+                Un appel ou un mail suffit : devis gratuit, sans engagement.
               </p>
             </div>
           </div>
@@ -418,85 +421,58 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <WaveDivider top="text-cream" bottom="bg-ink" />
+      <WaveDivider top="text-cream" bottom="bg-paper" />
 
-      {/* ── COMMENT ÇA MARCHE ────────────────────────────── */}
-      <section id="comment" className="py-20 px-4 md:px-8 bg-ink">
-        <div className="max-w-[860px] mx-auto">
+      {/* ── COMMENT ÇA MARCHE (frise commune du site) ────── */}
+      <section id="comment" className="relative py-16 md:py-28 px-4 md:px-8 bg-paper overflow-hidden">
+        <AmbientBackground variant="light" />
+        <div className="relative z-10 max-w-[1100px] mx-auto">
+          <SectionHeader
+            eyebrow="Simple et rapide"
+            title="Comment ça se passe ?"
+            lede="Quatre étapes, zéro effort de votre côté."
+          />
+
+          <StepsTimeline steps={ETAPES} icons={ETAPES_ICONES} />
+
+          {/* CTA bar sauge : téléphone ou mail */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-14"
+            transition={{ duration: 0.8 }}
+            className="spotlight relative mt-16 bg-sage paper-texture border-2 border-ink/10 p-8 md:p-12 text-center rounded-tl-[60px] md:rounded-tl-[80px] rounded-br-[60px] md:rounded-br-[80px] overflow-hidden"
           >
-            <span className="text-[11px] tracking-[0.3em] uppercase text-paper/30 font-semibold">
-              Simple et rapide
-            </span>
-            <h2
-              className="mt-3 font-display font-medium text-paper"
-              style={{ fontSize: "clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem)" }}
-            >
-              Comment ça se passe ?
-            </h2>
-          </motion.div>
-
-          <div className="relative">
-            {/* Ligne verticale animée */}
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-paper/10 hidden md:block" />
-
-            <div className="flex flex-col gap-0">
-              {ETAPES.map(({ num, title, desc, color }, i) => (
-                <motion.div
-                  key={num}
-                  variants={fadeUp}
-                  custom={i * 0.4}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, margin: "-80px" }}
-                  className="relative flex gap-6 md:gap-10 pb-12 last:pb-0"
-                >
-                  {/* Pastille numéro */}
-                  <div className="relative shrink-0 z-10">
-                    <div
-                      className={`w-12 h-12 rounded-full ${color} flex items-center justify-center font-display font-bold text-paper text-[14px]`}
-                    >
-                      {num}
-                    </div>
-                  </div>
-
-                  {/* Contenu */}
-                  <div className="pt-2 pb-2">
-                    <h3 className="font-display font-semibold text-paper text-[1.1rem] mb-2">
-                      {title}
-                    </h3>
-                    <p className="text-paper/55 text-[14px] leading-relaxed max-w-xl">{desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <ShineSweep delay={0.4} />
+            <h3 className="relative z-10 font-display font-medium text-3xl md:text-4xl text-paper leading-tight">
+              Parlons de votre débarras.
+            </h3>
+            <p className="relative z-10 mt-4 text-paper/85 text-[15px]">
+              Par téléphone ou par mail, comme vous préférez. Devis gratuit, sans engagement.
+            </p>
+            <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-3">
+              <MagneticButton
+                href={SITE.phoneHref}
+                className="bg-paper text-sage-deep px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <Phone size={15} strokeWidth={2} />
+                  {SITE.phone}
+                </span>
+              </MagneticButton>
+              <MagneticButton
+                href={`mailto:${SITE.email}`}
+                className="border-2 border-paper/40 text-paper px-8 py-3.5 text-[13px] tracking-[0.25em] uppercase font-bold overflow-hidden rounded-full hover:border-paper"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <Mail size={15} strokeWidth={2} />
+                  Écrire un mail
+                </span>
+              </MagneticButton>
             </div>
-          </div>
-
-          {/* CTA inline */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="mt-12 flex justify-center"
-          >
-            <a
-              href={SITE.phoneHref}
-              className="inline-flex items-center gap-3 bg-terracotta text-paper font-display font-bold px-8 py-4 rounded-full text-lg hover:bg-terracotta/90 transition-colors"
-            >
-              <Phone size={20} strokeWidth={2} />
-              Appeler pour un devis
-            </a>
           </motion.div>
         </div>
       </section>
-
-      <ArcDivider top="text-ink" bottom="bg-paper" flip />
 
       {/* ── NOUS VS BENNE ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-paper">
@@ -660,16 +636,25 @@ export default function DebarrasPage() {
               Prêt à vous débarrasser ?
             </h2>
             <p className="mt-4 text-paper/70 text-[15px] leading-relaxed">
-              Un appel, un devis gratuit, et on s'occupe de tout.
+              Un appel ou un mail, un devis gratuit, et on s'occupe de tout.
               Disponible du mardi au samedi.
             </p>
-            <a
-              href={SITE.phoneHref}
-              className="mt-8 inline-flex items-center gap-3 bg-paper text-terracotta font-display font-bold px-10 py-5 rounded-full text-xl hover:bg-cream active:scale-95 transition-all shadow-lg"
-            >
-              <Phone size={22} strokeWidth={2} />
-              {SITE.phone}
-            </a>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={SITE.phoneHref}
+                className="inline-flex items-center gap-3 bg-paper text-terracotta font-display font-bold px-10 py-5 rounded-full text-xl hover:bg-cream active:scale-95 transition-all shadow-lg"
+              >
+                <Phone size={22} strokeWidth={2} />
+                {SITE.phone}
+              </a>
+              <a
+                href={`mailto:${SITE.email}`}
+                className="inline-flex items-center gap-2 border-2 border-paper/50 text-paper px-8 py-4 rounded-full text-[14px] font-bold hover:border-paper hover:bg-paper/10 transition-colors"
+              >
+                <Mail size={18} strokeWidth={2} />
+                {SITE.email}
+              </a>
+            </div>
             <p className="mt-4 text-paper/40 text-[13px]">
               {SITE.address}
             </p>

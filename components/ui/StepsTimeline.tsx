@@ -7,13 +7,22 @@ import { DON_STEPS } from "@/lib/constants"
 const stepIcons = [Phone, Truck, Sparkles, Tags]
 const ease = [0.22, 1, 0.36, 1] as const
 
+type Step = { step: string; title: string; desc: string }
+
 /**
- * Frise de progression du don : 4 nœuds navy (coins asymétriques, signature
+ * Frise de progression : 4 nœuds navy (coins asymétriques, signature
  * du site) reliés par un trait orange qui se "trace" au scroll, avec un point
  * lumineux qui parcourt la frise en boucle. Élévation franche au survol.
  * Horizontale sur desktop, verticale sur mobile.
+ * Par défaut : les étapes du don. Personnalisable via `steps` et `icons`.
  */
-export default function StepsTimeline() {
+export default function StepsTimeline({
+  steps = DON_STEPS,
+  icons = stepIcons,
+}: {
+  steps?: Step[]
+  icons?: typeof stepIcons
+}) {
   const reduce = useReducedMotion()
 
   return (
@@ -58,8 +67,8 @@ export default function StepsTimeline() {
       />
 
       <ol className="relative grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-6">
-        {DON_STEPS.map((step, i) => {
-          const Icon = stepIcons[i]
+        {steps.map((step, i) => {
+          const Icon = icons[i]
           const delay = i * 0.15
           return (
             <motion.li
