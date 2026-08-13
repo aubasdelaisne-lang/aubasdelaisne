@@ -1,4 +1,4 @@
-// Source unique des FAQ débarras — utilisée par la page (affichage)
+// Source unique des FAQ débarras : utilisée par la page (affichage)
 // et par le layout (données structurées JSON-LD pour Google).
 export const FAQS = [
   {

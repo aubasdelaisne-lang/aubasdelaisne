@@ -49,7 +49,7 @@ export default function CookieBanner() {
 
             {/* Texte */}
             <p className="flex-1 text-[13px] text-paper/85 leading-relaxed">
-              Ici, on ne collecte que les objets — aucun cookie de suivi ni de pub.
+              Ici, on ne collecte que les objets : aucun cookie de suivi ni de pub.
               Seule la carte de la page Contact demande votre accord pour s'afficher.{" "}
               <a
                 href="/cookies"

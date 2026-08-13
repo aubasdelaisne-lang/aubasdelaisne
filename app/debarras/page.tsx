@@ -1,39 +1,38 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
-import { motion, useInView, useScroll, useTransform, type Variants } from "framer-motion"
-import { Phone, Truck, Recycle, Star, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown } from "lucide-react"
+import { motion, useInView, type Variants } from "framer-motion"
+import { Phone, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import WaveDivider from "@/components/ui/WaveDivider"
 import ArcDivider from "@/components/ui/ArcDivider"
 import TiltCard from "@/components/ui/TiltCard"
-import ScrollFilaments from "@/components/ui/ScrollFilaments"
 import { FAQS } from "./faq-data"
 
 /* ─── données ────────────────────────────────────────────── */
 
 const SITUATIONS = [
   {
-    emoji: "📦",
+    Icon: Truck,
     title: "Déménagement",
     desc: "Vous partez et ne pouvez pas tout emporter ? On vient vider ce qui reste avant votre départ.",
     keywords: ["meubles", "électroménager", "cartons"],
   },
   {
-    emoji: "🏠",
+    Icon: KeyRound,
     title: "Succession",
     desc: "Vider le logement d'un proche après un décès. On s'occupe de tout, avec respect et discrétion.",
     keywords: ["héritage", "vider appartement", "maison"],
   },
   {
-    emoji: "📚",
+    Icon: Archive,
     title: "Grenier / cave",
-    desc: "Des années d'accumulation à évacuer ? Livres, meubles, bibelots — on trie et on valorise.",
+    desc: "Des années d'accumulation à évacuer ? Livres, meubles, bibelots : on trie et on valorise.",
     keywords: ["encombrants", "vider grenier", "cave garage"],
   },
   {
-    emoji: "🔨",
+    Icon: Hammer,
     title: "Avant travaux",
     desc: "Libérer la place avant une rénovation ou un aménagement. Rapide et sans effort de votre côté.",
     keywords: ["rénovation", "libérer espace", "travaux"],
@@ -56,7 +55,7 @@ const ETAPES = [
   {
     num: "03",
     title: "On collecte tout",
-    desc: "Meubles, encombrants, bibelots — on emporte. Vous n'avez rien à trier, rien à porter, rien à amener.",
+    desc: "Meubles, encombrants, bibelots : on emporte tout. Vous n'avez rien à trier, rien à porter, rien à amener.",
     color: "bg-terracotta",
   },
   {
@@ -144,135 +143,62 @@ const fadeUp: Variants = {
 /* ─── page ───────────────────────────────────────────────── */
 
 export default function DebarrasPage() {
-  const heroRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden bg-ink pt-24 pb-16 px-4 md:px-8"
-      >
-        {/* Fond animé */}
-        <motion.div
-          style={{ y: heroY }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(96,120,100,0.18),transparent)] pointer-events-none"
-        />
-        <ScrollFilaments className="absolute inset-0 opacity-30" />
-
-        <div className="relative z-10 max-w-[1200px] mx-auto w-full">
-          {/* Headline — l'eyebrow fait partie du h1 (mot-clé SEO dans le titre) */}
-          <h1
-            className="font-display font-medium text-paper leading-[1.04]"
-            style={{ fontSize: "clamp(2.6rem, 2rem + 4vw, 5.5rem)" }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 flex items-center gap-3 text-[11px] tracking-[0.3em] uppercase text-paper/60 font-semibold"
-            >
-              <span className="h-px w-8 bg-terracotta" />
-              Débarras à Château-Thierry
-            </motion.span>
-            {["Une maison à vider ?", "Respirez.", "On s'occupe de tout."].map((line, li) => (
-              <span key={li} className="block overflow-hidden pb-[0.06em]">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 + li * 0.12 }}
-                  className={`block ${li === 1 ? "text-terracotta" : ""}`}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-
-          {/* Sous-titre */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-            className="mt-7 max-w-lg text-paper/70 text-[16px] leading-relaxed"
-          >
-            Déménagement, succession, grenier plein à craquer — on vient, on
-            emporte, vous n'avez rien à porter. Et rien ne part inutilement à la
-            benne : vos objets retrouvent une seconde vie en boutique et
-            financent l'emploi local dans le sud de l'Aisne.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4"
-          >
-            <a
-              href={SITE.phoneHref}
-              className="inline-flex items-center justify-center gap-3 bg-terracotta text-paper font-display font-bold px-8 py-4 rounded-full text-lg hover:bg-terracotta/90 active:scale-95 transition-all"
-            >
-              <Phone size={20} strokeWidth={2} />
-              {SITE.phone}
-            </a>
-            <a
-              href="#comment"
-              className="inline-flex items-center justify-center gap-2 border-2 border-paper/20 text-paper/80 px-8 py-4 rounded-full text-[15px] hover:border-paper/50 transition-colors"
-            >
-              Comment ça marche
-              <ArrowRight size={16} />
-            </a>
-          </motion.div>
-
-          {/* Micro-copie de réassurance */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.85 }}
-            className="mt-4 text-paper/45 text-[13px]"
-          >
-            Un coup de fil suffit — devis gratuit, sans engagement.
-          </motion.p>
-
-          {/* Badges confiance */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            {["Association locale depuis 2014", "Vous ne portez rien", "Tout est trié et valorisé"].map((b) => (
-              <span
-                key={b}
-                className="text-[12px] text-paper/50 border border-paper/10 px-4 py-1.5 rounded-full"
+      {/* ── HERO (gabarit commun : carte sage arrondie) ──── */}
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-10 px-4 md:px-8 bg-paper overflow-x-clip">
+        <div className="max-w-[1300px] mx-auto">
+          <div className="spotlight relative bg-sage paper-texture border-2 border-ink/10 p-8 sm:p-10 md:p-16 text-center rounded-tl-[60px] sm:rounded-tl-[100px] rounded-br-[60px] sm:rounded-br-[100px] overflow-hidden">
+            <ShineSweep />
+            <div className="relative z-10">
+              <div className="text-[11px] tracking-[0.3em] uppercase text-paper/80 font-semibold">
+                Débarras à Château-Thierry
+              </div>
+              <h1
+                className="mt-4 font-display font-medium text-paper leading-[1.05]"
+                style={{ fontSize: "clamp(2rem, 1rem + 3.5vw, 3.75rem)" }}
               >
-                {b}
-              </span>
-            ))}
-          </motion.div>
+                <span className="block overflow-hidden pb-[0.12em]">
+                  <motion.span
+                    initial={{ y: "115%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="block"
+                  >
+                    Une maison à vider ?
+                    <br />
+                    On s'occupe de tout.
+                  </motion.span>
+                </span>
+              </h1>
+              <p className="mt-6 max-w-xl mx-auto text-paper/85 text-[15px] leading-relaxed">
+                Déménagement, succession, grenier plein à craquer : on vient, on
+                emporte, vous n'avez rien à porter. Vos objets retrouvent une
+                seconde vie en boutique et financent l'emploi local.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href={SITE.phoneHref}
+                  className="inline-flex items-center justify-center gap-3 bg-paper text-sage-deep font-display font-bold px-8 py-4 rounded-full text-lg tracking-[0.04em] tabular-nums hover:bg-cream active:scale-95 transition-all"
+                >
+                  <Phone size={20} strokeWidth={2} className="text-terracotta" />
+                  {SITE.phone}
+                </a>
+                <a
+                  href="#comment"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-paper/40 text-paper px-8 py-4 rounded-full text-[13px] uppercase tracking-[0.2em] font-bold hover:border-paper transition-colors"
+                >
+                  Comment ça marche
+                  <ArrowRight size={15} />
+                </a>
+              </div>
+              <p className="mt-5 text-paper/60 text-[13px]">
+                Un coup de fil suffit : devis gratuit, sans engagement.
+              </p>
+            </div>
+          </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-            className="w-5 h-8 border-2 border-paper/20 rounded-full flex justify-center pt-1.5"
-          >
-            <div className="w-1 h-1.5 bg-paper/40 rounded-full" />
-          </motion.div>
-        </motion.div>
       </section>
-
-      <WaveDivider top="text-ink" bottom="bg-paper" />
 
       {/* ── STATS ────────────────────────────────────────── */}
       <section className="py-16 px-4 md:px-8 bg-paper">
@@ -327,7 +253,7 @@ export default function DebarrasPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {SITUATIONS.map(({ emoji, title, desc, keywords }, i) => (
+            {SITUATIONS.map(({ Icon, title, desc, keywords }, i) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
@@ -338,7 +264,9 @@ export default function DebarrasPage() {
               >
                 <TiltCard className="h-full rounded-2xl">
                   <div className="h-full bg-paper border border-ink/8 rounded-2xl p-7 flex flex-col gap-4">
-                    <span className="text-4xl">{emoji}</span>
+                    <span className="w-12 h-12 rounded-xl bg-sage/15 flex items-center justify-center">
+                      <Icon size={24} className="text-sage-deep" strokeWidth={1.8} />
+                    </span>
                     <h3 className="font-display font-semibold text-ink text-[1.2rem]">{title}</h3>
                     <p className="text-ink/60 text-[14px] leading-relaxed flex-1">{desc}</p>
                     <div className="flex flex-wrap gap-2 mt-auto pt-2">

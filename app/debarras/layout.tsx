@@ -7,10 +7,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://ressourcerie-aubas
 export const metadata: Metadata = {
   title: "Débarras à Château-Thierry",
   description:
-    "Service de débarras à Château-Thierry et dans l'Aisne : vidage de grenier, cave, appartement, succession. On collecte, on trie, on valorise. Devis gratuit — 03 64 13 48 64.",
+    "Service de débarras à Château-Thierry et dans l'Aisne : vidage de grenier, cave, appartement, succession. On collecte, on trie, on valorise. Devis gratuit au 03 64 13 48 64.",
   alternates: { canonical: "/debarras" },
   openGraph: {
-    title: "Débarras à Château-Thierry — Au Bas de l'Aisne",
+    title: "Débarras à Château-Thierry · Au Bas de l'Aisne",
     description:
       "Vidage de grenier, cave, appartement ou succession à Château-Thierry. On vient collecter vos encombrants et leur donnons une seconde vie. Appelez-nous.",
     url: "/debarras",
