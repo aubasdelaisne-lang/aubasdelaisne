@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView, type Variants } from "framer-motion"
-import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake } from "lucide-react"
+import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake, Star, X } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import WaveDivider from "@/components/ui/WaveDivider"
@@ -479,13 +479,13 @@ export default function DebarrasPage() {
 
       {/* ── NOUS VS BENNE ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-paper">
-        <div className="max-w-[860px] mx-auto">
+        <div className="max-w-[960px] mx-auto">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-14"
           >
             <h2
               className="font-display font-medium text-ink"
@@ -498,38 +498,71 @@ export default function DebarrasPage() {
             </p>
           </motion.div>
 
-          {/* Tableau comparatif */}
-          <div className="rounded-2xl overflow-hidden border border-ink/8">
-            {/* Header */}
-            <div className="grid grid-cols-[1fr_80px_80px] bg-ink text-paper text-[12px] uppercase tracking-[0.2em] font-semibold">
-              <div className="px-5 py-3" />
-              <div className="px-3 py-3 text-center text-terracotta">Nous</div>
-              <div className="px-3 py-3 text-center text-paper/40">Benne</div>
-            </div>
+          <div className="grid md:grid-cols-2 gap-5 items-start">
+            {/* ── Carte Nous ── */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="spotlight relative bg-sage paper-texture rounded-tl-[48px] rounded-br-[48px] overflow-hidden p-8 md:p-10"
+            >
+              <ShineSweep />
+              <span className="relative z-10 inline-flex items-center gap-1.5 bg-terracotta text-paper text-[11px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-6">
+                <Star size={10} fill="currentColor" strokeWidth={0} />
+                Recommandé
+              </span>
+              <h3 className="relative z-10 font-display font-semibold text-[1.4rem] text-paper mb-1">
+                Au Bas de l&apos;Aisne
+              </h3>
+              <p className="relative z-10 text-paper/50 text-[13px] mb-8">Ressourcerie solidaire · Château-Thierry</p>
+              <ul className="relative z-10 space-y-4">
+                {AVANTAGES.map(({ label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-terracotta/25 flex items-center justify-center">
+                      <CheckCircle2 size={13} className="text-terracotta" strokeWidth={2.5} />
+                    </span>
+                    <span className="text-paper/85 text-[14px] leading-snug">{label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="relative z-10 mt-8 pt-6 border-t border-paper/15">
+                <p className="text-paper/40 text-[11px] uppercase tracking-[0.2em]">Coût</p>
+                <p className="text-paper font-display font-semibold text-[1.5rem] mt-1">
+                  Devis gratuit <span className="text-terracotta text-[14px] font-normal">sur place</span>
+                </p>
+              </div>
+            </motion.div>
 
-            {AVANTAGES.map(({ label, nous, benne }, i) => (
-              <motion.div
-                key={label}
-                variants={fadeUp}
-                custom={i * 0.15}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="grid grid-cols-[1fr_80px_80px] border-t border-ink/6 bg-paper hover:bg-cream transition-colors"
-              >
-                <div className="px-5 py-4 text-ink/75 text-[14px]">{label}</div>
-                <div className="px-3 py-4 flex justify-center items-center">
-                  {nous
-                    ? <CheckCircle2 size={20} className="text-sage-deep" strokeWidth={2} />
-                    : <XCircle size={20} className="text-ink/20" strokeWidth={2} />}
-                </div>
-                <div className="px-3 py-4 flex justify-center items-center">
-                  {benne
-                    ? <CheckCircle2 size={20} className="text-sage-deep" strokeWidth={2} />
-                    : <XCircle size={20} className="text-ink/20" strokeWidth={2} />}
-                </div>
-              </motion.div>
-            ))}
+            {/* ── Carte Benne ── */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="relative bg-cream border border-ink/8 rounded-tl-[48px] rounded-br-[48px] overflow-hidden p-8 md:p-10"
+            >
+              <div className="h-[26px] mb-6" />
+              <h3 className="font-display font-semibold text-[1.4rem] text-ink/40 mb-1">Location de benne</h3>
+              <p className="text-ink/25 text-[13px] mb-8">Option classique</p>
+              <ul className="space-y-4">
+                {AVANTAGES.map(({ label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-ink/8 flex items-center justify-center">
+                      <X size={9} className="text-ink/30" strokeWidth={2.5} />
+                    </span>
+                    <span className="text-ink/35 text-[14px] leading-snug line-through decoration-ink/15">{label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 pt-6 border-t border-ink/10">
+                <p className="text-ink/30 text-[11px] uppercase tracking-[0.2em]">Coût estimé</p>
+                <p className="text-ink/45 font-display font-semibold text-[1.5rem] mt-1">
+                  200 à 600 € <span className="text-[13px] font-normal text-ink/25">+ main d&apos;œuvre</span>
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
