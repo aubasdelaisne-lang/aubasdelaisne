@@ -566,8 +566,9 @@ export default function DebarrasPage() {
               >
                 On intervient près de chez vous
               </h2>
-              <p className="mt-3 text-paper/50 text-[15px] max-w-[40ch]">
-                Deux communautés de communes couvertes autour de Château-Thierry.
+              <p className="mt-3 text-paper/50 text-[15px] max-w-[44ch]">
+                Deux territoires couverts autour de Château-Thierry, et des
+                interventions possibles bien au-delà selon votre besoin.
               </p>
             </motion.div>
             <motion.div
@@ -578,10 +579,10 @@ export default function DebarrasPage() {
               transition={{ delay: 0.15 }}
               className="shrink-0 text-right md:text-right"
             >
-              <p className="font-display font-semibold text-paper leading-none" style={{ fontSize: "clamp(2.8rem, 1.5rem + 3vw, 4rem)" }}>
-                ~30 km
+              <p className="font-display font-semibold text-paper leading-none" style={{ fontSize: "clamp(2rem, 1.2rem + 2.4vw, 3.2rem)" }}>
+                Jusqu'à Paris
               </p>
-              <p className="text-paper/40 text-[12.5px] mt-1 uppercase tracking-[0.15em]">de rayon autour de CT</p>
+              <p className="text-paper/40 text-[12.5px] mt-1 uppercase tracking-[0.15em]">on se déplace selon vos besoins</p>
             </motion.div>
           </div>
 
@@ -617,7 +618,7 @@ export default function DebarrasPage() {
                   {group.communes.map((c) => (
                     <span
                       key={c}
-                      className="text-[12.5px] text-ink/65 bg-ink/5 border border-ink/12 px-3.5 py-1.5 rounded-full hover:bg-ink/10 transition-colors"
+                      className="text-[12.5px] text-ink/65 bg-ink/5 border border-ink/12 px-3.5 py-1.5 rounded-full cursor-default transition-all duration-300 hover:bg-sage hover:border-sage hover:text-paper hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-6px_rgba(25,20,101,0.45)]"
                     >
                       {c}
                     </span>
@@ -677,51 +678,113 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      {/* Transition diagonale bg-cream → bg-terracotta */}
-      <div aria-hidden className="relative h-16 overflow-hidden -mb-px bg-terracotta">
+      {/* Transition diagonale bg-cream → bg-sage (fond commun avec le footer) */}
+      <div aria-hidden className="relative h-16 overflow-hidden -mb-px bg-sage">
         <div className="absolute inset-0 bg-cream" style={{ clipPath: "polygon(0 0, 100% 0, 100% 55%, 0 100%)" }} />
       </div>
 
-      {/* ── CTA FINAL ────────────────────────────────────── */}
-      <section className="py-24 px-4 md:px-8 bg-terracotta text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_50%,rgba(255,255,255,0.06),transparent)] pointer-events-none" />
-        <div className="relative z-10 max-w-[640px] mx-auto">
+      {/* ── CTA FINAL (carte orange posée sur le fond du footer) ── */}
+      <section className="relative pt-10 md:pt-14 pb-16 md:pb-24 px-4 md:px-8 bg-sage overflow-hidden">
+        {/* Halo chaud derrière la carte */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 60% 55% at 50% 45%, rgba(239,95,23,0.14), transparent 70%)" }}
+        />
+        <div className="relative z-10 max-w-[1100px] mx-auto">
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 48, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="spotlight relative bg-terracotta paper-texture text-center overflow-hidden p-10 md:p-16 rounded-tl-[60px] md:rounded-tl-[90px] rounded-br-[60px] md:rounded-br-[90px] shadow-[0_45px_100px_-30px_rgba(239,95,23,0.55)]"
           >
-            <Truck size={36} className="text-paper/70 mx-auto mb-6" strokeWidth={1.5} />
-            <h2
-              className="font-display font-medium text-paper leading-tight"
-              style={{ fontSize: "clamp(1.8rem, 1rem + 2.5vw, 3rem)" }}
-            >
-              Prêt à vous débarrasser ?
-            </h2>
-            <p className="mt-4 text-paper/70 text-[15px] leading-relaxed">
-              Un appel ou un mail, un devis gratuit, et on s'occupe de tout.
-              Disponible du mardi au samedi.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={SITE.phoneHref}
-                className="inline-flex items-center gap-3 bg-paper text-terracotta font-display font-bold px-10 py-5 rounded-full text-xl hover:bg-cream active:scale-95 transition-all shadow-lg"
+            <ShineSweep delay={0.5} />
+
+            {/* Halos dérivants dans la carte */}
+            <motion.span
+              aria-hidden
+              animate={{ x: [0, 46, 0], y: [0, -22, 0] }}
+              transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-28 -left-28 w-80 h-80 rounded-full bg-paper/10 blur-3xl pointer-events-none"
+            />
+            <motion.span
+              aria-hidden
+              animate={{ x: [0, -36, 0], y: [0, 26, 0] }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute -bottom-32 -right-24 w-96 h-96 rounded-full bg-ink/20 blur-3xl pointer-events-none"
+            />
+
+            <div className="relative z-10 max-w-[640px] mx-auto">
+              {/* Camion : entre en scène depuis la gauche, puis flotte */}
+              <motion.div
+                initial={{ x: -70, opacity: 0, rotate: -4 }}
+                whileInView={{ x: 0, opacity: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 130, damping: 15, delay: 0.25 }}
+                className="inline-flex"
               >
-                <Phone size={22} strokeWidth={2} />
-                {SITE.phone}
-              </a>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="inline-flex items-center gap-2 border-2 border-paper/50 text-paper px-8 py-4 rounded-full text-[14px] font-bold hover:border-paper hover:bg-paper/10 transition-colors"
+                <motion.span
+                  animate={{ y: [0, -7, 0] }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="grid place-items-center w-16 h-16 md:w-[72px] md:h-[72px] rounded-tl-[22px] rounded-br-[22px] bg-paper/15 border border-paper/30 shadow-[0_14px_30px_-10px_rgba(10,8,56,0.4)]"
+                >
+                  <Truck size={30} className="text-paper" strokeWidth={1.5} />
+                </motion.span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-6 font-display font-medium text-paper leading-tight"
+                style={{ fontSize: "clamp(1.8rem, 1rem + 2.5vw, 3rem)" }}
               >
-                <Mail size={18} strokeWidth={2} />
-                {SITE.email}
-              </a>
+                Prêt à vous débarrasser ?
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-4 text-paper/80 text-[15px] leading-relaxed"
+              >
+                Un appel ou un mail, un devis gratuit, et on s'occupe de tout.
+                Disponible du mardi au samedi.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+              >
+                <a
+                  href={SITE.phoneHref}
+                  className="group inline-flex items-center gap-3 bg-paper text-terracotta font-display font-bold px-10 py-5 rounded-full text-xl hover:bg-cream hover:-translate-y-1 hover:shadow-[0_20px_45px_-12px_rgba(10,8,56,0.5)] active:scale-95 transition-all duration-300 shadow-lg"
+                >
+                  <Phone size={22} strokeWidth={2} className="transition-transform duration-300 group-hover:rotate-12" />
+                  {SITE.phone}
+                </a>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="inline-flex items-center gap-2 border-2 border-paper/50 text-paper px-8 py-4 rounded-full text-[14px] font-bold hover:border-paper hover:bg-paper/10 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <Mail size={18} strokeWidth={2} />
+                  {SITE.email}
+                </a>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="mt-5 text-paper/50 text-[13px]"
+              >
+                {SITE.address}
+              </motion.p>
             </div>
-            <p className="mt-4 text-paper/40 text-[13px]">
-              {SITE.address}
-            </p>
           </motion.div>
         </div>
       </section>

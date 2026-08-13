@@ -3,11 +3,11 @@
 export const FAQS = [
   {
     q: "Le débarras est-il payant ?",
-    a: "Pas toujours. Lorsque les objets ont de la valeur et que le volume est important, on peut intervenir gratuitement : la revente en boutique couvre nos frais. Si les objets sont peu valorisables, une participation peut être demandée. Dans tous les cas, on vous fait un devis honnête et sans surprise avant d'intervenir.",
+    a: "Oui, le débarras est un service payant : il finance le travail de l'équipe et la logistique. Le montant dépend du volume à évacuer et de l'accès au logement (étage, cave, stationnement). On vous fait un devis gratuit et sans surprise après une visite sur place.",
   },
   {
     q: "Vous intervenez à quelle distance de Château-Thierry ?",
-    a: "On couvre la communauté d'agglomération de la région de Château-Thierry (Aisne) et la communauté de communes Charly-sur-Marne et la Marne. Appelez-nous pour vérifier si votre adresse est couverte.",
+    a: "On couvre la communauté d'agglomération de la région de Château-Thierry (Aisne) et la communauté de communes Charly-sur-Marne et la Marne. Selon la demande, on se déplace aussi plus loin, jusqu'à Paris. Appelez-nous pour en parler.",
   },
   {
     q: "Que faites-vous des objets collectés ?",
