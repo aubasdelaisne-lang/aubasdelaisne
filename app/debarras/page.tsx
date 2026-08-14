@@ -5,8 +5,6 @@ import { motion, useInView, type Variants } from "framer-motion"
 import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake, Star, X } from "lucide-react"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
-import WaveDivider from "@/components/ui/WaveDivider"
-import ArcDivider from "@/components/ui/ArcDivider"
 import SectionHeader from "@/components/ui/SectionHeader"
 import StepsTimeline from "@/components/ui/StepsTimeline"
 import MagneticButton from "@/components/ui/MagneticButton"
@@ -60,7 +58,47 @@ const SITUATIONS: {
   },
 ]
 
-const SITUATION_ICON_BG = ["bg-sage", "bg-terracotta", "bg-sage", "bg-terracotta"]
+/* Damier de couleurs : navy en haut à gauche, terracotta en bas à droite,
+   deux cartes claires en contrepoint. Numéro fantôme + point de couleur,
+   même motif que les cartes de la zone d'intervention. */
+const SITUATION_TONES = [
+  {
+    card: "bg-sage paper-texture border-ink/10 hover:border-terracotta/70 hover:shadow-[0_20px_50px_-15px_rgba(25,20,101,0.55)]",
+    num: "text-paper/10",
+    dot: "bg-terracotta",
+    title: "text-paper",
+    hoverTitle: "group-hover:text-terracotta-soft",
+    desc: "text-paper/65",
+    pill: "text-paper/75 border-paper/25 bg-paper/10",
+  },
+  {
+    card: "bg-paper border-ink/8 hover:border-terracotta/60 hover:shadow-[0_20px_50px_-15px_rgba(239,95,23,0.22)]",
+    num: "text-ink/8",
+    dot: "bg-terracotta",
+    title: "text-ink",
+    hoverTitle: "group-hover:text-terracotta",
+    desc: "text-ink/55",
+    pill: "text-ink/45 border-ink/12",
+  },
+  {
+    card: "bg-paper border-ink/8 hover:border-terracotta/60 hover:shadow-[0_20px_50px_-15px_rgba(239,95,23,0.22)]",
+    num: "text-ink/8",
+    dot: "bg-sage",
+    title: "text-ink",
+    hoverTitle: "group-hover:text-terracotta",
+    desc: "text-ink/55",
+    pill: "text-ink/45 border-ink/12",
+  },
+  {
+    card: "bg-terracotta paper-texture border-ink/10 hover:border-sage/50 hover:shadow-[0_20px_50px_-15px_rgba(239,95,23,0.5)]",
+    num: "text-paper/15",
+    dot: "bg-paper",
+    title: "text-paper",
+    hoverTitle: "group-hover:text-cream",
+    desc: "text-paper/80",
+    pill: "text-paper/85 border-paper/30 bg-paper/10",
+  },
+]
 
 const ETAPES = [
   {
@@ -229,7 +267,10 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      <ArcDivider top="text-paper" bottom="bg-cream" />
+      {/* Transition diagonale bg-paper → bg-cream */}
+      <div aria-hidden className="relative h-14 overflow-hidden -mt-px -mb-px bg-cream">
+        <div className="absolute inset-0 bg-paper" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 35%)" }} />
+      </div>
 
       {/* ── SITUATIONS ───────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-cream">
@@ -253,54 +294,61 @@ export default function DebarrasPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {SITUATIONS.map(({ Icon, title, desc, keywords }, i) => (
-              <motion.article
-                key={title}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-8%" }}
-                transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -6, transition: { type: "spring", stiffness: 340, damping: 22 } }}
-                className="group flex gap-5 bg-paper rounded-tl-[36px] rounded-br-[36px] p-6 md:p-8 border-2 border-ink/8 hover:border-terracotta/60 hover:shadow-[0_20px_50px_-15px_rgba(239,95,23,0.22)] transition-[border-color,box-shadow] duration-500 cursor-default"
-              >
-                {/* Icône */}
-                <div className="shrink-0 pt-0.5">
-                  <motion.div
-                    whileHover={{ rotate: -8, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 280, damping: 18 }}
-                    className={`w-14 h-14 rounded-tl-[16px] rounded-br-[16px] flex items-center justify-center shadow-md ${SITUATION_ICON_BG[i]}`}
+            {SITUATIONS.map(({ title, desc, keywords }, i) => {
+              const t = SITUATION_TONES[i]
+              return (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-8%" }}
+                  transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -6, transition: { type: "spring", stiffness: 340, damping: 22 } }}
+                  className={`group relative overflow-hidden rounded-tl-[36px] rounded-br-[36px] p-6 md:p-8 border-2 transition-[border-color,box-shadow] duration-500 cursor-default ${t.card}`}
+                >
+                  {/* Numéro fantôme */}
+                  <span
+                    aria-hidden
+                    className={`pointer-events-none absolute top-3 right-6 font-display font-bold leading-none select-none text-[3.4rem] ${t.num}`}
                   >
-                    <Icon size={22} strokeWidth={1.6} className="text-paper" />
-                  </motion.div>
-                </div>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-                {/* Contenu */}
-                <div className="min-w-0">
-                  <h3 className="font-display font-semibold text-[1.25rem] text-ink leading-tight mb-2 group-hover:text-terracotta transition-colors duration-300">
-                    {title}
-                  </h3>
-                  <p className="text-ink/55 text-[13.5px] leading-relaxed mb-4">
-                    {desc}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {keywords.map((k) => (
-                      <span key={k} className="text-[11px] text-ink/45 border border-ink/12 px-2.5 py-1 rounded-full">
-                        {k}
-                      </span>
-                    ))}
+                  {/* Contenu */}
+                  <div className="relative min-w-0 pr-10">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <span aria-hidden className={`shrink-0 w-2 h-2 rounded-full ${t.dot}`} />
+                      <h3 className={`font-display font-semibold text-[1.25rem] leading-tight transition-colors duration-300 ${t.title} ${t.hoverTitle}`}>
+                        {title}
+                      </h3>
+                    </div>
+                    <p className={`text-[13.5px] leading-relaxed mb-4 ${t.desc}`}>
+                      {desc}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {keywords.map((k) => (
+                        <span key={k} className={`text-[11px] border px-2.5 py-1 rounded-full ${t.pill}`}>
+                          {k}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                </motion.article>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      <WaveDivider top="text-cream" bottom="bg-ink" />
-
       {/* ── COMMENT ÇA MARCHE (frise commune, fond bleu) ─── */}
-      <section id="comment" className="relative py-16 md:py-28 px-4 md:px-8 bg-ink overflow-hidden">
+      <section id="comment" className="relative pt-28 md:pt-40 pb-28 md:pb-36 px-4 md:px-8 bg-ink overflow-hidden">
         <AmbientBackground variant="dark" />
+        {/* Diagonale intégrée : la section cream mord sur le haut, aucun raccord visible */}
+        <div
+          aria-hidden
+          className="absolute top-0 inset-x-0 h-20 md:h-24 bg-cream"
+          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 40%)" }}
+        />
         <div className="relative z-10 max-w-[1100px] mx-auto">
           <SectionHeader
             eyebrow="Simple et rapide"
@@ -348,12 +396,14 @@ export default function DebarrasPage() {
             </div>
           </motion.div>
         </div>
-      </section>
 
-      {/* Transition diagonale bg-ink → bg-paper */}
-      <div aria-hidden className="relative h-20 overflow-hidden -mb-px bg-paper">
-        <div className="absolute inset-0 bg-ink" style={{ clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 100%)" }} />
-      </div>
+        {/* Diagonale intégrée : la section paper mord sur le bas */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 inset-x-0 h-20 md:h-24 bg-paper"
+          style={{ clipPath: "polygon(0 100%, 100% 40%, 100% 100%)" }}
+        />
+      </section>
 
       {/* ── NOUS VS BENNE ────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-paper">
@@ -513,13 +563,14 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      {/* ── Transition diagonale bg-paper → bg-ink ────────── */}
-      <div aria-hidden className="relative h-20 overflow-hidden -mb-px bg-paper">
-        <div className="absolute inset-0 bg-ink" style={{ clipPath: "polygon(0 60%, 100% 0, 100% 100%, 0 100%)" }} />
-      </div>
-
       {/* ── ZONE DE COLLECTE ─────────────────────────────── */}
-      <section className="relative py-20 px-4 md:px-8 bg-ink overflow-hidden">
+      <section className="relative pt-32 md:pt-40 pb-20 px-4 md:px-8 bg-ink overflow-hidden">
+        {/* Diagonale intégrée : la section paper mord sur le haut */}
+        <div
+          aria-hidden
+          className="absolute top-0 inset-x-0 h-20 md:h-24 bg-paper z-[1]"
+          style={{ clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 100%)" }}
+        />
         {/* Filaments animés */}
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
           {[0, 1, 2, 3].map((i) => (
@@ -641,10 +692,14 @@ export default function DebarrasPage() {
             </a>
           </motion.p>
         </div>
-      </section>
 
-      {/* Transition bg-ink → bg-cream */}
-      <WaveDivider top="text-ink" bottom="bg-cream" />
+        {/* Diagonale intégrée : la section cream mord sur le bas */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 inset-x-0 h-16 md:h-20 bg-cream z-[1]"
+          style={{ clipPath: "polygon(0 40%, 0 100%, 100% 100%)" }}
+        />
+      </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section className="py-20 px-4 md:px-8 bg-cream">
@@ -678,18 +733,19 @@ export default function DebarrasPage() {
         </div>
       </section>
 
-      {/* Transition diagonale bg-cream → bg-sage (fond commun avec le footer) */}
-      <div aria-hidden className="relative h-16 overflow-hidden -mb-px bg-sage">
-        <div className="absolute inset-0 bg-cream" style={{ clipPath: "polygon(0 0, 100% 0, 100% 55%, 0 100%)" }} />
-      </div>
-
       {/* ── CTA FINAL (carte orange posée sur le fond du footer) ── */}
-      <section className="relative pt-10 md:pt-14 pb-16 md:pb-24 px-4 md:px-8 bg-sage overflow-hidden">
+      <section className="relative pt-24 md:pt-28 pb-16 md:pb-24 px-4 md:px-8 bg-sage overflow-hidden">
         {/* Halo chaud derrière la carte */}
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse 60% 55% at 50% 45%, rgba(239,95,23,0.14), transparent 70%)" }}
+        />
+        {/* Diagonale intégrée : la section cream mord sur le haut */}
+        <div
+          aria-hidden
+          className="absolute top-0 inset-x-0 h-16 md:h-20 bg-cream"
+          style={{ clipPath: "polygon(0 0, 100% 0, 100% 55%, 0 100%)" }}
         />
         <div className="relative z-10 max-w-[1100px] mx-auto">
           <motion.div
