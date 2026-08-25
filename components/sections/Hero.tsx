@@ -71,8 +71,8 @@ export default function Hero() {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
                     key={rotatingTitles[titleIndex].id}
-                    initial={{ y: 28, opacity: 0, backgroundPosition: "0% 0%" }}
-                    animate={{ y: 0, opacity: 1, backgroundPosition: ["0% 0%", "100% 0%"] }}
+                    initial={{ y: 28, opacity: 0, backgroundPosition: "100% 0%" }}
+                    animate={{ y: 0, opacity: 1, backgroundPosition: ["100% 0%", "0% 0%"] }}
                     exit={{ y: -28, opacity: 0 }}
                     transition={{
                       duration: 0.6,
