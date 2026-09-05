@@ -128,19 +128,19 @@ export default function Hero() {
                 className="mt-9 flex flex-wrap gap-3"
               >
                 <MagneticButton
-                  href="/mission"
+                  href="/boutique"
                   className="bg-paper text-sage-deep px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:text-ink transition-colors rounded-full"
                 >
-                  Soutenir l'insertion
+                  Explorer la boutique
                   <ArrowRight size={14} strokeWidth={2.2} className="text-terracotta" />
                 </MagneticButton>
 
                 <MagneticButton
-                  href="/boutique"
+                  href="/debarras"
                   strength={0.25}
                   className="border-2 border-paper/70 text-paper px-6 sm:px-7 py-3.5 text-[12px] sm:text-[13px] tracking-[0.22em] sm:tracking-[0.25em] uppercase font-bold overflow-hidden hover:border-paper rounded-full"
                 >
-                  Visiter la boutique
+                  Besoin d'un débarras ?
                 </MagneticButton>
               </motion.div>
 
