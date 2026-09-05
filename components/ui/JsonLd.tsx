@@ -8,6 +8,14 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://ressourcerie-aubas
  * directement dans les résultats de recherche (Knowledge Panel).
  */
 export default function JsonLd() {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Au Bas de l'Aisne",
+    alternateName: "Ressourcerie Au Bas de l'Aisne",
+    url: BASE_URL,
+  }
+
   const schema = {
     "@context": "https://schema.org",
     "@type": ["Store", "Organization"],
@@ -68,9 +76,15 @@ export default function JsonLd() {
   }
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+    </>
   )
 }
