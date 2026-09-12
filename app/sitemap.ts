@@ -24,9 +24,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/debarras`,
-      lastModified: new Date("2026-08-29"),
+      lastModified: new Date("2026-09-12"),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/debarras/succession`,
+      lastModified: new Date("2026-09-12"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/debarras/grenier`,
+      lastModified: new Date("2026-09-12"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/debarras/demenagement`,
+      lastModified: new Date("2026-09-12"),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/mission`,

@@ -2,7 +2,8 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView, type Variants } from "framer-motion"
-import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, XCircle, ChevronDown, CalendarDays, Recycle, HeartHandshake, Star, X } from "lucide-react"
+import { Phone, Mail, Truck, KeyRound, Archive, Hammer, MapPin, ArrowRight, CheckCircle2, ChevronDown, CalendarDays, Recycle, HeartHandshake, Star, X } from "lucide-react"
+import Link from "next/link"
 import { SITE } from "@/lib/constants"
 import ShineSweep from "@/components/ui/ShineSweep"
 import SectionHeader from "@/components/ui/SectionHeader"
@@ -23,6 +24,7 @@ const SITUATIONS: {
   keywords: string[]
   tone: SituationTone
   size: SituationSize
+  href?: string
 }[] = [
   {
     Icon: KeyRound,
@@ -31,6 +33,7 @@ const SITUATIONS: {
     keywords: ["héritage", "vider une maison", "appartement"],
     tone: "sage",
     size: "xl",
+    href: "/debarras/succession",
   },
   {
     Icon: Truck,
@@ -39,6 +42,7 @@ const SITUATIONS: {
     keywords: ["meubles", "électroménager", "cartons"],
     tone: "terracotta",
     size: "lg",
+    href: "/debarras/demenagement",
   },
   {
     Icon: Archive,
@@ -47,6 +51,7 @@ const SITUATIONS: {
     keywords: ["encombrants", "vider grenier"],
     tone: "cream",
     size: "md",
+    href: "/debarras/grenier",
   },
   {
     Icon: Hammer,
@@ -294,7 +299,7 @@ export default function DebarrasPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {SITUATIONS.map(({ title, desc, keywords }, i) => {
+            {SITUATIONS.map(({ title, desc, keywords, href }, i) => {
               const t = SITUATION_TONES[i]
               return (
                 <motion.article
@@ -304,7 +309,7 @@ export default function DebarrasPage() {
                   viewport={{ once: true, margin: "-8%" }}
                   transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ y: -6, transition: { type: "spring", stiffness: 340, damping: 22 } }}
-                  className={`group relative overflow-hidden rounded-tl-[36px] rounded-br-[36px] p-6 md:p-8 border-2 transition-[border-color,box-shadow] duration-500 cursor-default ${t.card}`}
+                  className={`group relative overflow-hidden rounded-tl-[36px] rounded-br-[36px] p-6 md:p-8 border-2 transition-[border-color,box-shadow] duration-500 ${href ? "cursor-pointer" : "cursor-default"} ${t.card}`}
                 >
                   {/* Numéro fantôme */}
                   <span
@@ -325,12 +330,20 @@ export default function DebarrasPage() {
                     <p className={`text-[13.5px] leading-relaxed mb-4 ${t.desc}`}>
                       {desc}
                     </p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       {keywords.map((k) => (
                         <span key={k} className={`text-[11px] border px-2.5 py-1 rounded-full ${t.pill}`}>
                           {k}
                         </span>
                       ))}
+                      {href && (
+                        <Link
+                          href={href}
+                          className={`ml-auto text-[11px] font-semibold tracking-[0.12em] uppercase inline-flex items-center gap-1 transition-opacity opacity-60 hover:opacity-100 ${t.title}`}
+                        >
+                          En savoir plus <ArrowRight size={11} strokeWidth={2.5} />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </motion.article>
